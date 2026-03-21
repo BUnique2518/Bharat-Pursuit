@@ -69,10 +69,13 @@ const companyLogos = [
   "./assets/companies/D2e_Vector_logo-Primary_400x.svg",
   "./assets/companies/Group_87_59a28562-b3b3-4331-9d3c-4a27366eba04.webp",
   "./assets/companies/gatim_logo.avif",
-  "./assets/companies/images.jpeg",
+  // "./assets/companies/images.jpeg",
   "./assets/companies/insync-new-logo.png",
   "./assets/companies/jdlogosvg.svg",
-  "./assets/companies/logo.svg"
+  "./assets/companies/logo.svg",
+  "./assets/companies/download__1_-removebg-preview.png",
+  "./assets/companies/hd-fedex-shipping-company-logo-png-7017516947092607rk126a27k-removebg-preview.png",
+  "./assets/companies/Accolite_Logo_Grey-removebg-preview.png",
 ];
 
 function Header({ setCurrentPage }) {
