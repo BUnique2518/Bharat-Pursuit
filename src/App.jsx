@@ -95,7 +95,7 @@ function Header({ setCurrentPage }) {
         <a href="#" className="brand" onClick={(e) => goHome(e)}>
           <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" />
           <div>
-            <div className="brand-top">Global Consulting</div>
+            <div className="brand-top">Pursue Growth. Build Bharat.</div>
             <div className="brand-name">Bharat Pursuit</div>
           </div>
         </a>
@@ -538,10 +538,52 @@ function Contact() {
     return () => clearTimeout(timeoutId);
   }, [active, animSequence]);
 
+  const [status, setStatus] = React.useState('');
   const handleInteraction = () => setActive(false);
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     setActive(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+    const { name, email, company, challenge } = values;
+
+    const formData = {
+      // Create a free access key at https://web3forms.com
+      access_key: "b2e235d1-c2e2-4105-9e63-22b48ec37a34",
+      subject: `New Consulting Enquiry from ${name || 'Website'}`,
+      from_name: "Bharat Pursuit Website",
+      name: name,
+      email: email,
+      company: company,
+      message: challenge
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus("Message Sent!");
+        setValues({ name: '', email: '', company: '', challenge: '' });
+        setTimeout(() => setStatus(''), 4000);
+      } else {
+        setStatus("Failed to send.");
+        setTimeout(() => setStatus(''), 4000);
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("Error sending.");
+      setTimeout(() => setStatus(''), 4000);
+    }
   };
 
   return (
@@ -557,7 +599,7 @@ function Contact() {
             </p>
           </div>
 
-          <form className="contact-form">
+          <form className="contact-form" onSubmit={handleSubmit}>
             <input
               type="text"
               name="name"
@@ -566,6 +608,7 @@ function Contact() {
               onChange={handleChange}
               onFocus={handleInteraction}
               onClick={handleInteraction}
+              required
             />
             <input
               type="email"
@@ -575,6 +618,7 @@ function Contact() {
               onChange={handleChange}
               onFocus={handleInteraction}
               onClick={handleInteraction}
+              required
             />
             <input
               type="text"
@@ -593,8 +637,11 @@ function Contact() {
               onChange={handleChange}
               onFocus={handleInteraction}
               onClick={handleInteraction}
+              required
             ></textarea>
-            <button type="button" className="btn btn-gold">Send Enquiry</button>
+            <button type="submit" className="btn btn-gold" disabled={status === 'Sending...'}>
+              {status || 'Send Enquiry'}
+            </button>
           </form>
         </div>
       </div>
@@ -625,7 +672,10 @@ function Footer({ setCurrentPage }) {
         <div className="footer-grid">
           <div className="footer-col-main">
             {/* <h2 className="footer-brand-title">Bharat Pursuit</h2> */}
-            <div className="brand-name-footer">Bharat Pursuit</div>
+            <div className="brand-name-footer" style={{ marginBottom: '4px' }}>Bharat Pursuit</div>
+            <div style={{ color: '#fbbf24', fontSize: '13px', fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '16px' }}>
+              Pursue Growth. Build Bharat.
+            </div>
             <p className="footer-desc">
               Premier consulting firm dedicated to architectural excellence and strategic growth in the Indian business landscape.
             </p>
@@ -716,6 +766,91 @@ function CookiePolicyPage() {
   );
 }
 
+function Chatbot() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { role: 'bot', text: 'Hello! I am the Bharat Pursuit AI assistant. How can I help you build your global market presence today?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [messages, isOpen]);
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMsg = input.trim();
+    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setInput('');
+
+    // Simulate AI response
+    setTimeout(() => {
+      const botResponses = [
+        "That's a great question. Strategic positioning often requires a deep dive into your current market reality.",
+        "I can certainly help point you in the right direction. Have you considered looking at our Core Services?",
+        "Our senior consultants specialize in exactly that type of challenge. Would you like to schedule a strategy call?",
+        "Interesting. Many of our enterprise clients face similar friction before refining their go-to-market execution."
+      ];
+      const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+      setMessages(prev => [...prev, { role: 'bot', text: randomResponse }]);
+    }, 1000);
+  };
+
+  return (
+    <div className="chatbot-wrapper">
+      <button
+        className={`chatbot-toggle ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle Chat"
+      >
+        <span className="material-symbols-outlined">{isOpen ? 'close' : 'auto_awesome'}</span>
+      </button>
+
+      <div className={`chatbot-window ${isOpen ? 'open' : ''}`}>
+        <div className="chatbot-header">
+          <div className="chatbot-header-info">
+            <span className="bot-avatar-icon material-symbols-outlined">neurology</span>
+            <div>
+              <h4>Bharat AI</h4>
+              <span>Online</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="chatbot-messages">
+          {messages.map((msg, i) => (
+            <div key={i} className={`chat-bubble ${msg.role}`}>
+              {msg.text}
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+
+        <form className="chatbot-input-area" onSubmit={handleSend}>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button type="submit" disabled={!input.trim()}>
+            <span className="material-symbols-outlined">send</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   React.useEffect(() => {
     const cards = document.querySelectorAll(".tilt-card");
@@ -777,6 +912,7 @@ export default function App() {
       <Header setCurrentPage={setCurrentPage} />
       <main>{content}</main>
       <Footer setCurrentPage={setCurrentPage} />
+      <Chatbot />
     </>
   );
 }
