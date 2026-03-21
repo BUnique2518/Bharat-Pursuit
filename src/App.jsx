@@ -159,19 +159,59 @@ function Hero() {
 function SectorsBand() {
   return (
     <section className="sectors-band">
-      <div className="container sectors-grid">
-        {sectors.map((sector) => (
-          <div key={sector} className="sector-item">{sector}</div>
-        ))}
+      <div className="sectors-marquee">
+        <div className="sectors-track">
+          {/* Repeating array to create a seamless infinite marquee effect */}
+          {[...sectors, ...sectors, ...sectors].map((sector, i) => (
+            <div key={i} className="sector-item">
+              <span className="sector-dot"></span>
+              {sector}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 function Services() {
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Adds the class to trigger the animation
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (containerRef.current) {
+      const cards = containerRef.current.querySelectorAll(".service-animate");
+      cards.forEach((card) => observer.observe(card));
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const getAnimationClass = (index) => {
+    switch (index) {
+      case 0: return "reveal-tl";
+      case 1: return "reveal-tr";
+      case 2: return "reveal-bl";
+      case 3: return "reveal-br";
+      default: return "reveal-tl";
+    }
+  };
+
   return (
     <section className="section" id="services">
-      <div className="container">
+      <div className="container" ref={containerRef}>
         <div className="section-head">
           <div className="section-kicker">Core Services</div>
           <h2>Consulting built for firms that need clarity, credibility, and commercial momentum.</h2>
@@ -182,8 +222,8 @@ function Services() {
         </div>
 
         <div className="services-grid">
-          {services.map((service) => (
-            <article className="service-card tilt-card" key={service.title}>
+          {services.map((service, index) => (
+            <article className={`service-card tilt-card service-animate ${getAnimationClass(index)}`} key={service.title}>
               <div className="service-top">
                 <div className="service-icon"></div>
                 <div className="service-number">{service.number}</div>
@@ -200,9 +240,32 @@ function Services() {
 }
 
 function Approach() {
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-flipped");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.8 }
+    );
+
+    if (containerRef.current) {
+      const cards = containerRef.current.querySelectorAll(".flip-card");
+      cards.forEach((card) => observer.observe(card));
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="section section-dark" id="approach">
-      <div className="container approach-grid">
+      <div className="container approach-grid" ref={containerRef}>
         <div className="section-head dark">
           <div className="section-kicker">How We Work</div>
           <h2>Commercial strategy with consulting-grade structure.</h2>
@@ -213,10 +276,21 @@ function Approach() {
         </div>
 
         <div className="approach-cards">
-          {approach.map((item) => (
-            <div className="approach-card" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+          {approach.map((item, index) => (
+            <div className="flip-card" key={item.title}>
+              <div
+                className="flip-card-inner"
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                <div className="flip-card-front approach-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                  <div style={{ fontSize: '42px', color: 'rgba(255, 255, 255, 0.12)', fontWeight: '800', lineHeight: 1 }}>0{index + 1}</div>
+                  <h3 style={{ marginTop: '30px' }}>{item.title}</h3>
+                </div>
+                <div className="flip-card-back approach-card">
+                  <h3 style={{ fontSize: '20px', marginBottom: '12px' }}>{item.title}</h3>
+                  <p style={{ margin: 0 }}>{item.text}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -226,9 +300,64 @@ function Approach() {
 }
 
 function WhyChoose() {
+  const [expanded, setExpanded] = React.useState(false);
+  const [typingIndex, setTypingIndex] = React.useState(-1);
+  const [typedChars, setTypedChars] = React.useState(reasons.map(() => 0));
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !expanded) {
+          setExpanded(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.6 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    
+    return () => observer.disconnect();
+  }, [expanded]);
+
+  // Start typing after cards finish expanding
+  React.useEffect(() => {
+    if (expanded && typingIndex === -1) {
+      const timer = setTimeout(() => {
+        setTypingIndex(0);
+      }, 800); // 800ms match CSS transition
+      return () => clearTimeout(timer);
+    }
+  }, [expanded, typingIndex]);
+
+  // Handle typing effect one card at a time
+  React.useEffect(() => {
+    if (typingIndex >= 0 && typingIndex < reasons.length) {
+      const currentText = reasons[typingIndex];
+      const currentCharCount = typedChars[typingIndex];
+      
+      if (currentCharCount < currentText.length) {
+        const timer = setTimeout(() => {
+          setTypedChars(prev => {
+            const next = [...prev];
+            next[typingIndex] = currentCharCount + 1;
+            return next;
+          });
+        }, 15); // Fast typing speed
+        return () => clearTimeout(timer);
+      } else {
+        // move to next card
+        const timer = setTimeout(() => {
+          setTypingIndex(prev => prev + 1);
+        }, 120); // pause before next card
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [typingIndex, typedChars]);
+
   return (
     <section className="section" id="sectors">
-      <div className="container why-grid">
+      <div className="container why-grid" ref={containerRef}>
         <div className="section-head">
           <div className="section-kicker">Why Clients Choose Us</div>
           <h2>Global polish without generic consulting fluff.</h2>
@@ -239,12 +368,28 @@ function WhyChoose() {
         </div>
 
         <div className="reasons-grid">
-          {reasons.map((item) => (
-            <div className="reason-card" key={item}>
-              <span className="check-dot"></span>
-              <p>{item}</p>
-            </div>
-          ))}
+          {reasons.map((item, i) => {
+            const textToDisplay = item.substring(0, typedChars[i]);
+            const isContentVisible = typingIndex >= 0;
+
+            return (
+              <div className="reason-card-wrapper" key={i}>
+                <div className={`reason-card-anim ${expanded ? 'is-expanded' : ''}`}>
+                  <div className={`reason-card-content ${isContentVisible ? 'show-content' : ''}`}>
+                    <span 
+                      className="check-dot" 
+                      style={{ 
+                        opacity: typedChars[i] > 0 ? 1 : 0, 
+                        transform: `scale(${typedChars[i] > 0 ? 1 : 0})`,
+                        transition: 'opacity 0.2s ease, transform 0.2s ease' 
+                      }}
+                    ></span>
+                    <p>{textToDisplay}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
