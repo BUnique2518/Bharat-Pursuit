@@ -876,8 +876,8 @@ function Chatbot() {
     <div className="chatbot-wrapper">
       {popupText && !isOpen && (
         <div className="chatbot-tooltip">
-          <span className="material-symbols-outlined">neurology</span>
           {popupText}
+          <span className="material-symbols-outlined">neurology</span>
         </div>
       )}
       <button
