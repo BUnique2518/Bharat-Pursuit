@@ -73,7 +73,6 @@ const companyLogos = [
   "./assets/companies/D2e_Vector_logo-Primary_400x.svg",
   "./assets/companies/Group_87_59a28562-b3b3-4331-9d3c-4a27366eba04.webp",
   "./assets/companies/gatim_logo.avif",
-  // "./assets/companies/images.jpeg",
   "./assets/companies/insync-new-logo.png",
   "./assets/companies/jdlogosvg.svg",
   "./assets/companies/logo.svg",
@@ -82,7 +81,7 @@ const companyLogos = [
   "./assets/companies/Accolite_Logo_Grey-removebg-preview.png",
 ];
 
-function Header({ setCurrentPage }) {
+function Header({ setCurrentPage, theme, toggleTheme }) {
   const goHome = (e, targetId) => {
     e.preventDefault();
     setCurrentPage('home');
@@ -115,9 +114,95 @@ function Header({ setCurrentPage }) {
           <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a>
         </nav>
 
-        <a href="#contact" className="btn btn-primary" onClick={(e) => goHome(e, 'contact')}>Book a Strategy Call</a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <button onClick={toggleTheme} className="btn-icon" aria-label="Toggle Theme" style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', padding: 0, color: 'var(--primary)' }}>
+            <span className="material-symbols-outlined">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
+          </button>
+          <a href="#contact" className="btn btn-primary" onClick={(e) => goHome(e, 'contact')}>Book a Strategy Call</a>
+        </div>
       </div>
     </header>
+  );
+}
+
+// Custom hook for animated counter
+function useAnimatedCounter(targetValue, duration = 2000, isVisible = true) {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!isVisible) {
+      setCount(0);
+      return;
+    }
+
+    // Extract the numeric value from strings like "12+", "30%", "3x", "100%"
+    const numericValue = parseInt(targetValue);
+    if (isNaN(numericValue)) {
+      setCount(targetValue);
+      return;
+    }
+
+    const startTime = Date.now();
+    let animationFrameId;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const currentValue = Math.floor(progress * numericValue);
+      setCount(currentValue);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [targetValue, duration, isVisible]);
+
+  return count;
+}
+
+function ProofCard({ item }) {
+  const proofRef = React.useRef(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (proofRef.current) {
+      observer.observe(proofRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const animatedCount = useAnimatedCounter(item.value, 2000, isVisible);
+
+  // Extract the suffix (like "+", "%", "x")
+  const suffix = item.value.replace(/[0-9]/g, '');
+
+  return (
+    <div className="proof-card" ref={proofRef}>
+      <div className="proof-value">
+        {animatedCount}{suffix}
+      </div>
+      <div className="proof-label">{item.label}</div>
+    </div>
   );
 }
 
@@ -168,10 +253,7 @@ function Hero() {
 
               <div className="proof-grid">
                 {proof.map((item) => (
-                  <div className="proof-card" key={item.label}>
-                    <div className="proof-value">{item.value}</div>
-                    <div className="proof-label">{item.label}</div>
-                  </div>
+                  <ProofCard item={item} key={item.label} />
                 ))}
               </div>
 
@@ -454,7 +536,7 @@ function PartnerLogos() {
   return (
     <section className="partners-band" id="companies">
       <div className="container" style={{ textAlign: "center", marginBottom: "40px" }}>
-        <div className="section-kicker">Companies We've Worked With</div>
+        <div className="section-kicker">The trusted partner of startups, enterprises, and global conglomerates</div>
       </div>
       <div className="partners-marquee">
         <div className="partners-track">
@@ -980,16 +1062,27 @@ function Home() {
 
     const onMove = (event) => {
       const card = event.currentTarget;
-      const rect = card.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const rotateY = ((x / rect.width) - 0.5) * 10;
-      const rotateX = ((y / rect.height) - 0.5) * -10;
-      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      const clientX = event.clientX;
+      const clientY = event.clientY;
+
+      if (!card.dataset.ticking) {
+        card.dataset.ticking = "true";
+        window.requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = clientX - rect.left;
+          const y = clientY - rect.top;
+          const rotateY = ((x / rect.width) - 0.5) * 10;
+          const rotateX = ((y / rect.height) - 0.5) * -10;
+          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+          card.dataset.ticking = "";
+        });
+      }
     };
 
     const onLeave = (event) => {
-      event.currentTarget.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      const card = event.currentTarget;
+      card.dataset.ticking = "";
+      card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0)";
     };
 
     cards.forEach((card) => {
@@ -1020,6 +1113,29 @@ function Home() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState('home');
+  const [theme, setTheme] = React.useState('light');
+
+  React.useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+      if (storedTheme === 'dark') document.documentElement.classList.add('dark');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   let content;
   if (currentPage === 'privacy') content = <PrivacyPolicyPage />;
@@ -1032,7 +1148,7 @@ export default function App() {
       <div className="bg-orb orb-one"></div>
       <div className="bg-orb orb-two"></div>
       <div className="bg-orb orb-three"></div>
-      <Header setCurrentPage={setCurrentPage} />
+      <Header setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
       <main>{content}</main>
       <Footer setCurrentPage={setCurrentPage} />
       <Chatbot />
