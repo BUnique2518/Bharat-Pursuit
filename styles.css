@@ -585,14 +585,20 @@ img {
   justify-content: space-between;
 }
 
-.service-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 40%),
-    linear-gradient(145deg, #1d3856, #142538);
-  box-shadow: 0 16px 30px rgba(20, 37, 56, 0.22);
+.icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(196, 166, 100, 0.15);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.icon-circle .material-symbols-outlined {
+  font-size: 32px;
 }
 
 .service-number {
