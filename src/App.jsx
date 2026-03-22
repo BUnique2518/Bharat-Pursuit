@@ -73,7 +73,6 @@ const companyLogos = [
   "./assets/companies/D2e_Vector_logo-Primary_400x.svg",
   "./assets/companies/Group_87_59a28562-b3b3-4331-9d3c-4a27366eba04.webp",
   "./assets/companies/gatim_logo.avif",
-  // "./assets/companies/images.jpeg",
   "./assets/companies/insync-new-logo.png",
   "./assets/companies/jdlogosvg.svg",
   "./assets/companies/logo.svg",
@@ -118,6 +117,87 @@ function Header({ setCurrentPage }) {
         <a href="#contact" className="btn btn-primary" onClick={(e) => goHome(e, 'contact')}>Book a Strategy Call</a>
       </div>
     </header>
+  );
+}
+
+// Custom hook for animated counter
+function useAnimatedCounter(targetValue, duration = 2000, isVisible = true) {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!isVisible) {
+      setCount(0);
+      return;
+    }
+
+    // Extract the numeric value from strings like "12+", "30%", "3x", "100%"
+    const numericValue = parseInt(targetValue);
+    if (isNaN(numericValue)) {
+      setCount(targetValue);
+      return;
+    }
+
+    const startTime = Date.now();
+    let animationFrameId;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const currentValue = Math.floor(progress * numericValue);
+      setCount(currentValue);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [targetValue, duration, isVisible]);
+
+  return count;
+}
+
+function ProofCard({ item }) {
+  const proofRef = React.useRef(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (proofRef.current) {
+      observer.observe(proofRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const animatedCount = useAnimatedCounter(item.value, 2000, isVisible);
+
+  // Extract the suffix (like "+", "%", "x")
+  const suffix = item.value.replace(/[0-9]/g, '');
+
+  return (
+    <div className="proof-card" ref={proofRef}>
+      <div className="proof-value">
+        {animatedCount}{suffix}
+      </div>
+      <div className="proof-label">{item.label}</div>
+    </div>
   );
 }
 
@@ -168,10 +248,7 @@ function Hero() {
 
               <div className="proof-grid">
                 {proof.map((item) => (
-                  <div className="proof-card" key={item.label}>
-                    <div className="proof-value">{item.value}</div>
-                    <div className="proof-label">{item.label}</div>
-                  </div>
+                  <ProofCard item={item} key={item.label} />
                 ))}
               </div>
 
@@ -454,7 +531,7 @@ function PartnerLogos() {
   return (
     <section className="partners-band" id="companies">
       <div className="container" style={{ textAlign: "center", marginBottom: "40px" }}>
-        <div className="section-kicker">Companies We've Worked With</div>
+        <div className="section-kicker">The trusted partner of startups, enterprises, and global conglomerates</div>
       </div>
       <div className="partners-marquee">
         <div className="partners-track">
