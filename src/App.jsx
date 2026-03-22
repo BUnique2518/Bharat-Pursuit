@@ -4,22 +4,26 @@ const services = [
   {
     number: "01",
     title: "Strategic Market Positioning",
-    text: "Define a sharper market narrative, stronger differentiation, and a positioning architecture built for international growth."
+    text: "Define a sharper market narrative, stronger differentiation, and a positioning architecture built for international growth.",
+    icon: "target"
   },
   {
     number: "02",
     title: "Go-to-Market Acceleration",
-    text: "Launch new offers, geographies, and categories with structured messaging, revenue-focused campaigns, and measurable traction."
+    text: "Launch new offers, geographies, and categories with structured messaging, revenue-focused campaigns, and measurable traction.",
+    icon: "rocket_launch"
   },
   {
     number: "03",
     title: "Demand & Pipeline Strategy",
-    text: "Connect brand, content, performance, and enterprise sales motions into one commercial engine that compounds over time."
+    text: "Connect brand, content, performance, and enterprise sales motions into one commercial engine that compounds over time.",
+    icon: "trending_up"
   },
   {
     number: "04",
     title: "Executive Advisory",
-    text: "Support leadership teams with board-ready marketing strategy, growth diagnostics, and decision frameworks for high-stakes initiatives."
+    text: "Support leadership teams with board-ready marketing strategy, growth diagnostics, and decision frameworks for high-stakes initiatives.",
+    icon: "psychology"
   }
 ];
 
@@ -96,7 +100,8 @@ function Header({ setCurrentPage }) {
     <header className="site-header">
       <div className="container nav-wrap">
         <a href="#" className="brand" onClick={(e) => goHome(e)}>
-          <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" />
+          {/* <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" /> */}
+          <img src="./assets/MainIcon-removebg-preview.png" alt="Bharat Pursuit logo" className="brand-logo" />
           <div>
             <div className="brand-top">Pursue Growth. Build Bharat.</div>
             <div className="brand-name">Bharat Pursuit</div>
@@ -249,9 +254,32 @@ function Services() {
 
         <div className="services-grid">
           {services.map((service, index) => (
-            <article className={`service-card tilt-card service-animate ${getAnimationClass(index)}`} key={service.title}>
+            <article
+              className={`service-card tilt-card service-animate ${getAnimationClass(index)}`}
+              key={service.title}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-10px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(20, 37, 56, 0.08)';
+                const iconCircle = e.currentTarget.querySelector('.icon-circle');
+                if (iconCircle) {
+                  iconCircle.style.backgroundColor = 'var(--primary)';
+                  iconCircle.style.color = 'var(--secondary)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+                const iconCircle = e.currentTarget.querySelector('.icon-circle');
+                if (iconCircle) {
+                  iconCircle.style.backgroundColor = 'rgba(196, 166, 100, 0.15)';
+                  iconCircle.style.color = 'var(--accent, var(--secondary))';
+                }
+              }}
+            >
               <div className="service-top">
-                <div className="service-icon"></div>
+                <div className="icon-circle">
+                  <span className="material-symbols-outlined">{service.icon}</span>
+                </div>
                 <div className="service-number">{service.number}</div>
               </div>
               <h3>{service.title}</h3>
@@ -682,6 +710,23 @@ function Footer({ setCurrentPage }) {
             <p className="footer-desc">
               Premier consulting firm dedicated to architectural excellence and strategic growth in the Indian business landscape.
             </p>
+            <div className="footer-contact-info" style={{ marginTop: '20px' }}>
+              <a href="mailto:support@bharatpursuit.com" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                color: '#94a3b8',
+                fontSize: '14px',
+                textDecoration: 'none',
+                transition: 'color 0.2s ease'
+              }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#fbbf24'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
+              >
+                <span className="material-symbols-outlined" style={{ color: '#fbbf24', fontSize: '20px' }}>mail</span>
+                support@bharatpursuit.com
+              </a>
+            </div>
           </div>
           <div>
             <h4 className="footer-heading">Explore</h4>
@@ -859,7 +904,7 @@ function Chatbot() {
         const errorText = await response.text();
         throw new Error(`${response.status} ${errorText}`);
       }
-      
+
       const data = await response.json();
       const botReply = data.choices[0].message.content;
 
