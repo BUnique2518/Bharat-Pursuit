@@ -536,7 +536,7 @@ function PartnerLogos() {
   return (
     <section className="partners-band" id="companies">
       <div className="container" style={{ textAlign: "center", marginBottom: "40px" }}>
-        <div className="section-kicker">The trusted partner of startups, enterprises, and global conglomerates</div>
+        <div className="section-kicker">Experience That Shapes Our Work</div>
       </div>
       <div className="partners-marquee">
         <div className="partners-track">
