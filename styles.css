@@ -751,6 +751,10 @@ img {
   color: #55606e;
 }
 
+.dark .reason-card p {
+  color: white;
+}
+
 .check-dot {
   width: 12px;
   height: 12px;
@@ -811,6 +815,10 @@ img {
   margin: 0;
   line-height: 1.75;
   color: #55606e;
+}
+
+.dark .reason-card-content p {
+  color: white;
 }
 
 .reason-card-content .check-dot {
