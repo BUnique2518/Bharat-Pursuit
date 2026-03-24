@@ -9,7 +9,7 @@ const services = [
   },
   {
     number: "02",
-    title: "Go-to-Market Acceleration",
+    title: "Go to Market Acceleration",
     text: "Launch new offers, geographies, and categories with structured messaging, revenue-focused campaigns, and measurable traction.",
     icon: "rocket_launch"
   },
