@@ -70,15 +70,15 @@ const reasons = [
 ];
 
 const companyLogos = [
-  "./assets/companies/D2e_Vector_logo-Primary_400x.svg",
-  "./assets/companies/Group_87_59a28562-b3b3-4331-9d3c-4a27366eba04.webp",
-  "./assets/companies/gatim_logo.avif",
-  "./assets/companies/insync-new-logo.png",
-  "./assets/companies/jdlogosvg.svg",
-  "./assets/companies/logo.svg",
-  "./assets/companies/download__1_-removebg-preview.png",
-  "./assets/companies/hd-fedex-shipping-company-logo-png-7017516947092607rk126a27k-removebg-preview.png",
-  "./assets/companies/Accolite_Logo_Grey-removebg-preview.png",
+  "/assets/companies/D2e_Vector_logo-Primary_400x.svg",
+  "/assets/companies/Group_87_59a28562-b3b3-4331-9d3c-4a27366eba04.webp",
+  "/assets/companies/gatim_logo.avif",
+  "/assets/companies/insync-new-logo.png",
+  "/assets/companies/jdlogosvg.svg",
+  "/assets/companies/logo.svg",
+  "/assets/companies/download__1_-removebg-preview.png",
+  "/assets/companies/hd-fedex-shipping-company-logo-png-7017516947092607rk126a27k-removebg-preview.png",
+  "/assets/companies/Accolite_Logo_Grey-removebg-preview.png",
 ];
 
 function Header({ setCurrentPage, theme, toggleTheme }) {
@@ -100,7 +100,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
       <div className="container nav-wrap">
         <a href="#" className="brand" onClick={(e) => goHome(e)}>
           {/* <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" /> */}
-          <img src="./assets/MainIcon-removebg-preview.png" alt="Bharat Pursuit logo" className="brand-logo" />
+        <img src="/assets/MainIcon-removebg-preview.png" alt="Bharat Pursuit logo" className="brand-logo" />
           <div>
             <div className="brand-top">Pursue Growth. Build Bharat.</div>
             <div className="brand-name">Bharat Pursuit</div>
