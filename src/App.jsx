@@ -81,6 +81,78 @@ const companyLogos = [
   "/assets/companies/Accolite_Logo_Grey-removebg-preview.png",
 ];
 
+const jobListings = [
+  {
+    id: 1,
+    title: "Senior Strategic Marketing Consultant",
+    department: "Consulting",
+    level: "Senior",
+    location: "Remote",
+    type: "Full-time",
+    description: "Lead strategic positioning and go-to-market engagements for enterprise clients.",
+    qualifications: [
+      "8+ years of B2B marketing or strategy consulting experience",
+      "Proven track record building market positioning frameworks",
+      "Strong executive communication and presentation skills",
+      "Experience with Fortune 500 or ambitious mid-market firms"
+    ],
+    responsibilities: [
+      "Lead diagnostic audits and market positioning assessments",
+      "Develop and execute strategic narratives for complex solutions",
+      "Guide client leadership on positioning and go-to-market strategy",
+      "Mentor junior team members on consulting methodology"
+    ],
+    salary: "Competitive",
+    skills: ["Marketing Strategy", "Market Positioning", "Go-to-Market Strategy", "Enterprise Sales", "Client Leadership"]
+  },
+  {
+    id: 2,
+    title: "Strategic Messaging Specialist",
+    department: "Content & Strategy",
+    level: "Mid-level",
+    location: "Remote",
+    type: "Full-time",
+    description: "Craft compelling market narratives and positioning architectures for enterprise offerings.",
+    qualifications: [
+      "5+ years in solutions marketing, technical marketing, or marketing strategy",
+      "Exceptional written and verbal communication skills",
+      "Experience translating complex B2B solutions into market narratives",
+      "Portfolio of positioning frameworks or messaging architectures"
+    ],
+    responsibilities: [
+      "Develop buyer-centric messaging and positioning frameworks",
+      "Create positioning documentation and messaging systems",
+      "Translate technical solutions into persuasive market language",
+      "Collaborate with clients on narrative development and stakeholder alignment"
+    ],
+    salary: "Competitive",
+    skills: ["Technical Writing", "Messaging Architecture", "B2B Marketing", "Positioning", "Content Strategy"]
+  },
+  {
+    id: 3,
+    title: "Growth Strategy Associate",
+    department: "Strategy",
+    level: "Junior to Mid-level",
+    location: "Remote",
+    type: "Full-time",
+    description: "Support go-to-market acceleration and demand strategy initiatives for client engagements.",
+    qualifications: [
+      "3+ years in growth marketing, demand generation, or business strategy",
+      "Strong analytical and project management skills",
+      "Experience with SaaS or high-growth B2B companies",
+      "Ability to synthesize market research and competitive data"
+    ],
+    responsibilities: [
+      "Conduct market analysis and competitive assessments",
+      "Develop go-to-market playbooks and execution blueprints",
+      "Support demand and pipeline strategy development",
+      "Coordinate cross-functional strategy execution and reporting"
+    ],
+    salary: "Competitive",
+    skills: ["Data Analysis", "Project Management", "Market Research", "Strategic Planning", "GTM Strategy"]
+  }
+];
+
 function Header({ setCurrentPage, theme, toggleTheme }) {
   const goHome = (e, targetId) => {
     e.preventDefault();
@@ -112,6 +184,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
           <a href="#approach" onClick={(e) => goHome(e, 'approach')}>Approach</a>
           <a href="#sectors" onClick={(e) => goHome(e, 'sectors')}>Sectors</a>
           <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a>
+          <a href="#careers" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }}>Careers</a>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -211,30 +284,31 @@ function Hero() {
     <section className="hero section">
       <div className="container hero-grid">
         <div className="hero-copy reveal-up">
-          <div className="eyebrow-pill">Strategic & Solutions Marketing Consulting for global growth</div>
-          <h1>Build a market presence that looks premium, sells clearly, and scales globally.</h1>
+          <div className="eyebrow-pill">Elite Strategic Marketing for Enterprise Growth</div>
+          <h1>Build a market presence that commands credibility, sells with clarity, and scales globally.</h1>
           <p className="hero-text">
-            Bharat Pursuit partners with ambitious firms to sharpen brand strategy, refine market positioning,
-            and translate complex solutions into high-conviction growth narratives for international buyers.
+            Bharat Pursuit is the consulting partner for enterprises seeking architectural excellence in market positioning, 
+            go-to-market strategy, and global expansion. We bring senior-led strategic thinking to complex B2B value narratives, 
+            transforming how ambitious firms compete in international markets.
           </p>
 
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-gold">Request a Consultation</a>
-            <a href="#services" className="btn btn-outline">Explore Capabilities</a>
+            <a href="#contact" className="btn btn-gold">Schedule Strategy Consultation</a>
+            <a href="#services" className="btn btn-outline">Discover Our Methodology</a>
           </div>
 
           <div className="hero-points">
             <div className="info-card">
-              <h3>Positioning-first</h3>
-              <p>Strategy rooted in clear commercial advantage.</p>
+              <h3>Positioning Architecture</h3>
+              <p>Strategy rooted in buyer psychology and competitive differentiation.</p>
             </div>
             <div className="info-card">
-              <h3>Senior-led</h3>
-              <p>No junior handoff on core consulting work.</p>
+              <h3>Senior-Led Excellence</h3>
+              <p>No junior handoff. Experienced strategists drive every engagement.</p>
             </div>
             <div className="info-card">
-              <h3>Global-ready</h3>
-              <p>Messaging designed for cross-border credibility.</p>
+              <h3>Global-Ready Narratives</h3>
+              <p>Messaging calibrated for cross-border credibility and enterprise sophistication.</p>
             </div>
           </div>
         </div>
@@ -245,8 +319,8 @@ function Hero() {
             <div className="panel-content">
               <div className="panel-heading-row">
                 <div>
-                  <div className="panel-eyebrow">Boardroom-ready growth</div>
-                  <h2>A sharper route to market confidence</h2>
+                  <div className="panel-eyebrow">Enterprise-Grade Strategy</div>
+                  <h2>Transform positioning into competitive advantage</h2>
                 </div>
                 <div className="mini-orb"></div>
               </div>
@@ -258,8 +332,8 @@ function Hero() {
               </div>
 
               <div className="panel-note">
-                From positioning frameworks to executive messaging systems, we help firms look more credible,
-                communicate more clearly, and convert better across sophisticated markets.
+                From diagnostic positioning audits through market narrative architecture to executive alignment and execution, 
+                we help firms command trust in sophisticated markets.
               </div>
             </div>
           </div>
@@ -326,11 +400,11 @@ function Services() {
     <section className="section" id="services">
       <div className="container" ref={containerRef}>
         <div className="section-head">
-          <div className="section-kicker">Core Services</div>
-          <h2>Consulting built for firms that need clarity, credibility, and commercial momentum.</h2>
+          <div className="section-kicker">Core Consulting Services</div>
+          <h2>Cornerstone engagements built to sharpen strategy, strengthen positioning, and sustain momentum.</h2>
           <p>
-            Every engagement is designed to reduce strategic noise, sharpen the value story, and help leadership teams
-            move faster with more market confidence.
+            Each service discipline is designed with enterprise complexity in mind. We reduce strategic ambiguity, 
+            establish clear competitive narratives, and equip leadership teams to execute with market confidence.
           </p>
         </div>
 
@@ -403,11 +477,11 @@ function Approach() {
     <section className="section section-dark" id="approach">
       <div className="container approach-grid" ref={containerRef}>
         <div className="section-head dark">
-          <div className="section-kicker">How We Work</div>
-          <h2>Commercial strategy with consulting-grade structure.</h2>
+          <div className="section-kicker">Our Methodology</div>
+          <h2>Structured consulting architecture for disciplined growth execution.</h2>
           <p>
-            Our approach combines strategic diagnosis, market logic, narrative architecture, and action planning so
-            teams can move from fragmented marketing to disciplined growth execution.
+            Our approach combines strategic diagnosis with market intelligence, narrative engineering, and executable 
+            frameworks. We transform positioning thinking into organizational capability that compounds competitive advantage.
           </p>
         </div>
 
@@ -495,11 +569,11 @@ function WhyChoose() {
     <section className="section" id="sectors">
       <div className="container why-grid" ref={containerRef}>
         <div className="section-head">
-          <div className="section-kicker">Why Clients Choose Us</div>
-          <h2>Global polish without generic consulting fluff.</h2>
+          <div className="section-kicker">Why Enterprise Leaders Choose Us</div>
+          <h2>Premium strategy execution without enterprise consulting pricing or overhead.</h2>
           <p>
-            The visual language, messaging discipline, and strategic tone are designed to make ambitious firms look
-            established, serious, and internationally credible.
+            Our positioning, narrative discipline, and senior-led approach are built for firms competing at the highest tier. 
+            We deliver the sophistication of top-tier consulting with agility and focus.
           </p>
         </div>
 
@@ -704,8 +778,8 @@ function Contact() {
       <div className="container">
         <div className="contact-shell">
           <div className="contact-copy">
-            <div className="section-kicker">Start the conversation</div>
-            <h2>Looking for a consulting partner that can speak both strategy and market reality?</h2>
+            <div className="section-kicker">Start the Engagement</div>
+            <h2>Ready to sharpen positioning and accelerate market momentum?</h2>
             <p>
               Bharat Pursuit helps firms refine how they are perceived, how they are understood, and how they grow.
               Let’s build a market presence that commands trust across borders.
@@ -752,8 +826,7 @@ function Contact() {
               onClick={handleInteraction}
               required
             ></textarea>
-            <button type="submit" className="btn btn-gold" disabled={status === 'Sending...'}>
-              {status || 'Send Enquiry'}
+            <button type="submit" className="btn btn-gold" disabled={status === 'Sending...'}>               {status || 'Schedule Strategy Call'}
             </button>
           </form>
         </div>
@@ -790,7 +863,7 @@ function Footer({ setCurrentPage }) {
               Pursue Growth. Build Bharat.
             </div>
             <p className="footer-desc">
-              Premier consulting firm dedicated to architectural excellence and strategic growth in the Indian business landscape.
+              Premier strategic marketing consulting firm specializing in market positioning, go-to-market acceleration, and global expansion. Top-tier strategy execution for ambitious enterprises worldwide.
             </p>
             <div className="footer-contact-info" style={{ marginTop: '20px' }}>
               <a href="mailto:support@bharatpursuit.com" style={{
@@ -816,6 +889,7 @@ function Footer({ setCurrentPage }) {
               <li><a href="#approach" onClick={(e) => goHomeSection(e, 'approach')}>Our Approach</a></li>
               <li><a href="#services" onClick={(e) => goHomeSection(e, 'services')}>Core Services</a></li>
               <li><a href="#companies" onClick={(e) => goHomeSection(e, 'companies')}>Companies We've Worked With</a></li>
+              <li><a href="#careers" onClick={(e) => { e.preventDefault(); goPage(e, 'careers'); }}>Careers</a></li>
             </ul>
           </div>
           <div>
@@ -893,6 +967,136 @@ function CookiePolicyPage() {
       <h3 style={pageSubHeadStyle}>2. Which Cookies Do We Use?</h3>
       <p>We use the following cookies: <strong>Strictly necessary cookies</strong> (required for the operation of our website), <strong>Analytical or performance cookies</strong> (allow us to recognize and count the number of visitors), and <strong>Functionality cookies</strong> (used to recognize you when you return to our website).</p>
     </div>
+  );
+}
+
+function CareersPage() {
+  return (
+    <div style={pageStyle}>
+      <h1 style={pageHeadStyle}>Careers at Bharat Pursuit</h1>
+      <p style={{ fontSize: '18px', marginBottom: '40px' }}>
+        Join our elite team of strategic consultants. We're building a firm dedicated to architectural excellence and transformative market positioning for ambitious enterprises globally.
+      </p>
+      
+      <h2 style={pageSubHeadStyle}>Why Join Bharat Pursuit?</h2>
+      <ul style={{ marginBottom: '40px', lineHeight: 2 }}>
+        <li><strong>Senior-led engagement:</strong> Work alongside experienced strategists with deep enterprise consulting background</li>
+        <li><strong>Meaningful impact:</strong> Drive strategic positioning and growth for Fortune 500 and high-growth firms</li>
+        <li><strong>Positioning-first methodology:</strong> Master the discipline of strategic market architecture</li>
+        <li><strong>Global scope:</strong> Consult on cross-border expansion and international market strategy</li>
+        <li><strong>Premium brand:</strong> Be part of a firm recognized as a top-tier strategic consulting partner</li>
+      </ul>
+      
+      <h2 style={pageSubHeadStyle}>Our Consulting Culture</h2>
+      <p>
+        At Bharat Pursuit, we believe that consulting excellence comes from disciplined thinking, clear communication, and senior-led engagement. We prioritize meaningful client relationships over volume, strategic depth over surface-level recommendations, and long-term impact over quick wins.
+      </p>
+      <p style={{ marginBottom: '40px' }}>
+        We invest in our team's growth through real consulting engagements with enterprise clients, cross-functional collaboration, and mentorship from senior strategists.
+      </p>
+      
+      <h2 style={pageSubHeadStyle}>Open Positions</h2>
+      <p style={{ marginBottom: '30px', fontSize: '16px', color: 'var(--primary)' }}>
+        Below are our current career opportunities. Each role is integral to delivering premier consulting outcomes.
+      </p>
+    </div>
+  );
+}
+
+function JobListingPage({ jobId, setCurrentPage }) {
+  const job = jobListings.find(j => j.id === jobId);
+  
+  if (!job) {
+    return (
+      <div style={pageStyle}>
+        <h1 style={pageHeadStyle}>Job Not Found</h1>
+        <p>This position is no longer available. <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>View all open positions</a></p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={pageStyle}>
+      <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>← Back to Careers</a>
+      
+      <div style={{ marginBottom: '40px' }}>
+        <h1 style={pageHeadStyle}>{job.title}</h1>
+        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '20px', color: 'var(--text-soft)', fontSize: '14px' }}>
+          <span><strong>Department:</strong> {job.department}</span>
+          <span><strong>Level:</strong> {job.level}</span>
+          <span><strong>Location:</strong> {job.location}</span>
+          <span><strong>Type:</strong> {job.type}</span>
+        </div>
+      </div>
+
+      <h2 style={pageSubHeadStyle}>About the Role</h2>
+      <p>{job.description}</p>
+
+      <h2 style={pageSubHeadStyle}>Key Responsibilities</h2>
+      <ul style={{ lineHeight: 1.8 }}>
+        {job.responsibilities.map((resp, i) => (
+          <li key={i}>{resp}</li>
+        ))}
+      </ul>
+
+      <h2 style={pageSubHeadStyle}>Required Qualifications</h2>
+      <ul style={{ lineHeight: 1.8 }}>
+        {job.qualifications.map((qual, i) => (
+          <li key={i}>{qual}</li>
+        ))}
+      </ul>
+
+      <h2 style={pageSubHeadStyle}>Key Skills & Expertise</h2>
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '40px' }}>
+        {job.skills.map((skill, i) => (
+          <span key={i} style={{ padding: '8px 16px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '20px', fontSize: '14px' }}>
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <h2 style={pageSubHeadStyle}>Compensation</h2>
+      <p>{job.salary} (discussed during interview process based on experience and background)</p>
+
+      <h2 style={pageSubHeadStyle}>Apply Now</h2>
+      <p style={{ marginBottom: '20px' }}>
+        Interested in this role? Send your resume, portfolio, and a brief note on why you're interested to <strong>careers@bharatpursuit.com</strong>
+      </p>
+      <p style={{ fontSize: '14px', color: 'var(--text-soft)' }}>
+        We review applications on a rolling basis. Shortlisted candidates will be contacted within 1 week. We appreciate the time you take to apply and will provide feedback at key stages.
+      </p>
+    </div>
+  );
+}
+
+function CareerListings() {
+  return (
+    <section className="section" style={{ borderTop: "1px solid rgba(20, 37, 56, 0.08)" }}>
+      <div className="container">
+        <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px', marginTop: '40px' }}>
+          {jobListings.map((job) => (
+            <article key={job.id} className="job-card" style={{
+              padding: '24px',
+              border: '1px solid rgba(20, 37, 56, 0.08)',
+              borderRadius: '12px',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer'
+            }}>
+              <div style={{ marginBottom: '16px' }}>
+                <h3 style={{ margin: '0 0 8px 0', color: 'var(--primary)', fontSize: '18px' }}>{job.title}</h3>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.level}</span>
+                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.location}</span>
+                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.type}</span>
+                </div>
+              </div>
+              <p style={{ color: 'var(--text-soft)', fontSize: '14px', marginBottom: '16px', lineHeight: 1.6 }}>{job.description}</p>
+              <div style={{ fontSize: '14px', color: 'var(--secondary)', fontWeight: '600' }}>View Details →</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1113,6 +1317,7 @@ function Home() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState('home');
+  const [selectedJobId, setSelectedJobId] = React.useState(null);
   const [theme, setTheme] = React.useState('light');
 
   React.useEffect(() => {
@@ -1141,6 +1346,47 @@ export default function App() {
   if (currentPage === 'privacy') content = <PrivacyPolicyPage />;
   else if (currentPage === 'terms') content = <TermsOfServicePage />;
   else if (currentPage === 'cookies') content = <CookiePolicyPage />;
+  else if (currentPage === 'careers') {
+    content = (
+      <>
+        <CareersPage />
+        <CareerListings />
+        <div style={{ margin: '60px 0', textAlign: 'center' }}>
+          <h2 style={{ marginBottom: '20px', color: 'var(--primary)' }}>Explore a Specific Role</h2>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {jobListings.map((job) => (
+              <button
+                key={job.id}
+                onClick={() => {
+                  setCurrentPage('jobDetail');
+                  setSelectedJobId(job.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                style={{
+                  padding: '12px 24px',
+                  background: 'var(--secondary)',
+                  color: 'var(--white)',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'opacity 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.target.style.opacity = '1'}
+              >
+                {job.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  }
+  else if (currentPage === 'jobDetail') {
+    content = <JobListingPage jobId={selectedJobId} setCurrentPage={setCurrentPage} />;
+  }
   else content = <Home />;
 
   return (
