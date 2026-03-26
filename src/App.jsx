@@ -5,25 +5,100 @@ const services = [
     number: "01",
     title: "Strategic Market Positioning",
     text: "Define a sharper market narrative, stronger differentiation, and a positioning architecture built for international growth.",
-    icon: "target"
+    icon: "target",
+    details: {
+      overview: "Market positioning is the foundation of all commercial success. We build positioning architectures that establish clear competitive differentiation and buyer conviction.",
+      outcomes: [
+        "Positioning statement that articulates unique competitive advantage",
+        "Market narrative framework aligned to buyer psychology",
+        "Competitive positioning map and category architecture",
+        "Messaging hierarchy and positioning validation with buyers"
+      ],
+      process: [
+        "Category & competitive audit to identify positioning gaps",
+        "Buyer research & persona calibration",
+        "Positioning architecture design workshop with leadership",
+        "Messaging development and buyer testing",
+        "Positioning documentation and rollout plan"
+      ],
+      bestFor: "Companies entering new markets, repositioning for growth, or seeking clarity on competitive advantage.",
+      timeline: "6-12 weeks"
+    }
   },
   {
     number: "02",
     title: "Go to Market Acceleration",
     text: "Launch new offers, geographies, and categories with structured messaging, revenue-focused campaigns, and measurable traction.",
-    icon: "rocket_launch"
+    icon: "rocket_launch",
+    details: {
+      overview: "Successful launches require disciplined strategy execution. We design and orchestrate go-to-market motions that drive predictable revenue from day one.",
+      outcomes: [
+        "Go-to-market strategy with phased rollout plan",
+        "Buyer targeting and account-based campaign roadmap",
+        "Sales enablement materials and training program",
+        "Marketing campaign sequencing and performance metrics",
+        "3-month execution results and optimization roadmap"
+      ],
+      process: [
+        "GTM strategy workshop with leadership and Sales",
+        "Buyer targeting & segmentation analysis",
+        "Campaign messaging and creative direction",
+        "Sales enablement development and training",
+        "Campaign launch coordination and weekly optimization"
+      ],
+      bestFor: "New product launches, geographic expansion, or category entry requiring coordinated go-to-market execution.",
+      timeline: "3-4 months"
+    }
   },
   {
     number: "03",
     title: "Demand & Pipeline Strategy",
     text: "Connect brand, content, performance, and enterprise sales motions into one commercial engine that compounds over time.",
-    icon: "trending_up"
+    icon: "trending_up",
+    details: {
+      overview: "Demand generation success comes from unified strategy, not tactics. We architect pipeline-focused engines that align brand, content, and sales for compounding growth.",
+      outcomes: [
+        "Integrated demand generation strategy connecting marketing and sales",
+        "Pipeline visibility framework with weekly forecasting",
+        "Content strategy mapped to buyer journey stages",
+        "Campaign playbooks for consistent execution",
+        "Demand metrics dashboard and optimization playbook"
+      ],
+      process: [
+        "Sales & marketing alignment workshop",
+        "Pipeline analysis and demand gap assessment",
+        "Buyer journey mapping and content requirements",
+        "Campaign playbook development & testing",
+        "Performance infrastructure setup and optimization cadence"
+      ],
+      bestFor: "Companies needing to connect marketing and sales, improve pipeline velocity, or scale demand within budget constraints.",
+      timeline: "4-6 months"
+    }
   },
   {
     number: "04",
     title: "Executive Advisory",
     text: "Support leadership teams with board-ready marketing strategy, growth diagnostics, and decision frameworks for high-stakes initiatives.",
-    icon: "psychology"
+    icon: "psychology",
+    details: {
+      overview: "Leadership teams need strategic partners who understand their complexity. We provide board-ready strategy, growth diagnostics, and decision support for critical initiatives.",
+      outcomes: [
+        "Board-ready strategy presentations with financial implications",
+        "Growth diagnostic with market opportunity assessment",
+        "Competitive & customer intelligence briefing",
+        "Strategic decision framework for key initiatives",
+        "Executive advisory engagement with direct leadership access"
+      ],
+      process: [
+        "Leadership alignment workshop to define strategic questions",
+        "Market & competitive intelligence gathering",
+        "Strategic analysis and scenario planning",
+        "Board-ready presentation development",
+        "Quarterly advisory sessions and strategic guidance"
+      ],
+      bestFor: "CEOs, CMOs, and executive teams navigating strategic expansion, M&A, or market transformation.",
+      timeline: "Ongoing (typical 3-6 month engagements)"
+    }
   }
 ];
 
@@ -363,6 +438,7 @@ function SectorsBand() {
 
 function Services() {
   const containerRef = React.useRef(null);
+  const [selectedService, setSelectedService] = React.useState(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -386,6 +462,19 @@ function Services() {
     return () => observer.disconnect();
   }, []);
 
+  React.useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedService(null);
+      }
+    };
+    
+    if (selectedService) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [selectedService]);
+
   const getAnimationClass = (index) => {
     switch (index) {
       case 0: return "reveal-tl";
@@ -397,55 +486,295 @@ function Services() {
   };
 
   return (
-    <section className="section" id="services">
-      <div className="container" ref={containerRef}>
-        <div className="section-head">
-          <div className="section-kicker">Core Consulting Services</div>
-          <h2>Cornerstone engagements built to sharpen strategy, strengthen positioning, and sustain momentum.</h2>
-          <p>
-            Each service discipline is designed with enterprise complexity in mind. We reduce strategic ambiguity, 
-            establish clear competitive narratives, and equip leadership teams to execute with market confidence.
-          </p>
-        </div>
+    <>
+      <section className="section" id="services">
+        <div className="container" ref={containerRef}>
+          <div className="section-head">
+            <div className="section-kicker">Core Consulting Services</div>
+            <h2>Cornerstone engagements built to sharpen strategy, strengthen positioning, and sustain momentum.</h2>
+            <p>
+              Each service discipline is designed with enterprise complexity in mind. We reduce strategic ambiguity, 
+              establish clear competitive narratives, and equip leadership teams to execute with market confidence.
+            </p>
+          </div>
 
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <article
-              className={`service-card tilt-card service-animate ${getAnimationClass(index)}`}
-              key={service.title}
+          <div className="services-grid">
+            {services.map((service, index) => (
+              <article
+                className={`service-card tilt-card service-animate ${getAnimationClass(index)}`}
+                key={service.title}
+                onClick={() => setSelectedService(service)}
+                style={{ cursor: 'pointer' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(20, 37, 56, 0.08)';
+                  const iconCircle = e.currentTarget.querySelector('.icon-circle');
+                  if (iconCircle) {
+                    iconCircle.style.backgroundColor = 'var(--primary)';
+                    iconCircle.style.color = 'var(--secondary)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  const iconCircle = e.currentTarget.querySelector('.icon-circle');
+                  if (iconCircle) {
+                    iconCircle.style.backgroundColor = 'rgba(196, 166, 100, 0.15)';
+                    iconCircle.style.color = 'var(--accent, var(--secondary))';
+                  }
+                }}
+              >
+                <div className="service-top">
+                  <div className="icon-circle">
+                    <span className="material-symbols-outlined">{service.icon}</span>
+                  </div>
+                  <div className="service-number">{service.number}</div>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+                <span className="service-link" onClick={(e) => { e.stopPropagation(); setSelectedService(service); }}>Learn more</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Detail Modal */}
+      {selectedService && (
+        <div 
+          className="service-modal-overlay" 
+          onClick={() => setSelectedService(null)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'var(--bg)',
+            opacity: 0.95,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            backdropFilter: 'blur(4px)',
+            animation: 'fadeIn 0.3s ease',
+            paddingLeft: '20px',
+            paddingRight: '20px'
+          }}
+        >
+          <div 
+            className="service-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'var(--surface)',
+              borderRadius: '16px',
+              border: '1px solid var(--line)',
+              padding: '48px',
+              maxWidth: '700px',
+              width: '100%',
+              color: 'var(--primary)',
+              boxShadow: '0 25px 50px var(--shadow)',
+              animation: 'slideInUp 0.4s ease',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              position: 'relative'
+            }}
+          >
+            <button
+              onClick={() => setSelectedService(null)}
+              style={{
+                position: 'absolute',
+                top: '24px',
+                right: '24px',
+                background: 'rgba(196, 166, 100, 0.15)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--secondary)',
+                transition: 'all 0.2s ease'
+              }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-10px)';
-                e.currentTarget.style.boxShadow = '0 20px 40px rgba(20, 37, 56, 0.08)';
-                const iconCircle = e.currentTarget.querySelector('.icon-circle');
-                if (iconCircle) {
-                  iconCircle.style.backgroundColor = 'var(--primary)';
-                  iconCircle.style.color = 'var(--secondary)';
-                }
+                e.currentTarget.style.background = 'rgba(196, 166, 100, 0.25)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-                const iconCircle = e.currentTarget.querySelector('.icon-circle');
-                if (iconCircle) {
-                  iconCircle.style.backgroundColor = 'rgba(196, 166, 100, 0.15)';
-                  iconCircle.style.color = 'var(--accent, var(--secondary))';
-                }
+                e.currentTarget.style.background = 'rgba(196, 166, 100, 0.15)';
               }}
             >
-              <div className="service-top">
-                <div className="icon-circle">
-                  <span className="material-symbols-outlined">{service.icon}</span>
-                </div>
-                <div className="service-number">{service.number}</div>
+              <span className="material-symbols-outlined">close</span>
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+              <div 
+                style={{
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '12px',
+                  background: 'rgba(196, 166, 100, 0.15)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--secondary)',
+                  fontSize: '32px'
+                }}
+              >
+                <span className="material-symbols-outlined">{selectedService.icon}</span>
               </div>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-              <span className="service-link">Learn more</span>
-            </article>
-          ))}
+              <div>
+                <div style={{ fontSize: '14px', color: 'var(--secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Service {selectedService.number}
+                </div>
+                <h2 style={{ margin: '0', fontSize: '28px', color: 'var(--primary)' }}>
+                  {selectedService.title}
+                </h2>
+              </div>
+            </div>
+
+            <p style={{ fontSize: '16px', lineHeight: '1.8', marginBottom: '32px', color: 'var(--text-soft)' }}>
+              {selectedService.details.overview}
+            </p>
+
+            <div style={{ marginBottom: '32px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--secondary)' }}>
+                Key Outcomes
+              </h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {selectedService.details.outcomes.map((outcome, i) => (
+                  <li 
+                    key={i} 
+                    style={{
+                      padding: '12px 0',
+                      borderBottom: i < selectedService.details.outcomes.length - 1 ? `1px solid var(--line)` : 'none',
+                      display: 'flex',
+                      gap: '12px',
+                      alignItems: 'flex-start'
+                    }}
+                  >
+                    <span style={{ color: 'var(--secondary)', marginTop: '4px', minWidth: '20px' }}>✓</span>
+                    <span style={{ color: 'var(--text-soft)' }}>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div style={{ marginBottom: '32px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--secondary)' }}>
+                Our Process
+              </h3>
+              <ol style={{ listStyle: 'none', padding: 0, margin: 0, counterReset: 'step' }}>
+                {selectedService.details.process.map((step, i) => (
+                  <li 
+                    key={i}
+                    style={{
+                      padding: '12px 0 12px 36px',
+                      borderBottom: i < selectedService.details.process.length - 1 ? `1px solid var(--line)` : 'none',
+                      position: 'relative',
+                      color: 'var(--text-soft)'
+                    }}
+                  >
+                    <span 
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: '12px',
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '50%',
+                        background: 'var(--secondary)',
+                        color: 'var(--white)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '12px',
+                        fontWeight: '700'
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', padding: '24px 0', borderTop: `1px solid var(--line)` }}>
+              <div>
+                <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--secondary)', fontWeight: '600', marginBottom: '8px' }}>
+                  Best For
+                </div>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-soft)', lineHeight: '1.6' }}>
+                  {selectedService.details.bestFor}
+                </p>
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--secondary)', fontWeight: '600', marginBottom: '8px' }}>
+                  Typical Timeline
+                </div>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-soft)', lineHeight: '1.6' }}>
+                  {selectedService.details.timeline}
+                </p>
+              </div>
+            </div>
+
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                setSelectedService(null);
+                setTimeout(() => {
+                  const el = document.getElementById('contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+              }}
+              style={{
+                display: 'inline-block',
+                marginTop: '24px',
+                padding: '12px 24px',
+                background: 'var(--secondary)',
+                color: 'var(--white)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                transition: 'opacity 0.2s ease',
+                width: '100%',
+                textAlign: 'center',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            >
+              Schedule a Consultation for This Service
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        @keyframes slideInUp {
+          from {
+            transform: translateY(40px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
