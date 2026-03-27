@@ -1,4 +1,6 @@
 import React from "react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const services = [
   {
@@ -1152,6 +1154,8 @@ export default function App() {
       <main>{content}</main>
       <Footer setCurrentPage={setCurrentPage} />
       <Chatbot />
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }
