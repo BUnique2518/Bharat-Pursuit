@@ -585,7 +585,7 @@ function Contact() {
 
     const formData = {
       // Create a free access key at https://web3forms.com
-      access_key: "b2e235d1-c2e2-4105-9e63-22b48ec37a34",
+      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
       subject: `New Consulting Enquiry from ${name || 'Website'}`,
       from_name: "Bharat Pursuit Website",
       name: name,
@@ -882,7 +882,7 @@ function Chatbot() {
       const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer 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",
+          "Authorization": `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
