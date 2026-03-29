@@ -258,6 +258,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
           <a href="#services" onClick={(e) => goHome(e, 'services')}>Services</a>
           <a href="#approach" onClick={(e) => goHome(e, 'approach')}>Approach</a>
           <a href="#sectors" onClick={(e) => goHome(e, 'sectors')}>Sectors</a>
+          <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo({ top: 0 }); }}>About</a>
           <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a>
           <a href="#careers" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }}>Careers</a>
         </nav>
@@ -1215,6 +1216,7 @@ function Footer({ setCurrentPage }) {
           <div>
             <h4 className="footer-heading">Explore</h4>
             <ul className="footer-links">
+              <li><a href="#about" onClick={(e) => { e.preventDefault(); goPage(e, 'about'); }}>About Us</a></li>
               <li><a href="#approach" onClick={(e) => goHomeSection(e, 'approach')}>Our Approach</a></li>
               <li><a href="#services" onClick={(e) => goHomeSection(e, 'services')}>Core Services</a></li>
               <li><a href="#companies" onClick={(e) => goHomeSection(e, 'companies')}>Companies We've Worked With</a></li>
@@ -1296,6 +1298,731 @@ function CookiePolicyPage() {
       <h3 style={pageSubHeadStyle}>2. Which Cookies Do We Use?</h3>
       <p>We use the following cookies: <strong>Strictly necessary cookies</strong> (required for the operation of our website), <strong>Analytical or performance cookies</strong> (allow us to recognize and count the number of visitors), and <strong>Functionality cookies</strong> (used to recognize you when you return to our website).</p>
     </div>
+  );
+}
+
+  
+
+function AboutUsPage() {
+  const [selectedIndustry, setSelectedIndustry] = React.useState('Technology');
+  const [showArchitectureModal, setShowArchitectureModal] = React.useState(false);
+  
+  const industries = [
+    { name: 'Technology', color: '#3B82F6', description: 'SaaS platforms, cloud infrastructure, and tech innovation' },
+    { name: 'B2B SaaS', color: '#8B5CF6', description: 'Enterprise software and subscription models' },
+    { name: 'Healthcare', color: '#EC4899', description: 'Life sciences, health tech, and medical devices' },
+    { name: 'Financial Services', color: '#F59E0B', description: 'Fintech, banks, and investment firms' },
+    { name: 'Manufacturing', color: '#10B981', description: 'Industrial tech and smart manufacturing' },
+    { name: 'Professional Services', color: '#06B6D4', description: 'Consulting, legal, and accounting firms' },
+    { name: 'Enterprise Software', color: '#6366F1', description: 'ERP, CRM, and enterprise platforms' },
+    { name: 'Emerging Tech', color: '#D946EF', description: 'AI, blockchain, and cutting-edge innovation' }
+  ];
+
+  const industryBgImages = {
+    'Technology': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80")',
+    'B2B SaaS': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80")',
+    'Healthcare': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80")',
+    'Financial Services': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80")',
+    'Manufacturing': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80")',
+    'Professional Services': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80")',
+    'Enterprise Software': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1920&q=80")',
+    'Emerging Tech': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=80")'
+  };
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--line)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ fontSize: '14px', color: 'var(--secondary)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '20px', animation: 'fadeIn 0.6s ease' }}>
+              About Bharat Pursuit
+            </div>
+            <h1 style={{ 
+              fontSize: '52px', 
+              fontWeight: '800', 
+              marginBottom: '24px', 
+              color: 'transparent', 
+              lineHeight: 1.2,
+              animation: 'slideUpAndColor 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+              background: 'linear-gradient(to right, var(--primary) 0%, var(--secondary) 50%, #3B82F6 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              cursor: 'pointer',
+              transition: 'transform 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundPosition = 'right';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundPosition = 'left';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}>
+              Strategy. Positioning. Global Growth.
+            </h1>
+            <p style={{ fontSize: '20px', color: 'var(--text-soft)', lineHeight: 1.8, animation: 'fadeIn 1s ease 0.2s backwards' }}>
+              We partner with ambitious enterprises to build market positioning that commands trust, craft narratives that convert, and execute go-to-market strategies that scale globally.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Foundation */}
+      <section style={{ padding: '100px 0', background: 'var(--white)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ fontSize: '36px', fontWeight: '800', marginBottom: '24px', color: 'var(--primary)' }}>
+                Our Foundation
+              </h2>
+              <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', marginBottom: '16px' }}>
+                Bharat Pursuit was founded on a singular belief: <strong>premium market positioning is a strategic imperative, not a marketing tactic.</strong> We built a firm dedicated to helping ambitious enterprises across borders clarify their competitive differentiation and execute with market confidence.
+              </p>
+              <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', marginBottom: '16px' }}>
+                Every consulting engagement reflects our commitment to architectural excellence—disciplined strategy, clear narratives, and measurable outcomes. We don't believe in generic positioning. We believe in strategic clarity.
+              </p>
+              <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)' }}>
+                We serve enterprise clients across Technology, Healthcare, B2B SaaS, Financial Services, Manufacturing, and Professional Services. We help them think sharper, position stronger, and grow globally.
+              </p>
+            </div>
+            <div style={{ 
+              background: 'linear-gradient(135deg, rgba(196, 166, 100, 0.1) 0%, rgba(196, 166, 100, 0.05) 100%)',
+              borderRadius: '16px',
+              padding: '60px',
+              textAlign: 'center',
+              border: '1px solid rgba(196, 166, 100, 0.2)',
+              transition: 'all 0.4s ease',
+              cursor: 'pointer',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onClick={() => setShowArchitectureModal(true)}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05) rotateY(5deg)';
+              e.currentTarget.style.boxShadow = 'var(--shadow)';
+              const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
+              animElements.forEach((el) => {
+                el.style.opacity = '0.6';
+                if(el.classList.contains('ai-particle')) {
+                  el.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px)`;
+                  el.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                } else {
+                  el.style.transform = `scaleX(${0.5 + Math.random()}) rotate(${Math.random()*360}deg)`;
+                  el.style.transition = 'all 1s ease-in-out';
+                }
+              });
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1) rotateY(0deg)';
+              e.currentTarget.style.boxShadow = 'none';
+              const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
+              animElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translate(0, 0) scale(1) rotate(0deg)';
+              });
+            }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 0 }}>
+                <div className="ai-particle" style={{ top: '20%', left: '30%' }}></div>
+                <div className="ai-particle" style={{ top: '60%', left: '70%' }}></div>
+                <div className="ai-particle" style={{ top: '80%', left: '40%' }}></div>
+                <div className="ai-connection" style={{ top: '40%', left: '50%', width: '100px' }}></div>
+                <div className="ai-connection" style={{ top: '70%', left: '55%', width: '80px' }}></div>
+              </div>
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ fontSize: '48px', fontWeight: '800', color: 'var(--secondary)', marginBottom: '8px' }}>
+                  Architecture
+                </div>
+                <div style={{ fontSize: '16px', color: 'var(--text-soft)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Over Strategy
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--text-soft)', marginTop: '32px', lineHeight: 1.8 }}>
+                  We believe consulting excellence comes from disciplined thinking, clear narrative architecture, and senior-led execution. That's how we operate.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section style={{ padding: '100px 0', background: 'var(--bg)', borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--primary)' }}>
+              Our Vision & Mission
+            </h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--line)',
+              borderRadius: '16px',
+              padding: '40px',
+              textAlign: 'center',
+              transition: 'all 0.4s ease',
+              cursor: 'pointer',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = 'var(--shadow)';
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196, 166, 100, 0.08), rgba(196, 166, 100, 0.02))';
+              const sw = e.currentTarget.querySelector('.visionary-sweep');
+              if(sw) {
+                sw.style.animation = 'sweepLight 1.5s ease-in-out forwards';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.background = 'var(--surface)';
+              const sw = e.currentTarget.querySelector('.visionary-sweep');
+              if(sw) {
+                sw.style.animation = 'none';
+              }
+            }}>
+              <div className="visionary-sweep"></div>
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--secondary)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Our Vision
+                </div>
+                <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', margin: 0 }}>
+                  To be the most trusted strategic consulting partner for enterprises seeking market clarity, competitive differentiation, and sustainable global growth.
+                </p>
+              </div>
+            </div>
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--line)',
+              borderRadius: '16px',
+              padding: '40px',
+              textAlign: 'center',
+              transition: 'all 0.4s ease',
+              cursor: 'pointer',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = 'var(--shadow)';
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196, 166, 100, 0.08), rgba(196, 166, 100, 0.02))';
+              const rings = e.currentTarget.querySelectorAll('.mission-pulse-ring');
+              rings.forEach((r, i) => {
+                r.style.animation = `pulseRing 1.5s ease-out infinite ${i * 0.4}s`;
+              });
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.background = 'var(--surface)';
+              const rings = e.currentTarget.querySelectorAll('.mission-pulse-ring');
+              rings.forEach(r => {
+                r.style.animation = 'none';
+              });
+            }}>
+              <div className="mission-pulse-ring"></div>
+              <div className="mission-pulse-ring"></div>
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--secondary)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Our Mission
+                </div>
+                <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', margin: 0 }}>
+                  Deliver positioning architecture, go-to-market strategy, and executive advisory that transform how ambitious firms compete, communicate, and grow across international markets.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How We Operate - Video Section */}
+      <section style={{ padding: '100px 0', background: 'var(--white)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--primary)' }}>
+              How We Operate
+            </h2>
+            <p style={{ fontSize: '16px', color: 'var(--text-soft)', marginTop: '16px', maxWidth: '600px', margin: '16px auto 0' }}>
+              Watch how our structured methodology delivers transformation at every stage.
+            </p>
+          </div>
+          <div style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: 'var(--shadow)',
+            background: '#000',
+            position: 'relative',
+            paddingBottom: '56.25%',
+            height: 0
+          }}>
+            <video
+              width="100%"
+              height="auto"
+              style={{
+                display: 'block',
+                borderRadius: '16px'
+              }}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80"
+            >
+              <source src="https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
+      {/* Industries We Serve - Interactive */}
+      <section style={{ 
+        padding: '100px 0', 
+        background: industryBgImages[selectedIndustry],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        borderTop: '1px solid var(--line)',
+        transition: 'background 0.6s ease',
+        color: 'white'
+      }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'white' }}>
+              Industries We Serve
+            </h2>
+            <p style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.8)', marginTop: '16px', maxWidth: '600px', margin: '16px auto 0' }}>
+              Click on any industry to explore how we serve that sector.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+            {industries.map((industry, i) => (
+              <div 
+                key={i} 
+                onClick={() => setSelectedIndustry(industry.name)}
+                style={{
+                  background: selectedIndustry === industry.name ? industry.color : 'var(--surface)',
+                  border: `2px solid ${selectedIndustry === industry.name ? industry.color : 'var(--line)'}`,
+                  borderRadius: '12px',
+                  padding: '24px',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  transform: selectedIndustry === industry.name ? 'scale(1.05) translateY(-8px)' : 'scale(1)',
+                  boxShadow: selectedIndustry === industry.name ? '0 12px 24px rgba(0,0,0,0.15)' : 'none'
+                }}
+              >
+                <div style={{ 
+                  fontSize: '16px', 
+                  fontWeight: '700', 
+                  color: selectedIndustry === industry.name ? '#fff' : 'var(--primary)',
+                  transition: 'all 0.3s ease'
+                }}>
+                  {industry.name}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--line)',
+            borderRadius: '12px',
+            padding: '32px',
+            textAlign: 'center',
+            animation: 'fadeIn 0.4s ease'
+          }}>
+            <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--secondary)', marginBottom: '12px' }}>
+              {selectedIndustry}
+            </div>
+            <p style={{ fontSize: '16px', color: 'var(--text-soft)', margin: 0, lineHeight: 1.8 }}>
+              {industries.find(ind => ind.name === selectedIndustry)?.description}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section style={{ 
+        padding: '80px 0', 
+        background: `linear-gradient(135deg, rgba(196, 166, 100, 0.1) 0%, rgba(196, 166, 100, 0.05) 100%)`,
+        borderTop: '1px solid var(--line)',
+        textAlign: 'center'
+      }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--primary)', marginBottom: '24px' }}>
+            Ready to Transform Your Market Positioning?
+          </h2>
+          <p style={{ fontSize: '16px', color: 'var(--text-soft)', marginBottom: '32px', lineHeight: 1.8 }}>
+            Let's discuss how Bharat Pursuit can help your firm build premium positioning, strengthen market narratives, and accelerate global growth.
+          </p>
+          <a href="#contact" style={{
+            display: 'inline-block',
+            padding: '14px 32px',
+            background: 'var(--secondary)',
+            color: 'var(--white)',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontWeight: '600',
+            transition: 'opacity 0.2s ease'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+            Schedule a Strategy Call
+          </a>
+        </div>
+      </section>
+
+      {/* Architecture Modal */}
+      {showArchitectureModal && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'var(--bg)',
+            opacity: 0.95,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            backdropFilter: 'blur(4px)',
+            animation: 'fadeIn 0.3s ease',
+            paddingLeft: '20px',
+            paddingRight: '20px'
+          }}
+          onClick={() => setShowArchitectureModal(false)}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'var(--surface)',
+              borderRadius: '16px',
+              border: '1px solid var(--line)',
+              padding: '48px',
+              maxWidth: '800px',
+              width: '100%',
+              color: 'var(--primary)',
+              boxShadow: '0 25px 50px var(--shadow)',
+              animation: 'slideInUp 0.4s ease',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              position: 'relative'
+            }}
+          >
+            <button
+              onClick={() => setShowArchitectureModal(false)}
+              style={{
+                position: 'absolute',
+                top: '24px',
+                right: '24px',
+                background: 'rgba(196, 166, 100, 0.15)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--secondary)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--secondary)';
+                e.currentTarget.style.color = '#fff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(196, 166, 100, 0.15)';
+                e.currentTarget.style.color = 'var(--secondary)';
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>close</span>
+            </button>
+            <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+              <div style={{ 
+                width: '80px', height: '80px', borderRadius: '50%', 
+                background: 'rgba(196, 166, 100, 0.1)', display: 'flex', 
+                alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px',
+                color: 'var(--secondary)'
+              }}>
+                <span className="material-symbols-outlined" style={{ fontSize: '40px' }}>account_tree</span>
+              </div>
+              <h2 style={{ fontSize: '36px', fontWeight: '800', marginBottom: '16px' }}>Architecture Over Strategy</h2>
+              <p style={{ fontSize: '18px', color: 'var(--text-soft)', lineHeight: 1.8 }}>
+                Strategy dictates where you want to go. Architecture dictates exactly how the components of your enterprise interact to get you there.
+              </p>
+            </div>
+            
+            {/* Animated Architecture Graphic inside the modal */}
+            <div style={{
+              background: 'var(--bg)',
+              borderRadius: '12px',
+              padding: '40px',
+              marginBottom: '40px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '300px',
+              border: '1px solid var(--line)'
+            }}>
+              <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                <div className="arch-node center-node">
+                  Core Logic
+                </div>
+                <div className="arch-node orbit-node orbit-1">
+                  Market Positioning
+                </div>
+                <div className="arch-node orbit-node orbit-2">
+                  Go-To-Market
+                </div>
+                <div className="arch-node orbit-node orbit-3">
+                  Brand Narrative
+                </div>
+                <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+                  <line x1="50%" y1="50%" x2="20%" y2="20%" className="arch-line" />
+                  <line x1="50%" y1="50%" x2="80%" y2="30%" className="arch-line" />
+                  <line x1="50%" y1="50%" x2="50%" y2="80%" className="arch-line" />
+                </svg>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+              <div>
+                <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px', color: 'var(--secondary)' }}>
+                  1. Structural Diagnosis
+                </h4>
+                <p style={{ color: 'var(--text-soft)', lineHeight: 1.8 }}>
+                  We evaluate the fundamental building blocks of your brand equity to identify silos, misalignments, and friction points in your market communication.
+                </p>
+              </div>
+              <div>
+                <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px', color: 'var(--secondary)' }}>
+                  2. Systems Engine
+                </h4>
+                <p style={{ color: 'var(--text-soft)', lineHeight: 1.8 }}>
+                  Instead of disconnected marketing tactics, we build interconnected ecosystems that map directly to enterprise sales pipelines and KPIs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        @keyframes aiAgent {
+          0%, 100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: translateY(-10px) scale(1.05);
+            opacity: 0.8;
+          }
+        }
+        
+        @keyframes slideUpAndColor {
+          0% {
+            opacity: 0;
+            transform: translateY(40px);
+            background-position: left;
+          }
+          40% {
+            opacity: 1;
+            transform: translateY(0);
+            background-position: left;
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            background-position: right;
+          }
+        }
+
+        .ai-particle {
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          background: var(--secondary);
+          border-radius: 50%;
+          opacity: 0;
+          box-shadow: 0 0 10px var(--secondary);
+          pointer-events: none;
+        }
+
+        .ai-connection {
+          position: absolute;
+          background: rgba(196, 166, 100, 0.4);
+          transform-origin: 0 50%;
+          opacity: 0;
+          height: 1px;
+          pointer-events: none;
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-8px) scale(1.02);
+          }
+        }
+        
+        .visionary-sweep {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+          transform: skewX(-20deg);
+          animation: none;
+        }
+
+        .mission-pulse-ring {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          border: 2px solid var(--secondary);
+          border-radius: 50%;
+          opacity: 0;
+          pointer-events: none;
+        }
+        
+        @keyframes pulseRing {
+          0% { width: 40px; height: 40px; opacity: 1; }
+          100% { width: 300px; height: 300px; opacity: 0; }
+        }
+
+        @keyframes sweepLight {
+          0% { left: -100%; }
+          100% { left: 200%; }
+        }
+
+        /* Architecture Modal Animations */
+        .arch-node {
+          position: absolute;
+          background: var(--surface);
+          border: 2px solid var(--secondary);
+          color: var(--primary);
+          font-weight: 700;
+          font-size: 14px;
+          padding: 12px 24px;
+          borderRadius: 8px;
+          z-index: 10;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(196,166,100,0.1);
+        }
+        
+        .center-node {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: var(--secondary);
+          color: white;
+          border-radius: 50%;
+          width: 120px;
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          animation: pulseNode 3s infinite ease-in-out;
+        }
+
+        .orbit-node {
+          border-radius: 8px;
+        }
+
+        .orbit-1 {
+          top: 20%;
+          left: 20%;
+          transform: translate(-50%, -50%);
+          animation: floatNode 4s infinite ease-in-out 0.2s;
+        }
+
+        .orbit-2 {
+          top: 30%;
+          left: 80%;
+          transform: translate(-50%, -50%);
+          animation: floatNode 5s infinite ease-in-out 1.5s;
+        }
+
+        .orbit-3 {
+          top: 80%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation: floatNode 4.5s infinite ease-in-out 0.8s;
+        }
+
+        .arch-line {
+          stroke: var(--secondary);
+          stroke-width: 2;
+          stroke-dasharray: 8;
+          animation: flowLine 2s linear infinite;
+        }
+
+        @keyframes pulseNode {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(196,166,100,0.4); }
+          50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 0 20px rgba(196,166,100,0); }
+        }
+
+        @keyframes floatNode {
+          0%, 100% { transform: translate(-50%, -50%); }
+          50% { transform: translate(-50%, calc(-50% - 15px)); }
+        }
+
+        @keyframes flowLine {
+          from { stroke-dashoffset: 16; }
+          to { stroke-dashoffset: 0; }
+        }
+        
+        @keyframes vibrate {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          10%, 30%, 50%, 70%, 90% {
+            transform: translateX(-2px);
+          }
+          20%, 40%, 60%, 80% {
+            transform: translateX(2px);
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -1675,6 +2402,7 @@ export default function App() {
   if (currentPage === 'privacy') content = <PrivacyPolicyPage />;
   else if (currentPage === 'terms') content = <TermsOfServicePage />;
   else if (currentPage === 'cookies') content = <CookiePolicyPage />;
+  else if (currentPage === 'about') content = <AboutUsPage />;
   else if (currentPage === 'careers') {
     content = (
       <>
