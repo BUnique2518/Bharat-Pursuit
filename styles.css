@@ -1458,6 +1458,59 @@ img {
   .main-nav {
     display: none;
   }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}
+
+.responsive-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .responsive-2col {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 72px; /* Sticky header height */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 72px);
+  background: var(--bg);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-menu-content a {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
 }
 
 @media (max-width: 720px) {
@@ -1483,7 +1536,12 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .nav-wrap,
+  .nav-wrap {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .footer-wrap {
     flex-direction: column;
     align-items: flex-start;
@@ -1507,6 +1565,40 @@ img {
 
   .contact-form {
     padding: 18px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .hero-panel {
+    padding: 32px 20px;
+  }
+
+  .brand-top {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Booking Modal Adjustments */
+  .mobile-menu-overlay {
+    padding: 32px 20px;
   }
 }
 

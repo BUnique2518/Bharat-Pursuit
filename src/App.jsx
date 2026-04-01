@@ -272,10 +272,11 @@ const jobListings = [
   }
 ];
 
-function Header({ setCurrentPage, theme, toggleTheme }) {
+function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMobileMenuOpen }) {
   const goHome = (e, targetId) => {
     e.preventDefault();
     setCurrentPage('home');
+    setIsMobileMenuOpen(false);
     if (targetId) {
       setTimeout(() => {
         const el = document.getElementById(targetId);
@@ -286,11 +287,17 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
     }
   };
 
+  const goPage = (e, page) => {
+    e.preventDefault();
+    setCurrentPage(page);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0 });
+  };
+
   return (
     <header className="site-header">
       <div className="container nav-wrap">
         <a href="#" className="brand" onClick={(e) => goHome(e)}>
-          {/* <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" /> */}
           <img src="/assets/light-mode.png" alt="Bharat Pursuit logo" className="brand-logo" />
           <div>
             <div className="brand-top">Pursue Growth. Build Bharat.</div>
@@ -299,24 +306,66 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
         </a>
 
         <nav className="main-nav">
-          {/* <a href="#services" onClick={(e) => goHome(e, 'services')}>Services</a>
-          <a href="#approach" onClick={(e) => goHome(e, 'approach')}>Approach</a>
-          <a href="#sectors" onClick={(e) => goHome(e, 'sectors')}>Sectors</a> */}
-          <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo({ top: 0 }); }}>About</a>
-          <a href="#tech" onClick={(e) => { e.preventDefault(); setCurrentPage('tech'); window.scrollTo({ top: 0 }); }}>Tech</a>
-          <a href="#cases" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); window.scrollTo({ top: 0 }); }}>Case Studies</a>
-          {/* <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a> */}
-          <a href="#careers" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }}>Careers</a>
+          <a href="#about" onClick={(e) => goPage(e, 'about')}>About</a>
+          <a href="#tech" onClick={(e) => goPage(e, 'tech')}>Tech</a>
+          <a href="#cases" onClick={(e) => goPage(e, 'caseStudies')}>Case Studies</a>
+          <a href="#careers" onClick={(e) => goPage(e, 'careers')}>Careers</a>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button onClick={toggleTheme} className="btn-icon" aria-label="Toggle Theme" style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', padding: 0, color: 'var(--primary)' }}>
             <span className="material-symbols-outlined">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
           </button>
-          <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}>Book a Strategy Call</a>
+          
+          <div className="desktop-only">
+            <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}>Book a Strategy Call</a>
+          </div>
+
+          <button 
+            className="mobile-menu-toggle" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'none', padding: 4, color: 'var(--primary)' }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>
+              {isMobileMenuOpen ? 'close' : 'menu'}
+            </span>
+          </button>
         </div>
       </div>
     </header>
+  );
+}
+
+function MobileMenu({ isOpen, onClose, setCurrentPage }) {
+  const navigate = (e, page) => {
+    e.preventDefault();
+    setCurrentPage(page);
+    onClose();
+    window.scrollTo({ top: 0 });
+  };
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+    onClose();
+    window.dispatchEvent(new Event('openBookingModal'));
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="mobile-menu-overlay" onClick={onClose}>
+      <nav className="mobile-menu-content" onClick={e => e.stopPropagation()}>
+        <a href="#about" onClick={(e) => navigate(e, 'about')}>About</a>
+        <a href="#tech" onClick={(e) => navigate(e, 'tech')}>Tech</a>
+        <a href="#cases" onClick={(e) => navigate(e, 'caseStudies')}>Case Studies</a>
+        <a href="#careers" onClick={(e) => navigate(e, 'careers')}>Careers</a>
+        <a href="#insights" onClick={(e) => navigate(e, 'insights')}>Insights</a>
+        <div style={{ marginTop: '20px' }}>
+           <a href="#" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={handleBooking}>Book a Strategy Call</a>
+        </div>
+      </nav>
+    </div>
   );
 }
 
@@ -474,7 +523,7 @@ function CapabilitiesDualPillar() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
           {/* Pillar 1 */}
           <div style={{ background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: '24px', padding: '48px', position: 'relative', overflow: 'hidden' }} className="reveal-tl">
             <div style={{ position: 'absolute', top: 0, right: 0, width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(196, 166, 100, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
@@ -799,7 +848,7 @@ function Services() {
               </ol>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', padding: '24px 0', borderTop: `1px solid var(--line)` }}>
+            <div className="responsive-2col" style={{ padding: '24px 0', borderTop: `1px solid var(--line)` }}>
               <div>
                 <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--secondary)', fontWeight: '600', marginBottom: '8px' }}>
                   Best For
@@ -1590,7 +1639,7 @@ function AboutUsPage() {
       {/* Our Foundation */}
       <section style={{ padding: '100px 0', background: 'var(--white)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+          <div className="responsive-2col" style={{ alignItems: 'center', gap: '40px' }}>
             <div>
               <h2 style={{ fontSize: '36px', fontWeight: '800', marginBottom: '24px', color: 'var(--primary)' }}>
                 Our Foundation
@@ -1672,7 +1721,7 @@ function AboutUsPage() {
               Our Vision & Mission
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+          <div className="responsive-2col">
 
             {/* Vision Card */}
             <div className="reveal-card-container">
@@ -1955,7 +2004,7 @@ function AboutUsPage() {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+            <div className="responsive-2col" style={{ gap: '30px' }}>
               <div>
                 <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px', color: 'var(--secondary)' }}>
                   1. Structural Diagnosis
@@ -2225,7 +2274,7 @@ function TechServicesPage() {
       {/* Services Grid Section */}
       <section className="section" style={{ background: 'var(--bg)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
             {techServices.map((t) => (
               <div key={t.id} className="tech-card">
                 <div className="tech-card-number">{t.number}</div>
@@ -2403,7 +2452,7 @@ function CaseStudiesPage({ setCurrentPage, setSelectedCaseId }) {
       {/* Grid Section */}
       <section className="section" style={{ background: 'var(--bg)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
             {caseStudiesData.map((c) => (
               <article key={c.id} className="case-card reveal-up">
                 <div>
@@ -2456,9 +2505,9 @@ function CaseStudyDetailPage({ caseId, setCurrentPage }) {
   }
 
   return (
-    <article style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
+    <article style={{ background: 'var(--bg)', paddingBottom: 'clamp(60px, 10vh, 120px)' }}>
       {/* Detail Hero */}
-      <header style={{ padding: '160px 0 100px', background: '#0a0a0a', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+      <header style={{ padding: 'clamp(100px, 15vh, 160px) 0 clamp(60px, 10vh, 100px)', background: '#0a0a0a', color: '#fff', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Work
@@ -2471,7 +2520,7 @@ function CaseStudyDetailPage({ caseId, setCurrentPage }) {
           </h1>
 
           {/* Hero Metrics Strip */}
-          <div className="reveal-scale" style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', padding: '32px', background: 'rgba(0,0,0,0.3)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', maxWidth: '900px', backdropFilter: 'blur(10px)' }}>
+          <div className="reveal-scale" style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 40px', padding: 'clamp(20px, 4vw, 32px)', background: 'rgba(0,0,0,0.3)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', maxWidth: '900px', backdropFilter: 'blur(10px)' }}>
             <div>
               <div style={{ fontSize: '48px', fontWeight: '800', color: 'var(--secondary)', lineHeight: 1 }}>{c.metric}</div>
               <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)', fontWeight: '600', marginTop: '8px' }}>{c.metricLabel}</div>
@@ -2483,7 +2532,7 @@ function CaseStudyDetailPage({ caseId, setCurrentPage }) {
         <div style={{ position: 'absolute', top: 0, right: 0, width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(196, 166, 100, 0.1) 0%, transparent 70%)', transform: 'translate(20%, -20%)', pointerEvents: 'none' }}></div>
       </header>
 
-      <div className="container" style={{ maxWidth: '900px', margin: '0 auto', paddingTop: '80px' }}>
+      <div className="container" style={{ maxWidth: '900px', margin: '0 auto', paddingTop: 'clamp(40px, 8vw, 80px)' }}>
         {/* Context Section */}
         <section className="reveal-up" style={{ marginBottom: '80px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
@@ -2650,7 +2699,7 @@ function CareerListings({ setCurrentPage, setSelectedJobId }) {
       <div className="container">
 
         {/* Dropdown Filters */}
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '40px', background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--line)', boxShadow: 'var(--shadow)' }}>
+        <div className="responsive-2col" style={{ gap: '16px', marginBottom: '40px', background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--line)', boxShadow: 'var(--shadow)' }}>
           <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: 'var(--text-soft)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Department</label>
             <select value={filterDept} onChange={(e) => setFilterDept(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '15px', fontWeight: '500', appearance: 'none' }}>
@@ -2671,7 +2720,7 @@ function CareerListings({ setCurrentPage, setSelectedJobId }) {
           </div>
         </div>
 
-        <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
+        <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job) => (
               <article key={job.id} className="job-card"
@@ -3012,7 +3061,7 @@ function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
           </a>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
           {displayInsights.map((insight, i) => (
             <article key={i} className="insight-card" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
               <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
@@ -3054,7 +3103,7 @@ function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
 
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '48px 32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
             {insightsData.map((insight) => (
               <article key={insight.id} className="insight-card reveal-up" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
                 <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
@@ -3095,8 +3144,8 @@ function InsightDetailPage({ insightId, setCurrentPage }) {
   }
 
   return (
-    <article style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
-      <header style={{ padding: '160px 0 0', position: 'relative' }}>
+    <article style={{ background: 'var(--bg)', paddingBottom: 'clamp(60px, 10vh, 120px)' }}>
+      <header style={{ padding: 'clamp(100px, 15vh, 160px) 0 0', position: 'relative' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Research
@@ -3118,7 +3167,7 @@ function InsightDetailPage({ insightId, setCurrentPage }) {
       <div className="container" style={{ maxWidth: '800px' }}>
         <div className="reveal-up" style={{ fontSize: '20px', lineHeight: 1.8, color: 'var(--text-soft)' }}>
           <p style={{ marginBottom: '32px' }}>{insight.content}</p>
-          <div style={{ padding: '32px', background: 'var(--surface)', borderLeft: '4px solid var(--secondary)', borderRadius: '0 16px 16px 0', margin: '48px 0' }}>
+          <div style={{ padding: 'clamp(20px, 4vw, 32px)', background: 'var(--surface)', borderLeft: '4px solid var(--secondary)', borderRadius: '0 16px 16px 0', margin: 'clamp(24px, 6vw, 48px) 0' }}>
             <p style={{ fontSize: '24px', color: 'var(--primary)', fontStyle: 'italic', margin: 0, fontWeight: '600', lineHeight: 1.4 }}>
               "Elite firms don't adapt to the market; they architect the market condition that favors their unique capabilities."
             </p>
@@ -3239,6 +3288,7 @@ export default function App() {
   const [selectedCaseId, setSelectedCaseId] = React.useState(null);
   const [selectedInsightId, setSelectedInsightId] = React.useState(null);
   const [theme, setTheme] = React.useState('light');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -3322,7 +3372,8 @@ export default function App() {
       <div className="bg-orb orb-one"></div>
       <div className="bg-orb orb-two"></div>
       <div className="bg-orb orb-three"></div>
-      <Header setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
+      <Header setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} setCurrentPage={setCurrentPage} />
       <main>{content}</main>
       <Footer setCurrentPage={setCurrentPage} />
       <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
