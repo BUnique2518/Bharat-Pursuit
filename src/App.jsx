@@ -305,7 +305,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
           <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo({ top: 0 }); }}>About</a>
           <a href="#tech" onClick={(e) => { e.preventDefault(); setCurrentPage('tech'); window.scrollTo({ top: 0 }); }}>Tech</a>
           <a href="#cases" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); window.scrollTo({ top: 0 }); }}>Case Studies</a>
-          <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a>
+          {/* <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a> */}
           <a href="#careers" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }}>Careers</a>
         </nav>
 
@@ -313,7 +313,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
           <button onClick={toggleTheme} className="btn-icon" aria-label="Toggle Theme" style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', padding: 0, color: 'var(--primary)' }}>
             <span className="material-symbols-outlined">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
           </button>
-          <a href="#contact" className="btn btn-primary" onClick={(e) => goHome(e, 'contact')}>Book a Strategy Call</a>
+          <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}>Book a Strategy Call</a>
         </div>
       </div>
     </header>
@@ -406,31 +406,29 @@ function Hero() {
     <section className="hero section">
       <div className="container hero-grid">
         <div className="hero-copy reveal-up">
-          <div className="eyebrow-pill">Elite Strategic Marketing for Enterprise Growth</div>
-          <h1>Build a market presence that commands credibility, sells with clarity, and scales globally.</h1>
+          <div className="eyebrow-pill">Elite Technology & Strategy Consultancy</div>
+          <h1>Architecting the future of enterprise growth through elite strategy and precision engineering.</h1>
           <p className="hero-text">
-            Bharat Pursuit is the consulting partner for enterprises seeking architectural excellence in market positioning,
-            go-to-market strategy, and global expansion. We bring senior-led strategic thinking to complex B2B value narratives,
-            transforming how ambitious firms compete in international markets.
+            Bharat Pursuit is the consulting partner for ambitious enterprises. We bridge the gap between high-level market positioning and deep technical execution, delivering end-to-end transformation that scales globally.
           </p>
 
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-gold">Schedule Strategy Consultation</a>
+            <a href="#" className="btn btn-gold" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}>Schedule Strategy Consultation</a>
             <a href="#services" className="btn btn-outline">Discover Our Methodology</a>
           </div>
 
           <div className="hero-points">
             <div className="info-card">
-              <h3>Positioning Architecture</h3>
-              <p>Strategy rooted in buyer psychology and competitive differentiation.</p>
+              <h3>Strategic Design</h3>
+              <p>Positioning rooted in buyer psychology and competitive differentiation.</p>
+            </div>
+            <div className="info-card">
+              <h3>Engineering Execution</h3>
+              <p>Scalable cloud infrastructure, AI integration, and robust solutions.</p>
             </div>
             <div className="info-card">
               <h3>Senior-Led Excellence</h3>
-              <p>No junior handoff. Experienced strategists drive every engagement.</p>
-            </div>
-            <div className="info-card">
-              <h3>Global-Ready Narratives</h3>
-              <p>Messaging calibrated for cross-border credibility and enterprise sophistication.</p>
+              <p>No junior handoff. Experienced partners drive every engagement.</p>
             </div>
           </div>
         </div>
@@ -458,6 +456,59 @@ function Hero() {
                 we help firms command trust in sophisticated markets.
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CapabilitiesDualPillar() {
+  return (
+    <section className="section" style={{ background: 'var(--surface)', borderTop: '1px solid var(--line)', padding: '120px 0' }}>
+      <div className="container reveal-up">
+        <div style={{ textAlign: 'center', marginBottom: '80px', maxWidth: '800px', margin: '0 auto 80px' }}>
+          <div className="eyebrow-pill">Our Unified Capabilities</div>
+          <h2 style={{ fontSize: '42px', color: 'var(--primary)', fontWeight: '800', lineHeight: 1.2, marginBottom: '24px' }}>
+            The era of disconnected agencies is over. We build the engine and design the map.
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px' }}>
+          {/* Pillar 1 */}
+          <div style={{ background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: '24px', padding: '48px', position: 'relative', overflow: 'hidden' }} className="reveal-tl">
+            <div style={{ position: 'absolute', top: 0, right: 0, width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(196, 166, 100, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+            <span className="material-symbols-outlined" style={{ fontSize: '48px', color: 'var(--secondary)', marginBottom: '24px' }}>strategy</span>
+            <h3 style={{ fontSize: '32px', color: 'var(--primary)', fontWeight: '800', marginBottom: '16px' }}>Strategic Design</h3>
+            <p style={{ color: 'var(--text-soft)', fontSize: '18px', lineHeight: 1.7, marginBottom: '32px' }}>
+              We architect market-dominating positioning, narrative frameworks, and go-to-market strategies that resonate with enterprise buyers and global stakeholders.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {['Diagnostic Audits', 'Go-To-Market Strategy', 'Brand Architecture', 'Executive Alignment'].map((item, i) => (
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', color: 'var(--primary)', fontWeight: '600' }}>
+                  <span className="material-symbols-outlined" style={{ color: 'var(--secondary)', fontSize: '20px' }}>check_circle</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Pillar 2 */}
+          <div style={{ background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: '24px', padding: '48px', position: 'relative', overflow: 'hidden' }} className="reveal-tr">
+            <div style={{ position: 'absolute', top: 0, right: 0, width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+            <span className="material-symbols-outlined" style={{ fontSize: '48px', color: '#3B82F6', marginBottom: '24px' }}>code_blocks</span>
+            <h3 style={{ fontSize: '32px', color: 'var(--primary)', fontWeight: '800', marginBottom: '16px' }}>Engineering Execution</h3>
+            <p style={{ color: 'var(--text-soft)', fontSize: '18px', lineHeight: 1.7, marginBottom: '32px' }}>
+              Strategy requires execution. Our engineering pods build the scalable infrastructure, AI products, and data pipelines necessary to actualize your vision.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {['AI & ML Integration', 'Cloud Architecture', 'Custom Software Development', 'Data Engineering'].map((item, i) => (
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', color: 'var(--primary)', fontWeight: '600' }}>
+                  <span className="material-symbols-outlined" style={{ color: '#3B82F6', fontSize: '20px' }}>check_circle</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -1015,6 +1066,8 @@ function SimpleSection({ id, title, defaultText }) {
 function Contact() {
   const [active, setActive] = React.useState(true);
   const [values, setValues] = React.useState({ name: "", email: "", company: "", challenge: "" });
+  const [bookingDate, setBookingDate] = React.useState("");
+  const [bookingStatus, setBookingStatus] = React.useState("");
   const [placeholders, setPlaceholders] = React.useState({
     name: "Full name",
     email: "Work email",
@@ -1108,6 +1161,40 @@ function Contact() {
     setActive(false);
   };
 
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    if (!bookingDate) return;
+    setBookingStatus('Scheduling...');
+
+    const formData = {
+      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+      subject: `New Strategy Briefing Requested`,
+      from_name: "Bharat Pursuit Website",
+      message: `A prospect has requested a 30-minute strategic briefing.\n\nRequested Date & Time: ${new Date(bookingDate).toLocaleString()}`
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      if (result.success) {
+        setBookingStatus("Briefing Requested!");
+        setBookingDate('');
+        setTimeout(() => setBookingStatus(''), 4000);
+      } else {
+        setBookingStatus("Failed to schedule.");
+        setTimeout(() => setBookingStatus(''), 4000);
+      }
+    } catch (error) {
+      console.error(error);
+      setBookingStatus("Error processing request.");
+      setTimeout(() => setBookingStatus(''), 4000);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Sending...');
@@ -1152,7 +1239,7 @@ function Contact() {
   return (
     <section className="section contact-section" id="contact">
       <div className="container">
-        <div className="contact-shell">
+        <div className="contact-shell reveal-up">
           <div className="contact-copy">
             <div className="section-kicker">Start the Engagement</div>
             <h2>Ready to sharpen positioning and accelerate market momentum?</h2>
@@ -1160,6 +1247,33 @@ function Contact() {
               Bharat Pursuit helps firms refine how they are perceived, how they are understood, and how they grow.
               Let’s build a market presence that commands trust across borders.
             </p>
+
+            <div style={{ marginTop: '40px', padding: '32px', background: 'var(--bg)', borderRadius: '16px', border: '1px solid var(--line)' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '12px', color: 'var(--primary)' }}>Prefer an immediate dialogue?</h3>
+              <p style={{ color: 'var(--text-soft)', marginBottom: '24px', fontSize: '15px' }}>
+                Bypass the form and schedule a 30-minute strategic briefing directly with a Managing Partner.
+              </p>
+
+              {bookingStatus ? (
+                <div style={{ padding: '16px', background: 'rgba(196, 166, 100, 0.1)', color: 'var(--secondary)', borderRadius: '8px', textAlign: 'center', fontWeight: 'bold' }}>
+                  {bookingStatus}
+                </div>
+              ) : (
+                <form onSubmit={handleBookingSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <input
+                    type="datetime-local"
+                    value={bookingDate}
+                    onChange={(e) => setBookingDate(e.target.value)}
+                    required
+                    style={{ width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--primary)', outline: 'none', fontSize: '15px' }}
+                  />
+                  <button type="submit" className="btn btn-gold" style={{ width: '100%', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}>
+                    <span className="material-symbols-outlined" style={{ marginRight: '8px', fontSize: '20px' }}>calendar_month</span>
+                    Schedule a Briefing
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
@@ -1347,7 +1461,64 @@ function CookiePolicyPage() {
   );
 }
 
+function LeadershipRoster() {
+  const partners = [
+    {
+      name: 'Elena Rostova',
+      role: 'Managing Partner, Strategy',
+      bio: 'Former Engagement Manager at McKinsey. 15+ years advising Fortune 500 tech firms on global expansion and market positioning.',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80'
+    },
+    {
+      name: 'David Chen',
+      role: 'Partner, Cloud & AI Architecture',
+      bio: 'Ex-AWS Principal Architect. Specializes in designing highly resilient, scalable data platforms and implementing enterprise AI pipelines.',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'
+    },
+    {
+      name: 'Marcus Thorne',
+      role: 'Partner, Go-to-Market Integration',
+      bio: 'Former VP Marketing at Snowflake. Master architect of Category Creation and complex B2B narrative systems.',
+      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80'
+    }
+  ];
 
+  return (
+    <section className="section" style={{ background: 'var(--surface)', padding: '120px 0', borderTop: '1px solid var(--line)' }}>
+      <div className="container reveal-up">
+        <div style={{ textAlign: 'center', marginBottom: '80px', maxWidth: '800px', margin: '0 auto' }}>
+          <div className="eyebrow-pill">Our Pedigree</div>
+          <h2 style={{ fontSize: '42px', color: 'var(--primary)', fontWeight: '800', lineHeight: 1.2, margin: 0 }}>
+            Led by strategists and engineers from the world’s most demanding firms.
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+          {partners.map((partner, i) => (
+            <div key={i} className="partner-card" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', borderRadius: '16px', overflow: 'hidden' }}>
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) contrast(1.1)', transition: 'filter 0.5s ease, transform 0.5s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.filter = 'grayscale(0%) contrast(1)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.filter = 'grayscale(100%) contrast(1.1)'; e.currentTarget.style.transform = 'scale(1)'; }}
+                />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)', margin: '0 0 8px 0' }}>{partner.name}</h3>
+                <div style={{ color: 'var(--secondary)', fontSize: '15px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '16px' }}>{partner.role}</div>
+                <p style={{ color: 'var(--text-soft)', fontSize: '16px', lineHeight: 1.6, margin: 0 }}>
+                  {partner.bio}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function AboutUsPage() {
   const [selectedIndustry, setSelectedIndustry] = React.useState('Technology');
@@ -1529,6 +1700,10 @@ function AboutUsPage() {
         </div>
       </section>
 
+      {/* Leadership Roster */}
+      {/* <LeadershipRoster /> */}
+      {/*removing LeadershipRoster, later need to add members*/}
+
       {/* How We Operate - Video Section */}
       <section style={{ padding: '100px 0', background: 'var(--white)' }}>
         <div className="container">
@@ -1652,7 +1827,7 @@ function AboutUsPage() {
           <p style={{ fontSize: '16px', color: 'var(--text-soft)', marginBottom: '32px', lineHeight: 1.8 }}>
             Let's discuss how Bharat Pursuit can help your firm build premium positioning, strengthen market narratives, and accelerate global growth.
           </p>
-          <a href="#contact" style={{
+          <a href="#" style={{
             display: 'inline-block',
             padding: '14px 32px',
             background: 'var(--secondary)',
@@ -1662,6 +1837,7 @@ function AboutUsPage() {
             fontWeight: '600',
             transition: 'opacity 0.2s ease'
           }}
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}
             onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
             Schedule a Strategy Call
@@ -1766,16 +1942,16 @@ function AboutUsPage() {
               border: '1px solid var(--line)',
               boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.2)'
             }}>
-              <img 
-                src="/assets/architectural_diagram.png" 
-                alt="Architectural Blueprint" 
+              <img
+                src="/assets/architectural_diagram.png"
+                alt="Architectural Blueprint"
                 style={{
                   maxWidth: '100%',
                   maxHeight: '500px',
                   objectFit: 'contain',
                   borderRadius: '8px',
                   animation: 'fadeIn 0.8s ease'
-                }} 
+                }}
               />
             </div>
 
@@ -2119,49 +2295,77 @@ function TechServicesPage() {
       <section className="section" style={{ background: '#0a0a0a', textAlign: 'center' }}>
         <div className="container">
           <h2 style={{ fontSize: '40px', color: 'white', marginBottom: '24px' }}>Ready to architect your digital future?</h2>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-gold" style={{ padding: '0 32px', fontSize: '16px', minHeight: '56px' }}>Book a Tech Strategy Call</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }} className="btn btn-gold" style={{ padding: '0 32px', fontSize: '16px', minHeight: '56px' }}>Book a Tech Strategy Call</a>
         </div>
       </section>
     </>
   );
 }
 
-function CaseStudiesPage() {
-  const caseStudies = [
-    {
-      id: 'c1',
-      title: 'AI-driven Lead Scoring for Enterprise SaaS',
-      tag: 'AI & Automation',
-      summary: 'A B2B SaaS platform was struggling with an overwhelming volume of unqualified MQLs. We engineered a custom machine-learning model that integrated directly with their CRM to score leads based on behavioral patterns and firmographic data.',
-      metric: '38%',
-      metricLabel: 'Increase in lead-to-opportunity conversion'
-    },
-    {
-      id: 'c2',
-      title: 'Global GTM Strategy for FinTech Scaleup',
-      tag: 'GTM Strategy',
-      summary: 'A European FinTech firm needed to enter the APAC market. We architected their complete positioning, compliance messaging, and localized go-to-market strategy, deploying highly targeted account-based campaigns.',
-      metric: '2.5x',
-      metricLabel: 'ARR growth within 9 months of launch'
-    },
-    {
-      id: 'c3',
-      title: 'Real-time Data Platform Modernization',
-      tag: 'Data Engineering',
-      summary: 'A logistics enterprise had fragmented data across 14 legacy systems. We consolidated their analytical pipelines into a modern Snowflake & dbt stack, providing executives with real-time operational BI dashboards.',
-      metric: '85%',
-      metricLabel: 'Reduction in manual reporting hours'
-    },
-    {
-      id: 'c4',
-      title: 'Cloud Migration & Infrastructure Optimization',
-      tag: 'Cloud & DevOps',
-      summary: 'A high-growth consumer app faced severe latency issues during traffic spikes. We migrated their monolithic architecture to a fully containerized Kubernetes setup on AWS, implementing autoscaling and comprehensive observability.',
-      metric: '99.99%',
-      metricLabel: 'SLA achieved with 40% lower cloud spend'
-    }
-  ];
+const caseStudiesData = [
+  {
+    id: 'c1',
+    title: 'AI-driven Lead Scoring for Enterprise SaaS',
+    tag: 'AI & Automation',
+    summary: 'A B2B SaaS platform was struggling with an overwhelming volume of unqualified MQLs. We engineered a custom machine-learning model that integrated directly with their CRM to score leads based on behavioral patterns and firmographic data.',
+    metric: '38%',
+    metricLabel: 'Increase in lead-to-opportunity conversion',
+    context: 'The client was generating 10,000+ top-of-funnel leads monthly, but sales velocity was plummeting due to rep burnout from unqualified calls. The existing rules-based scoring logic was rigid and failed to adapt to nuanced buying signals across different enterprise segments.',
+    architecture: 'We decoupled the scoring engine from their monolithic CRM. We built an event-driven data architecture utilizing Apache Kafka for real-time behavioral ingestion, feeding into a custom XGBoost classification model deployed via AWS SageMaker. This allowed us to score interactions in milliseconds and sync only high-propensity accounts to the sales team.',
+    results: [
+      '38% increase in sales-qualified opportunity conversion rate',
+      '45 hours per week of manual qualification saved for the SDR team',
+      'Model deployed with 92% precision in identifying ultimate closed-won patterns'
+    ]
+  },
+  {
+    id: 'c2',
+    title: 'Global GTM Strategy for FinTech Scaleup',
+    tag: 'GTM Strategy',
+    summary: 'A European FinTech firm needed to enter the APAC market. We architected their complete positioning, compliance messaging, and localized go-to-market strategy, deploying highly targeted account-based campaigns.',
+    metric: '2.5x',
+    metricLabel: 'ARR growth within 9 months of launch',
+    context: 'After conquering the EU market, the client sought to penetrate the highly fragmented APAC region, specifically Singapore and Australia. Their existing messaging lacked cultural resonance and regulatory credibility, leading to stalled mid-market negotiations.',
+    architecture: 'We executed a comprehensive positioning tear-down, elevating their category from a "Payments App" to "Cross-Border Liquidity Infrastructure". We mapped complex regulatory stakeholder personas and launched targeted ABM (Account-Based Marketing) campaigns aligned to specific APAC financial frameworks.',
+    results: [
+      '2.5x ARR growth within 9 months of the APAC launch',
+      'Secured 3 tier-1 regional banking partnerships',
+      'Reduced enterprise sales cycle from 9 months to 4.5 months'
+    ]
+  },
+  {
+    id: 'c3',
+    title: 'Real-time Data Platform Modernization',
+    tag: 'Data Engineering',
+    summary: 'A logistics enterprise had fragmented data across 14 legacy systems. We consolidated their analytical pipelines into a modern Snowflake & dbt stack, providing executives with real-time operational BI dashboards.',
+    metric: '85%',
+    metricLabel: 'Reduction in manual reporting hours',
+    context: 'The logistics provider was operating blind due to data silos spread across 14 distinct legacy systems. It took analysts three weeks to compile a monthly supply chain performance report, rendering the data obsolete upon delivery.',
+    architecture: 'We constructed a modern data stack. Using Fivetran for robust ETL, we centralized all structured and semi-structured payloads into Snowflake. We implemented dbt (data build tool) for rigorous version-controlled modeling, ultimately exposing clean, validated data marts via Looker for executive consumption.',
+    results: [
+      '85% reduction in manual data wrangling and reporting hours',
+      'Data latency reduced from 3 weeks to 15 minutes',
+      'Enabled proactive supply chain diversion, saving $1.2M in SLA penalties'
+    ]
+  },
+  {
+    id: 'c4',
+    title: 'Cloud Migration & Infrastructure Optimization',
+    tag: 'Cloud & DevOps',
+    summary: 'A high-growth consumer app faced severe latency issues during traffic spikes. We migrated their monolithic architecture to a fully containerized Kubernetes setup on AWS, implementing autoscaling and comprehensive observability.',
+    metric: '99.99%',
+    metricLabel: 'SLA achieved with 40% lower cloud spend',
+    context: 'The consumer application was scaling wildly but experiencing catastrophic latency degradation during peak traffic events. Their legacy monolithic infrastructure was over-provisioned yet failing to handle burst completely.',
+    architecture: 'We strangled the monolith. Over 6 months, we migrated core services to a fully containerized microservices architecture managed by Amazon EKS (Kubernetes). We implemented aggressive horizontal pod autoscaling and comprehensive Datadog observability to isolate bottlenecks automatically.',
+    results: [
+      'Achieved 99.99% uptime SLA across all core services',
+      'Reduced total AWS cloud spend by 40% via right-sizing and spot instances',
+      'Deployment frequency increased from bi-weekly to multiple times a day'
+    ]
+  }
+];
 
+function CaseStudiesPage({ setCurrentPage, setSelectedCaseId }) {
   return (
     <>
       {/* Hero Banner Section */}
@@ -2186,10 +2390,10 @@ function CaseStudiesPage() {
             marginBottom: '24px',
             border: '1px solid rgba(255, 255, 255, 0.1)'
           }}>Our Work</div>
-          <h1 style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: '800', lineHeight: 1.1, margin: '0 0 24px 0', letterSpacing: '-0.02em', maxWidth: '800px' }}>
+          <h1 className="reveal-up" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: '800', lineHeight: 1.1, margin: '0 0 24px 0', letterSpacing: '-0.02em', maxWidth: '800px' }}>
             Transforming ambition into measurable <span style={{ color: 'var(--secondary)' }}>commercial impact.</span>
           </h1>
-          <p style={{ fontSize: '18px', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: 0, maxWidth: '640px' }}>
+          <p className="reveal-up" style={{ fontSize: '18px', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: 0, maxWidth: '640px' }}>
             Read how we have partnered with industry leaders and fast-growing organizations to solve complex strategy, data, and engineering challenges.
           </p>
         </div>
@@ -2200,8 +2404,8 @@ function CaseStudiesPage() {
       <section className="section" style={{ background: 'var(--bg)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '32px' }}>
-            {caseStudies.map((c) => (
-              <article key={c.id} className="case-card">
+            {caseStudiesData.map((c) => (
+              <article key={c.id} className="case-card reveal-up">
                 <div>
                   <span className="tag-pill tag-pill-primary" style={{ marginBottom: '16px' }}>{c.tag}</span>
                 </div>
@@ -2213,8 +2417,13 @@ function CaseStudiesPage() {
                   <span style={{ fontSize: '14px', color: 'var(--text-soft)', fontWeight: '500' }}>{c.metricLabel}</span>
                 </div>
 
-                <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px', width: 'fit-content' }}>
-                  Read full story <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+                <a href="#" onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedCaseId(c.id);
+                  setCurrentPage('caseDetail');
+                  window.scrollTo(0, 0);
+                }} style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px', width: 'fit-content' }}>
+                  Read architectural review <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
                 </a>
               </article>
             ))}
@@ -2227,10 +2436,97 @@ function CaseStudiesPage() {
         <div className="container">
           <h2 style={{ fontSize: '32px', color: 'var(--primary)', marginBottom: '16px' }}>Have a similar strategic challenge?</h2>
           <p style={{ color: 'var(--text-soft)', marginBottom: '32px', fontSize: '16px' }}>Let's discuss how our cross-functional teams can architect a solution.</p>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-primary" style={{ padding: '0 32px' }}>Start the conversation</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }} className="btn btn-primary" style={{ padding: '0 32px' }}>Start the conversation</a>
         </div>
       </section>
     </>
+  );
+}
+
+function CaseStudyDetailPage({ caseId, setCurrentPage }) {
+  const c = caseStudiesData.find(cs => cs.id === caseId);
+
+  if (!c) {
+    return (
+      <div style={pageStyle}>
+        <h1 style={pageHeadStyle}>Case Study Not Found</h1>
+        <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Case Studies</a>
+      </div>
+    );
+  }
+
+  return (
+    <article style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
+      {/* Detail Hero */}
+      <header style={{ padding: '160px 0 100px', background: '#0a0a0a', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Work
+          </a>
+          <div style={{ marginBottom: '24px' }}>
+            <span style={{ padding: '6px 16px', background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: '20px', fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{c.tag}</span>
+          </div>
+          <h1 className="reveal-up" style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: '800', lineHeight: 1.15, margin: '0 0 40px 0', maxWidth: '900px' }}>
+            {c.title}
+          </h1>
+
+          {/* Hero Metrics Strip */}
+          <div className="reveal-scale" style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', padding: '32px', background: 'rgba(0,0,0,0.3)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', maxWidth: '900px', backdropFilter: 'blur(10px)' }}>
+            <div>
+              <div style={{ fontSize: '48px', fontWeight: '800', color: 'var(--secondary)', lineHeight: 1 }}>{c.metric}</div>
+              <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)', fontWeight: '600', marginTop: '8px' }}>{c.metricLabel}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Abstract Background Element */}
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(196, 166, 100, 0.1) 0%, transparent 70%)', transform: 'translate(20%, -20%)', pointerEvents: 'none' }}></div>
+      </header>
+
+      <div className="container" style={{ maxWidth: '900px', margin: '0 auto', paddingTop: '80px' }}>
+        {/* Context Section */}
+        <section className="reveal-up" style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(196, 166, 100, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary)' }}>
+              <span className="material-symbols-outlined">radar</span>
+            </div>
+            <h2 style={{ fontSize: '32px', color: 'var(--primary)', fontWeight: '800', margin: 0 }}>The Challenge & Context</h2>
+          </div>
+          <p style={{ fontSize: '18px', color: 'var(--text-soft)', lineHeight: 1.8 }}>{c.context}</p>
+        </section>
+
+        {/* Architecture Section */}
+        <section className="reveal-up" style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(196, 166, 100, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary)' }}>
+              <span className="material-symbols-outlined">architecture</span>
+            </div>
+            <h2 style={{ fontSize: '32px', color: 'var(--primary)', fontWeight: '800', margin: 0 }}>Strategic Architecture</h2>
+          </div>
+          <div style={{ padding: '40px', background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+            <p style={{ fontSize: '18px', color: 'var(--primary)', lineHeight: 1.8, margin: 0 }}>{c.architecture}</p>
+          </div>
+        </section>
+
+        {/* Results Section */}
+        <section className="reveal-up">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(196, 166, 100, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary)' }}>
+              <span className="material-symbols-outlined">monitoring</span>
+            </div>
+            <h2 style={{ fontSize: '32px', color: 'var(--primary)', fontWeight: '800', margin: 0 }}>Quantitative Outcomes</h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {c.results.map((result, idx) => (
+              <div key={idx} style={{ padding: '24px', background: 'rgba(20, 37, 56, 0.03)', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <span className="material-symbols-outlined" style={{ color: 'var(--secondary)', fontSize: '28px' }}>check_circle</span>
+                <span style={{ fontSize: '18px', color: 'var(--text-soft)', fontWeight: '500' }}>{result}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </article>
   );
 }
 
@@ -2324,7 +2620,7 @@ function JobListingPage({ jobId, setCurrentPage }) {
 
       <h2 style={pageSubHeadStyle}>Apply Now</h2>
       <p style={{ marginBottom: '20px' }}>
-        Interested in this role? Send your resume, portfolio, and a brief note on why you're interested to <strong>careers@bharatpursuit.com</strong>
+        Interested in this role? Send your resume, portfolio, and a brief note on why you're interested to <strong>support@bharatpursuit.com</strong>
       </p>
       <p style={{ fontSize: '14px', color: 'var(--text-soft)' }}>
         We review applications on a rolling basis. Shortlisted candidates will be contacted within 1 week. We appreciate the time you take to apply and will provide feedback at key stages.
@@ -2590,7 +2886,7 @@ function Chatbot() {
   );
 }
 
-function Home() {
+function Home({ setCurrentPage, setSelectedInsightId }) {
   React.useEffect(() => {
     const cards = document.querySelectorAll(".tilt-card");
 
@@ -2636,19 +2932,345 @@ function Home() {
     <>
       <Hero />
       <PartnerLogos />
+      <CapabilitiesDualPillar />
       <Services />
       {/* <SectorsBand /> */}
       <Approach />
+      <InsightsSection setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />
       <WhyChoose />
       <Contact />
     </>
   );
 }
 
+const insightsData = [
+  {
+    id: 'i1',
+    type: 'Whitepaper',
+    title: 'The AI Imperative: Architecting Autonomous Enterprise Systems',
+    readTime: '12 min read',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+    content: "Artificial Intelligence is no longer an experimental edge case—it is the core infrastructure of the modern enterprise. In this whitepaper, we dissect the necessary transition from human-in-the-loop workflows to fully autonomous, agentic systems. We cover the foundational data architecture required, the shift from monolithic predictive models to composable generative pipelines, and the strategic implications for organizational design."
+  },
+  {
+    id: 'i2',
+    type: 'Strategic Insight',
+    title: 'Positioning in the Post-SaaS Era: Finding Moats in Crowded Markets',
+    readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
+    content: "The SaaS explosion has led to unprecedented feature commoditization. When every competitor can ship identical functionality within weeks, the only sustainable moat is brand positioning and data gravity. This insight explores how B2B firms must pivot from competing on 'what it does' to 'how it transforms the business model', leveraging sophisticated narrative architecture to command premium pricing."
+  },
+  {
+    id: 'i3',
+    type: 'Research Report',
+    title: 'Global Expansion Playbook: Navigating APAC Market Entry Strategy',
+    readTime: '15 min read',
+    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80',
+    content: "Entering the APAC region requires more than just translating documentation. It demands deep understanding of fragmented regulatory landscapes, localized cultural trust markers, and unique digital ecosystems (such as WeChat in China or LINE in Japan). This report provides a quantitative analysis of market entry velocities, detailing the optimal GTM plays for enterprise software firms targeting Singapore, Australia, and Japan."
+  },
+  {
+    id: 'i4',
+    type: 'Engineering Guide',
+    title: 'Modernizing Legacy Data Stacks for Real-Time Analytics',
+    readTime: '10 min read',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+    content: "Batch processing is dead. Executive teams demand real-time telemetry to steer large organizations. We outline the architectural migration path from legacy on-premise warehouses to modern cloud data lakes utilizing Snowflake, dbt, and Kafka. Essential reading for CTOs and VP of Engineering profiles managing technical debt."
+  },
+  {
+    id: 'i5',
+    type: 'Executive Summary',
+    title: 'The Hidden Cost of Misaligned Go-To-Market Teams',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80',
+    content: "When Marketing promises 'digital transformation' but Sales sells 'software licenses', enterprise prospects disengage. This summary quantifies the pipeline leakage caused by siloed revenue teams and offers a framework for total commercial alignment, bridging the gap from first-touch marketing to post-sale customer success."
+  },
+  {
+    id: 'i6',
+    type: 'Case Study Analysis',
+    title: 'Cloud Optimization: Cutting Enterprise AWS Spend by 40%',
+    readTime: '9 min read',
+    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80',
+    content: "A detailed post-mortem on how we restructured the cloud architecture of a hyper-growth consumer application. We cover Kubernetes cluster optimization, strategic use of Spot instances, and implementing automated resource spin-downs during non-peak hours, resulting in massive operational savings without sacrificing SLA."
+  }
+];
+
+function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
+  const displayInsights = insightsData.slice(0, 3);
+
+  return (
+    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--line)', padding: '120px 0' }}>
+      <div className="container reveal-up">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px', flexWrap: 'wrap', gap: '24px' }}>
+          <div style={{ maxWidth: '600px' }}>
+            <div className="eyebrow-pill">Intellectual Capital</div>
+            <h2 style={{ fontSize: '42px', color: 'var(--primary)', fontWeight: '800', lineHeight: 1.2, margin: 0 }}>
+              Insights & Perspectives
+            </h2>
+          </div>
+          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); window.scrollTo(0, 0); }} style={{ color: 'var(--secondary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px' }}>
+            View all research <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+          </a>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
+          {displayInsights.map((insight, i) => (
+            <article key={i} className="insight-card" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
+              <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
+                <img
+                  src={insight.image}
+                  alt={insight.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.7s ease', filter: 'grayscale(40%)' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(40%)'; }}
+                />
+              </div>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{insight.type}</span>
+                <span style={{ color: 'var(--text-soft)', fontSize: '13px' }}>{insight.readTime}</span>
+              </div>
+              <h3 style={{ fontSize: '24px', fontWeight: '700', lineHeight: 1.4, color: 'var(--primary)', marginBottom: '16px', transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--primary)'}>
+                {insight.title}
+              </h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
+  return (
+    <div style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
+      <section style={{ padding: '160px 0 80px', background: '#0a0a0a', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <div className="container">
+          <div className="eyebrow-pill" style={{ color: '#a0aab5', background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.1)', marginBottom: '24px' }}>Intellectual Capital</div>
+          <h1 className="reveal-up" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: '800', lineHeight: 1.1, margin: '0 0 24px 0' }}>Our Research & <span style={{ color: 'var(--secondary)' }}>Perspectives.</span></h1>
+          <p className="reveal-up" style={{ fontSize: '18px', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', maxWidth: '640px', margin: 0 }}>
+            Deep-dive frameworks, architectural blueprints, and strategic market analysis from the partners at Bharat Pursuit.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '48px 32px' }}>
+            {insightsData.map((insight) => (
+              <article key={insight.id} className="insight-card reveal-up" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
+                <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
+                  <img
+                    src={insight.image}
+                    alt={insight.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.7s ease', filter: 'grayscale(40%)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(40%)'; }}
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+                  <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{insight.type}</span>
+                  <span style={{ color: 'var(--text-soft)', fontSize: '13px' }}>{insight.readTime}</span>
+                </div>
+                <h3 style={{ fontSize: '24px', fontWeight: '700', lineHeight: 1.4, color: 'var(--primary)', marginBottom: '16px', transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--primary)'}>
+                  {insight.title}
+                </h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function InsightDetailPage({ insightId, setCurrentPage }) {
+  const insight = insightsData.find(i => i.id === insightId);
+
+  if (!insight) {
+    return (
+      <div style={pageStyle}>
+        <h1 style={pageHeadStyle}>Insight Not Found</h1>
+        <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Research</a>
+      </div>
+    );
+  }
+
+  return (
+    <article style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
+      <header style={{ padding: '160px 0 0', position: 'relative' }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Research
+          </a>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '24px' }}>
+            <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', padding: '6px 16px', background: 'rgba(196, 166, 100, 0.1)', borderRadius: '20px' }}>{insight.type}</span>
+            <span style={{ color: 'var(--text-soft)', fontSize: '14px', fontWeight: '500' }}>{insight.readTime}</span>
+          </div>
+          <h1 className="reveal-up" style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: '800', lineHeight: 1.15, margin: '0 0 40px 0', color: 'var(--primary)' }}>{insight.title}</h1>
+        </div>
+      </header>
+
+      <div className="container reveal-scale" style={{ maxWidth: '1000px', marginBottom: '60px' }}>
+        <div style={{ width: '100%', aspectRatio: '21/9', borderRadius: '24px', overflow: 'hidden', boxShadow: 'var(--shadow)' }}>
+          <img src={insight.image} alt={insight.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+      </div>
+
+      <div className="container" style={{ maxWidth: '800px' }}>
+        <div className="reveal-up" style={{ fontSize: '20px', lineHeight: 1.8, color: 'var(--text-soft)' }}>
+          <p style={{ marginBottom: '32px' }}>{insight.content}</p>
+          <div style={{ padding: '32px', background: 'var(--surface)', borderLeft: '4px solid var(--secondary)', borderRadius: '0 16px 16px 0', margin: '48px 0' }}>
+            <p style={{ fontSize: '24px', color: 'var(--primary)', fontStyle: 'italic', margin: 0, fontWeight: '600', lineHeight: 1.4 }}>
+              "Elite firms don't adapt to the market; they architect the market condition that favors their unique capabilities."
+            </p>
+          </div>
+          <p>
+            For more information on implementing these strategies within your own enterprise, schedule a diagnostic session with our leadership team.
+          </p>
+        </div>
+
+        <div style={{ marginTop: '80px', paddingTop: '40px', borderTop: '1px solid var(--line)', textAlign: 'center' }}>
+          <h3 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)', marginBottom: '16px' }}>Want to discuss this further?</h3>
+          <a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }} className="btn btn-gold">Connect with a Partner</a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function BookingModal({ isOpen, onClose }) {
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [values, setValues] = React.useState({ name: "", email: "", company: "", context: "" });
+  const [bookingDate, setBookingDate] = React.useState("");
+  const [status, setStatus] = React.useState("");
+
+  React.useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => setIsVisible(true), 10);
+      return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!bookingDate) return;
+    setStatus('Sending request...');
+
+    const formData = {
+      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+      subject: `New Strategy Session Booking from ${values.name || 'Website'}`,
+      from_name: "Bharat Pursuit Website",
+      message: `Strategy Session Requested\n\nName: ${values.name}\nEmail: ${values.email}\nCompany: ${values.company}\nContext: ${values.context}\nRequested Time: ${new Date(bookingDate).toLocaleString()}`
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus("Request Sent! We will confirm shortly.");
+        setTimeout(() => {
+          setStatus('');
+          onClose();
+        }, 3000);
+      } else {
+        setStatus("Failed to send request.");
+        setTimeout(() => setStatus(''), 4000);
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("Error sending request.");
+      setTimeout(() => setStatus(''), 4000);
+    }
+  };
+
+  return (
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', zIndex: 99999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', opacity: isVisible ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+      <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '24px', padding: '48px', width: '100%', maxWidth: '640px', position: 'relative', overflowY: 'auto', maxHeight: '90vh', boxShadow: '0 24px 64px rgba(0,0,0,0.4)', opacity: isVisible ? 1 : 0, transform: isVisible ? 'scale(1)' : 'scale(0.96)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+        <button onClick={onClose} aria-label="Close Modal" style={{ position: 'absolute', top: '24px', right: '24px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--line)', borderRadius: '50%', color: 'var(--text-soft)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', transition: 'all 0.2s ease' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>close</span>
+        </button>
+
+        <div style={{ width: '64px', height: '64px', background: 'rgba(196, 166, 100, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+          <span className="material-symbols-outlined" style={{ color: 'var(--secondary)', fontSize: '32px' }}>event_available</span>
+        </div>
+        <h2 style={{ fontSize: '32px', color: 'var(--primary)', marginBottom: '12px', fontWeight: '800' }}>Schedule a Session</h2>
+        <p style={{ color: 'var(--text-soft)', marginBottom: '40px', fontSize: '16px', lineHeight: 1.6 }}>
+          Select a time and provide some context so we can pair you with the right managing partner for your strategic diagnostic.
+        </p>
+
+        {status ? (
+          <div style={{ padding: '24px', background: 'rgba(196, 166, 100, 0.1)', color: 'var(--secondary)', borderRadius: '12px', textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>
+            {status}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+              <input type="text" placeholder="Full Name" required value={values.name} onChange={e => setValues({ ...values, name: e.target.value })} style={{ flex: '1 1 calc(50% - 10px)', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '16px', outline: 'none' }} />
+              <input type="email" placeholder="Work Email" required value={values.email} onChange={e => setValues({ ...values, email: e.target.value })} style={{ flex: '1 1 calc(50% - 10px)', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '16px', outline: 'none' }} />
+            </div>
+
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+              <input type="text" placeholder="Company" value={values.company} onChange={e => setValues({ ...values, company: e.target.value })} style={{ flex: '1 1 calc(50% - 10px)', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '16px', outline: 'none' }} />
+              <input type="datetime-local" required value={bookingDate} onChange={e => setBookingDate(e.target.value)} style={{ flex: '1 1 calc(50% - 10px)', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '16px', outline: 'none' }} />
+            </div>
+
+            <textarea placeholder="What architectural or strategic challenge are you solving?" rows="4" required value={values.context} onChange={e => setValues({ ...values, context: e.target.value })} style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '16px', resize: 'vertical', outline: 'none' }}></textarea>
+
+            <button type="submit" className="btn btn-gold" style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '20px', fontSize: '18px', marginTop: '12px', cursor: 'pointer' }}>
+              Submit Request
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState('home');
   const [selectedJobId, setSelectedJobId] = React.useState(null);
+  const [selectedCaseId, setSelectedCaseId] = React.useState(null);
+  const [selectedInsightId, setSelectedInsightId] = React.useState(null);
   const [theme, setTheme] = React.useState('light');
+  const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleOpenModal = () => setIsBookingModalOpen(true);
+    window.addEventListener('openBookingModal', handleOpenModal);
+    return () => window.removeEventListener('openBookingModal', handleOpenModal);
+  }, []);
+
+  React.useEffect(() => {
+    // Global IntersectionObserver for reveal classes
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Find all elements looking to be revealed on scroll
+    const hiddenElements = document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-tl, .reveal-tr, .reveal-bl, .reveal-br');
+
+    // Reset them to ensure animation plays again if navigating back
+    hiddenElements.forEach(el => {
+      el.classList.remove('is-visible');
+      observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [currentPage]);
 
   React.useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -2678,7 +3300,10 @@ export default function App() {
   else if (currentPage === 'cookies') content = <CookiePolicyPage />;
   else if (currentPage === 'about') content = <AboutUsPage />;
   else if (currentPage === 'tech') content = <TechServicesPage />;
-  else if (currentPage === 'caseStudies') content = <CaseStudiesPage />;
+  else if (currentPage === 'caseStudies') content = <CaseStudiesPage setCurrentPage={setCurrentPage} setSelectedCaseId={setSelectedCaseId} />;
+  else if (currentPage === 'caseDetail') content = <CaseStudyDetailPage caseId={selectedCaseId} setCurrentPage={setCurrentPage} />;
+  else if (currentPage === 'insights') content = <InsightsPage setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />;
+  else if (currentPage === 'insightDetail') content = <InsightDetailPage insightId={selectedInsightId} setCurrentPage={setCurrentPage} />;
   else if (currentPage === 'careers') {
     content = (
       <>
@@ -2690,7 +3315,7 @@ export default function App() {
   else if (currentPage === 'jobDetail') {
     content = <JobListingPage jobId={selectedJobId} setCurrentPage={setCurrentPage} />;
   }
-  else content = <Home />;
+  else content = <Home setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />;
 
   return (
     <>
@@ -2700,6 +3325,7 @@ export default function App() {
       <Header setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
       <main>{content}</main>
       <Footer setCurrentPage={setCurrentPage} />
+      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
       <Chatbot />
     </>
   );
