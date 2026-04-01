@@ -1506,7 +1506,7 @@ img {
   gap: 24px;
 }
 
-.mobile-menu-content a {
+.mobile-menu-content a:not(.btn) {
   font-size: 24px;
   font-weight: 700;
   color: var(--primary);
