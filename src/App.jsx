@@ -102,6 +102,50 @@ const services = [
   }
 ];
 
+// Tech services (inspired by Beeutech + QodHunt patterns)
+const techServices = [
+  {
+    id: 'ts1',
+    number: '01',
+    icon: 'psychology',
+    title: 'AI & Engineering Services',
+    summary: 'End-to-end AI product development, model deployment, and MLOps for production-grade systems.',
+    tags: ['OpenAI / DeepSeek', 'Python', 'MLOps', 'Vector DBs'],
+    metric: { value: '+60%', label: 'Development velocity' },
+    highlights: ['ML model design & fine-tuning', 'Agentic workflows', 'Custom AI products', 'Ethical AI reviews']
+  },
+  {
+    id: 'ts2',
+    number: '02',
+    icon: 'cloud_sync',
+    title: 'Cloud & DevOps',
+    summary: 'Cloud architecture, infra-as-code, cost optimisation and continuous delivery pipelines for scale.',
+    tags: ['AWS / GCP / Azure', 'Kubernetes', 'Terraform', 'CI/CD'],
+    metric: { value: '40%', label: 'Average cost reduction' },
+    highlights: ['Cloud migration', 'Container orchestration', 'Infrastructure as Code', 'Observability & APM']
+  },
+  {
+    id: 'ts3',
+    number: '03',
+    icon: 'code_blocks',
+    title: 'Custom Software Engineering',
+    summary: 'Product engineering teams for web, mobile, and backend infrastructure with modern scalable stacks.',
+    tags: ['React / Next.js', 'Node.js', 'PostgreSQL', 'React Native'],
+    metric: { value: '99.9%', label: 'System uptime SLA' },
+    highlights: ['SaaS platform development', 'REST & GraphQL API design', 'Distributed systems', 'Automated QA testing']
+  },
+  {
+    id: 'ts4',
+    number: '04',
+    icon: 'analytics',
+    title: 'Data & Analytics',
+    summary: 'Data platforms, pipelines, and real-time BI that turn complex organizational data into predictable decisions.',
+    tags: ['Snowflake', 'dbt', 'Airflow', 'Tableau / PowerBI'],
+    metric: { value: '10x', label: 'Faster reporting cycles' },
+    highlights: ['Data engineering pipelines', 'Realtime streaming analytics', 'Data warehousing & lakes', 'Executive dashboards']
+  }
+];
+
 const proof = [
   { value: "12+", label: "Global market playbooks delivered" },
   { value: "30%", label: "Average messaging clarity uplift" },
@@ -113,7 +157,7 @@ const sectors = [
   "Technology",
   "Healthcare",
   "Manufacturing",
-  "Professional Services",
+  "Hiring",
   "B2B SaaS",
   "Financial Services"
 ];
@@ -247,7 +291,7 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
       <div className="container nav-wrap">
         <a href="#" className="brand" onClick={(e) => goHome(e)}>
           {/* <img src="./assets/MainIcon.png" alt="Bharat Pursuit logo" className="brand-logo" /> */}
-        <img src="/assets/MainIcon-removebg-preview.png" alt="Bharat Pursuit logo" className="brand-logo" />
+          <img src="/assets/light-mode.png" alt="Bharat Pursuit logo" className="brand-logo" />
           <div>
             <div className="brand-top">Pursue Growth. Build Bharat.</div>
             <div className="brand-name">Bharat Pursuit</div>
@@ -255,10 +299,12 @@ function Header({ setCurrentPage, theme, toggleTheme }) {
         </a>
 
         <nav className="main-nav">
-          <a href="#services" onClick={(e) => goHome(e, 'services')}>Services</a>
+          {/* <a href="#services" onClick={(e) => goHome(e, 'services')}>Services</a>
           <a href="#approach" onClick={(e) => goHome(e, 'approach')}>Approach</a>
-          <a href="#sectors" onClick={(e) => goHome(e, 'sectors')}>Sectors</a>
+          <a href="#sectors" onClick={(e) => goHome(e, 'sectors')}>Sectors</a> */}
           <a href="#about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo({ top: 0 }); }}>About</a>
+          <a href="#tech" onClick={(e) => { e.preventDefault(); setCurrentPage('tech'); window.scrollTo({ top: 0 }); }}>Tech</a>
+          <a href="#cases" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); window.scrollTo({ top: 0 }); }}>Case Studies</a>
           <a href="#contact" onClick={(e) => goHome(e, 'contact')}>Contact</a>
           <a href="#careers" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }}>Careers</a>
         </nav>
@@ -363,8 +409,8 @@ function Hero() {
           <div className="eyebrow-pill">Elite Strategic Marketing for Enterprise Growth</div>
           <h1>Build a market presence that commands credibility, sells with clarity, and scales globally.</h1>
           <p className="hero-text">
-            Bharat Pursuit is the consulting partner for enterprises seeking architectural excellence in market positioning, 
-            go-to-market strategy, and global expansion. We bring senior-led strategic thinking to complex B2B value narratives, 
+            Bharat Pursuit is the consulting partner for enterprises seeking architectural excellence in market positioning,
+            go-to-market strategy, and global expansion. We bring senior-led strategic thinking to complex B2B value narratives,
             transforming how ambitious firms compete in international markets.
           </p>
 
@@ -408,7 +454,7 @@ function Hero() {
               </div>
 
               <div className="panel-note">
-                From diagnostic positioning audits through market narrative architecture to executive alignment and execution, 
+                From diagnostic positioning audits through market narrative architecture to executive alignment and execution,
                 we help firms command trust in sophisticated markets.
               </div>
             </div>
@@ -469,7 +515,7 @@ function Services() {
         setSelectedService(null);
       }
     };
-    
+
     if (selectedService) {
       document.addEventListener('keydown', handleEscape);
       return () => document.removeEventListener('keydown', handleEscape);
@@ -494,7 +540,7 @@ function Services() {
             <div className="section-kicker">Core Consulting Services</div>
             <h2>Cornerstone engagements built to sharpen strategy, strengthen positioning, and sustain momentum.</h2>
             <p>
-              Each service discipline is designed with enterprise complexity in mind. We reduce strategic ambiguity, 
+              Each service discipline is designed with enterprise complexity in mind. We reduce strategic ambiguity,
               establish clear competitive narratives, and equip leadership teams to execute with market confidence.
             </p>
           </div>
@@ -542,8 +588,8 @@ function Services() {
 
       {/* Service Detail Modal */}
       {selectedService && (
-        <div 
-          className="service-modal-overlay" 
+        <div
+          className="service-modal-overlay"
           onClick={() => setSelectedService(null)}
           style={{
             position: 'fixed',
@@ -563,7 +609,7 @@ function Services() {
             paddingRight: '20px'
           }}
         >
-          <div 
+          <div
             className="service-modal-content"
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -610,7 +656,7 @@ function Services() {
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-              <div 
+              <div
                 style={{
                   width: '60px',
                   height: '60px',
@@ -645,8 +691,8 @@ function Services() {
               </h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {selectedService.details.outcomes.map((outcome, i) => (
-                  <li 
-                    key={i} 
+                  <li
+                    key={i}
                     style={{
                       padding: '12px 0',
                       borderBottom: i < selectedService.details.outcomes.length - 1 ? `1px solid var(--line)` : 'none',
@@ -668,7 +714,7 @@ function Services() {
               </h3>
               <ol style={{ listStyle: 'none', padding: 0, margin: 0, counterReset: 'step' }}>
                 {selectedService.details.process.map((step, i) => (
-                  <li 
+                  <li
                     key={i}
                     style={{
                       padding: '12px 0 12px 36px',
@@ -677,7 +723,7 @@ function Services() {
                       color: 'var(--text-soft)'
                     }}
                   >
-                    <span 
+                    <span
                       style={{
                         position: 'absolute',
                         left: 0,
@@ -721,8 +767,8 @@ function Services() {
               </div>
             </div>
 
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 setSelectedService(null);
@@ -810,7 +856,7 @@ function Approach() {
           <div className="section-kicker">Our Methodology</div>
           <h2>Structured consulting architecture for disciplined growth execution.</h2>
           <p>
-            Our approach combines strategic diagnosis with market intelligence, narrative engineering, and executable 
+            Our approach combines strategic diagnosis with market intelligence, narrative engineering, and executable
             frameworks. We transform positioning thinking into organizational capability that compounds competitive advantage.
           </p>
         </div>
@@ -902,7 +948,7 @@ function WhyChoose() {
           <div className="section-kicker">Why Enterprise Leaders Choose Us</div>
           <h2>Premium strategy execution without enterprise consulting pricing or overhead.</h2>
           <p>
-            Our positioning, narrative discipline, and senior-led approach are built for firms competing at the highest tier. 
+            Our positioning, narrative discipline, and senior-led approach are built for firms competing at the highest tier.
             We deliver the sophistication of top-tier consulting with agility and focus.
           </p>
         </div>
@@ -1301,19 +1347,19 @@ function CookiePolicyPage() {
   );
 }
 
-  
+
 
 function AboutUsPage() {
   const [selectedIndustry, setSelectedIndustry] = React.useState('Technology');
   const [showArchitectureModal, setShowArchitectureModal] = React.useState(false);
-  
+
   const industries = [
     { name: 'Technology', color: '#3B82F6', description: 'SaaS platforms, cloud infrastructure, and tech innovation' },
     { name: 'B2B SaaS', color: '#8B5CF6', description: 'Enterprise software and subscription models' },
     { name: 'Healthcare', color: '#EC4899', description: 'Life sciences, health tech, and medical devices' },
     { name: 'Financial Services', color: '#F59E0B', description: 'Fintech, banks, and investment firms' },
     { name: 'Manufacturing', color: '#10B981', description: 'Industrial tech and smart manufacturing' },
-    { name: 'Professional Services', color: '#06B6D4', description: 'Consulting, legal, and accounting firms' },
+    { name: 'Hiring', color: '#06B6D4', description: 'Consulting, legal, and accounting firms' },
     { name: 'Enterprise Software', color: '#6366F1', description: 'ERP, CRM, and enterprise platforms' },
     { name: 'Emerging Tech', color: '#D946EF', description: 'AI, blockchain, and cutting-edge innovation' }
   ];
@@ -1324,7 +1370,7 @@ function AboutUsPage() {
     'Healthcare': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80")',
     'Financial Services': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80")',
     'Manufacturing': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80")',
-    'Professional Services': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80")',
+    'Hiring': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80")',
     'Enterprise Software': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1920&q=80")',
     'Emerging Tech': 'linear-gradient(135deg, rgba(20, 37, 56, 0.95) 0%, rgba(20, 37, 56, 0.85) 100%), url("https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=80")'
   };
@@ -1338,11 +1384,11 @@ function AboutUsPage() {
             <div style={{ fontSize: '14px', color: 'var(--secondary)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '20px', animation: 'fadeIn 0.6s ease' }}>
               About Bharat Pursuit
             </div>
-            <h1 style={{ 
-              fontSize: '52px', 
-              fontWeight: '800', 
-              marginBottom: '24px', 
-              color: 'transparent', 
+            <h1 style={{
+              fontSize: '52px',
+              fontWeight: '800',
+              marginBottom: '24px',
+              color: 'transparent',
               lineHeight: 1.2,
               animation: 'slideUpAndColor 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
               background: 'linear-gradient(to right, var(--primary) 0%, var(--secondary) 50%, #3B82F6 100%)',
@@ -1353,14 +1399,14 @@ function AboutUsPage() {
               cursor: 'pointer',
               transition: 'transform 0.3s ease'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundPosition = 'right';
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundPosition = 'left';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}>
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundPosition = 'right';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundPosition = 'left';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}>
               Strategy. Positioning. Global Growth.
             </h1>
             <p style={{ fontSize: '20px', color: 'var(--text-soft)', lineHeight: 1.8, animation: 'fadeIn 1s ease 0.2s backwards' }}>
@@ -1388,7 +1434,7 @@ function AboutUsPage() {
                 We serve enterprise clients across Technology, Healthcare, B2B SaaS, Financial Services, Manufacturing, and Professional Services. We help them think sharper, position stronger, and grow globally.
               </p>
             </div>
-            <div style={{ 
+            <div style={{
               background: 'linear-gradient(135deg, rgba(196, 166, 100, 0.1) 0%, rgba(196, 166, 100, 0.05) 100%)',
               borderRadius: '16px',
               padding: '60px',
@@ -1399,31 +1445,31 @@ function AboutUsPage() {
               position: 'relative',
               overflow: 'hidden'
             }}
-            onClick={() => setShowArchitectureModal(true)}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05) rotateY(5deg)';
-              e.currentTarget.style.boxShadow = 'var(--shadow)';
-              const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
-              animElements.forEach((el) => {
-                el.style.opacity = '0.6';
-                if(el.classList.contains('ai-particle')) {
-                  el.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px)`;
-                  el.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                } else {
-                  el.style.transform = `scaleX(${0.5 + Math.random()}) rotate(${Math.random()*360}deg)`;
-                  el.style.transition = 'all 1s ease-in-out';
-                }
-              });
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1) rotateY(0deg)';
-              e.currentTarget.style.boxShadow = 'none';
-              const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
-              animElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translate(0, 0) scale(1) rotate(0deg)';
-              });
-            }}>
+              onClick={() => setShowArchitectureModal(true)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05) rotateY(5deg)';
+                e.currentTarget.style.boxShadow = 'var(--shadow)';
+                const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
+                animElements.forEach((el) => {
+                  el.style.opacity = '0.6';
+                  if (el.classList.contains('ai-particle')) {
+                    el.style.transform = `translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px)`;
+                    el.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                  } else {
+                    el.style.transform = `scaleX(${0.5 + Math.random()}) rotate(${Math.random() * 360}deg)`;
+                    el.style.transition = 'all 1s ease-in-out';
+                  }
+                });
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) rotateY(0deg)';
+                e.currentTarget.style.boxShadow = 'none';
+                const animElements = e.currentTarget.querySelectorAll('.ai-particle, .ai-connection');
+                animElements.forEach(el => {
+                  el.style.opacity = '0';
+                  el.style.transform = 'translate(0, 0) scale(1) rotate(0deg)';
+                });
+              }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 0 }}>
                 <div className="ai-particle" style={{ top: '20%', left: '30%' }}></div>
                 <div className="ai-particle" style={{ top: '60%', left: '70%' }}></div>
@@ -1447,94 +1493,38 @@ function AboutUsPage() {
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section style={{ padding: '100px 0', background: 'var(--bg)', borderTop: '1px solid var(--line)' }}>
+      {/* Vision & Mission (BeeuTech Inspired) */}
+      <section style={{ padding: '100px 0', background: '#0a0a0a' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--primary)' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#ffffff' }}>
               Our Vision & Mission
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--line)',
-              borderRadius: '16px',
-              padding: '40px',
-              textAlign: 'center',
-              transition: 'all 0.4s ease',
-              cursor: 'pointer',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow)';
-              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196, 166, 100, 0.08), rgba(196, 166, 100, 0.02))';
-              const sw = e.currentTarget.querySelector('.visionary-sweep');
-              if(sw) {
-                sw.style.animation = 'sweepLight 1.5s ease-in-out forwards';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.background = 'var(--surface)';
-              const sw = e.currentTarget.querySelector('.visionary-sweep');
-              if(sw) {
-                sw.style.animation = 'none';
-              }
-            }}>
-              <div className="visionary-sweep"></div>
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--secondary)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  Our Vision
-                </div>
-                <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', margin: 0 }}>
+
+            {/* Vision Card */}
+            <div className="reveal-card-container">
+              <img src="/vision-card.png" alt="Vision" className="reveal-card-image" />
+              <div className="reveal-card-content">
+                <h3 className="reveal-card-title">Our Vision</h3>
+                <p className="reveal-card-desc">
                   To be the most trusted strategic consulting partner for enterprises seeking market clarity, competitive differentiation, and sustainable global growth.
                 </p>
               </div>
             </div>
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--line)',
-              borderRadius: '16px',
-              padding: '40px',
-              textAlign: 'center',
-              transition: 'all 0.4s ease',
-              cursor: 'pointer',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow)';
-              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196, 166, 100, 0.08), rgba(196, 166, 100, 0.02))';
-              const rings = e.currentTarget.querySelectorAll('.mission-pulse-ring');
-              rings.forEach((r, i) => {
-                r.style.animation = `pulseRing 1.5s ease-out infinite ${i * 0.4}s`;
-              });
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.background = 'var(--surface)';
-              const rings = e.currentTarget.querySelectorAll('.mission-pulse-ring');
-              rings.forEach(r => {
-                r.style.animation = 'none';
-              });
-            }}>
-              <div className="mission-pulse-ring"></div>
-              <div className="mission-pulse-ring"></div>
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--secondary)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  Our Mission
-                </div>
-                <p style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--text-soft)', margin: 0 }}>
+
+            {/* Mission Card */}
+            <div className="reveal-card-container">
+              <img src="/mission-card.png" alt="Mission" className="reveal-card-image" />
+              <div className="reveal-card-content">
+                <h3 className="reveal-card-title">Our Mission</h3>
+                <p className="reveal-card-desc">
                   Deliver positioning architecture, go-to-market strategy, and executive advisory that transform how ambitious firms compete, communicate, and grow across international markets.
                 </p>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -1583,8 +1573,8 @@ function AboutUsPage() {
       </section>
 
       {/* Industries We Serve - Interactive */}
-      <section style={{ 
-        padding: '100px 0', 
+      <section style={{
+        padding: '100px 0',
         background: industryBgImages[selectedIndustry],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -1604,8 +1594,8 @@ function AboutUsPage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
             {industries.map((industry, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 onClick={() => setSelectedIndustry(industry.name)}
                 style={{
                   background: selectedIndustry === industry.name ? industry.color : 'var(--surface)',
@@ -1619,9 +1609,9 @@ function AboutUsPage() {
                   boxShadow: selectedIndustry === industry.name ? '0 12px 24px rgba(0,0,0,0.15)' : 'none'
                 }}
               >
-                <div style={{ 
-                  fontSize: '16px', 
-                  fontWeight: '700', 
+                <div style={{
+                  fontSize: '16px',
+                  fontWeight: '700',
                   color: selectedIndustry === industry.name ? '#fff' : 'var(--primary)',
                   transition: 'all 0.3s ease'
                 }}>
@@ -1649,8 +1639,8 @@ function AboutUsPage() {
       </section>
 
       {/* CTA Section */}
-      <section style={{ 
-        padding: '80px 0', 
+      <section style={{
+        padding: '80px 0',
         background: `linear-gradient(135deg, rgba(196, 166, 100, 0.1) 0%, rgba(196, 166, 100, 0.05) 100%)`,
         borderTop: '1px solid var(--line)',
         textAlign: 'center'
@@ -1672,8 +1662,8 @@ function AboutUsPage() {
             fontWeight: '600',
             transition: 'opacity 0.2s ease'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
-          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
             Schedule a Strategy Call
           </a>
         </div>
@@ -1681,7 +1671,7 @@ function AboutUsPage() {
 
       {/* Architecture Modal */}
       {showArchitectureModal && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             top: 0,
@@ -1701,14 +1691,14 @@ function AboutUsPage() {
           }}
           onClick={() => setShowArchitectureModal(false)}
         >
-          <div 
+          <div
             onClick={(e) => e.stopPropagation()}
             style={{
               background: 'var(--surface)',
               borderRadius: '16px',
               border: '1px solid var(--line)',
               padding: '48px',
-              maxWidth: '800px',
+              maxWidth: '1000px',
               width: '100%',
               color: 'var(--primary)',
               boxShadow: '0 25px 50px var(--shadow)',
@@ -1748,9 +1738,9 @@ function AboutUsPage() {
               <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>close</span>
             </button>
             <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-              <div style={{ 
-                width: '80px', height: '80px', borderRadius: '50%', 
-                background: 'rgba(196, 166, 100, 0.1)', display: 'flex', 
+              <div style={{
+                width: '80px', height: '80px', borderRadius: '50%',
+                background: 'rgba(196, 166, 100, 0.1)', display: 'flex',
                 alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px',
                 color: 'var(--secondary)'
               }}>
@@ -1761,40 +1751,32 @@ function AboutUsPage() {
                 Strategy dictates where you want to go. Architecture dictates exactly how the components of your enterprise interact to get you there.
               </p>
             </div>
-            
-            {/* Animated Architecture Graphic inside the modal */}
+
+            {/* Architectural Diagram inside the modal */}
             <div style={{
               background: 'var(--bg)',
-              borderRadius: '12px',
-              padding: '40px',
+              borderRadius: '16px',
+              padding: '24px',
               marginBottom: '40px',
               position: 'relative',
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '300px',
-              border: '1px solid var(--line)'
+              border: '1px solid var(--line)',
+              boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.2)'
             }}>
-              <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                <div className="arch-node center-node">
-                  Core Logic
-                </div>
-                <div className="arch-node orbit-node orbit-1">
-                  Market Positioning
-                </div>
-                <div className="arch-node orbit-node orbit-2">
-                  Go-To-Market
-                </div>
-                <div className="arch-node orbit-node orbit-3">
-                  Brand Narrative
-                </div>
-                <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-                  <line x1="50%" y1="50%" x2="20%" y2="20%" className="arch-line" />
-                  <line x1="50%" y1="50%" x2="80%" y2="30%" className="arch-line" />
-                  <line x1="50%" y1="50%" x2="50%" y2="80%" className="arch-line" />
-                </svg>
-              </div>
+              <img 
+                src="/assets/architectural_diagram.png" 
+                alt="Architectural Blueprint" 
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '500px',
+                  objectFit: 'contain',
+                  borderRadius: '8px',
+                  animation: 'fadeIn 0.8s ease'
+                }} 
+              />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
@@ -2026,6 +2008,232 @@ function AboutUsPage() {
   );
 }
 
+function TechServicesPage() {
+  return (
+    <>
+      {/* Hero Banner Section */}
+      <section style={{
+        position: 'relative',
+        padding: '120px 0 80px',
+        background: '#0a0a0a',
+        color: '#ffffff',
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ maxWidth: '800px' }}>
+            <div style={{
+              display: 'inline-block',
+              padding: '6px 16px',
+              background: 'rgba(196, 166, 100, 0.1)',
+              color: 'var(--secondary)',
+              borderRadius: '20px',
+              fontSize: '12px',
+              fontWeight: '700',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              marginBottom: '24px',
+              border: '1px solid rgba(196, 166, 100, 0.2)'
+            }}>AI-Driven Digital Studio</div>
+            <h1 style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: '800', lineHeight: 1.1, margin: '0 0 24px 0', letterSpacing: '-0.02em' }}>
+              Building <span style={{ color: 'var(--secondary)' }}>digital products</span> & AI systems that scale enterprises.
+            </h1>
+            <p style={{ fontSize: '18px', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: 0, maxWidth: '640px' }}>
+              We don't just write code. We architect solutions. From intelligent AI agents to scalable cloud infrastructure, we deliver end-to-end engineering excellence with precision and agility.
+            </p>
+          </div>
+        </div>
+        {/* Subtle background glow */}
+        <div style={{ position: 'absolute', top: '10%', right: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(196,166,100,0.15) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+      </section>
+
+      {/* Services Grid Section */}
+      <section className="section" style={{ background: 'var(--bg)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '30px' }}>
+            {techServices.map((t) => (
+              <div key={t.id} className="tech-card">
+                <div className="tech-card-number">{t.number}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--primary)' }}>{t.icon}</span>
+                  <h3 style={{ margin: 0, fontSize: '24px', color: 'var(--primary)', fontWeight: '800' }}>{t.title}</h3>
+                </div>
+                <p style={{ color: 'var(--text-soft)', lineHeight: 1.7, margin: '0 0 16px 0', fontSize: '15px' }}>{t.summary}</p>
+
+                <div className="tech-tags">
+                  {t.tags.map((tag, i) => (
+                    <span key={i} className="tag-pill">{tag}</span>
+                  ))}
+                </div>
+
+                <div style={{ marginBottom: '24px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-soft)', marginBottom: '12px' }}>Capabilities</div>
+                  <ul style={{ paddingLeft: '20px', margin: 0, color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.8 }}>
+                    {t.highlights.map((h, i) => <li key={i}>{h}</li>)}
+                  </ul>
+                </div>
+
+                <div className="tech-metric">
+                  <div className="tech-metric-value">{t.metric.value}</div>
+                  <div className="tech-metric-label">{t.metric.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="section" style={{ background: 'var(--surface)', borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 60px' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--primary)', margin: '0 0 16px 0' }}>Calm, predictable, no-chaos delivery.</h2>
+            <p style={{ color: 'var(--text-soft)', fontSize: '16px', lineHeight: 1.8 }}>Launching a product is only step one. Our process keeps you in the loop with tight feedback cycles without drowning you in endless calls.</p>
+          </div>
+
+          <div className="process-grid">
+            <div className="process-step">
+              <div className="process-step-num">1</div>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '20px', color: 'var(--primary)' }}>Discovery & Scope</h4>
+              <p style={{ margin: 0, color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.6 }}>Deep-dive into product requirements, user behavior, and constraints. We ask the hard strategic questions upfront.</p>
+            </div>
+            <div className="process-step">
+              <div className="process-step-num">2</div>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '20px', color: 'var(--primary)' }}>Architecture & Design</h4>
+              <p style={{ margin: 0, color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.6 }}>Scalable system architecture, UX/UI wireframes, and a clear roadmap. We design for current needs and future runway without overengineering.</p>
+            </div>
+            <div className="process-step">
+              <div className="process-step-num">3</div>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '20px', color: 'var(--primary)' }}>Build & Integrate</h4>
+              <p style={{ margin: 0, color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.6 }}>Full-stack development and AI model integration executed in tight, weekly transparent sprints.</p>
+            </div>
+            <div className="process-step">
+              <div className="process-step-num">4</div>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '20px', color: 'var(--primary)' }}>Launch & Scale</h4>
+              <p style={{ margin: 0, color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.6 }}>Deploy infrastructure, harden security, monitor telemetry, and optimize workflows via automation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section" style={{ background: '#0a0a0a', textAlign: 'center' }}>
+        <div className="container">
+          <h2 style={{ fontSize: '40px', color: 'white', marginBottom: '24px' }}>Ready to architect your digital future?</h2>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-gold" style={{ padding: '0 32px', fontSize: '16px', minHeight: '56px' }}>Book a Tech Strategy Call</a>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function CaseStudiesPage() {
+  const caseStudies = [
+    {
+      id: 'c1',
+      title: 'AI-driven Lead Scoring for Enterprise SaaS',
+      tag: 'AI & Automation',
+      summary: 'A B2B SaaS platform was struggling with an overwhelming volume of unqualified MQLs. We engineered a custom machine-learning model that integrated directly with their CRM to score leads based on behavioral patterns and firmographic data.',
+      metric: '38%',
+      metricLabel: 'Increase in lead-to-opportunity conversion'
+    },
+    {
+      id: 'c2',
+      title: 'Global GTM Strategy for FinTech Scaleup',
+      tag: 'GTM Strategy',
+      summary: 'A European FinTech firm needed to enter the APAC market. We architected their complete positioning, compliance messaging, and localized go-to-market strategy, deploying highly targeted account-based campaigns.',
+      metric: '2.5x',
+      metricLabel: 'ARR growth within 9 months of launch'
+    },
+    {
+      id: 'c3',
+      title: 'Real-time Data Platform Modernization',
+      tag: 'Data Engineering',
+      summary: 'A logistics enterprise had fragmented data across 14 legacy systems. We consolidated their analytical pipelines into a modern Snowflake & dbt stack, providing executives with real-time operational BI dashboards.',
+      metric: '85%',
+      metricLabel: 'Reduction in manual reporting hours'
+    },
+    {
+      id: 'c4',
+      title: 'Cloud Migration & Infrastructure Optimization',
+      tag: 'Cloud & DevOps',
+      summary: 'A high-growth consumer app faced severe latency issues during traffic spikes. We migrated their monolithic architecture to a fully containerized Kubernetes setup on AWS, implementing autoscaling and comprehensive observability.',
+      metric: '99.99%',
+      metricLabel: 'SLA achieved with 40% lower cloud spend'
+    }
+  ];
+
+  return (
+    <>
+      {/* Hero Banner Section */}
+      <section style={{
+        position: 'relative',
+        padding: '120px 0 80px',
+        background: '#0a0a0a',
+        color: '#ffffff',
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <div className="container">
+          <div style={{
+            display: 'inline-block',
+            padding: '6px 16px',
+            background: 'rgba(255, 255, 255, 0.05)',
+            color: '#a0aab5',
+            borderRadius: '20px',
+            fontSize: '12px',
+            fontWeight: '700',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            marginBottom: '24px',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+          }}>Our Work</div>
+          <h1 style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: '800', lineHeight: 1.1, margin: '0 0 24px 0', letterSpacing: '-0.02em', maxWidth: '800px' }}>
+            Transforming ambition into measurable <span style={{ color: 'var(--secondary)' }}>commercial impact.</span>
+          </h1>
+          <p style={{ fontSize: '18px', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', margin: 0, maxWidth: '640px' }}>
+            Read how we have partnered with industry leaders and fast-growing organizations to solve complex strategy, data, and engineering challenges.
+          </p>
+        </div>
+        <div style={{ position: 'absolute', bottom: '0', right: '0', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+      </section>
+
+      {/* Grid Section */}
+      <section className="section" style={{ background: 'var(--bg)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '32px' }}>
+            {caseStudies.map((c) => (
+              <article key={c.id} className="case-card">
+                <div>
+                  <span className="tag-pill tag-pill-primary" style={{ marginBottom: '16px' }}>{c.tag}</span>
+                </div>
+                <h3 style={{ margin: '0 0 16px 0', color: 'var(--primary)', fontSize: '22px', fontWeight: '800', lineHeight: 1.3 }}>{c.title}</h3>
+                <p style={{ color: 'var(--text-soft)', marginBottom: '0', fontSize: '15px', lineHeight: 1.7 }}>{c.summary}</p>
+
+                <div className="case-metric-box">
+                  <span className="case-metric-highlight">{c.metric}</span>
+                  <span style={{ fontSize: '14px', color: 'var(--text-soft)', fontWeight: '500' }}>{c.metricLabel}</span>
+                </div>
+
+                <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px', width: 'fit-content' }}>
+                  Read full story <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section" style={{ background: 'var(--surface)', borderTop: '1px solid var(--line)', textAlign: 'center' }}>
+        <div className="container">
+          <h2 style={{ fontSize: '32px', color: 'var(--primary)', marginBottom: '16px' }}>Have a similar strategic challenge?</h2>
+          <p style={{ color: 'var(--text-soft)', marginBottom: '32px', fontSize: '16px' }}>Let's discuss how our cross-functional teams can architect a solution.</p>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-primary" style={{ padding: '0 32px' }}>Start the conversation</a>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function CareersPage() {
   return (
     <div style={pageStyle}>
@@ -2033,7 +2241,7 @@ function CareersPage() {
       <p style={{ fontSize: '18px', marginBottom: '40px' }}>
         Join our elite team of strategic consultants. We're building a firm dedicated to architectural excellence and transformative market positioning for ambitious enterprises globally.
       </p>
-      
+
       <h2 style={pageSubHeadStyle}>Why Join Bharat Pursuit?</h2>
       <ul style={{ marginBottom: '40px', lineHeight: 2 }}>
         <li><strong>Senior-led engagement:</strong> Work alongside experienced strategists with deep enterprise consulting background</li>
@@ -2042,7 +2250,7 @@ function CareersPage() {
         <li><strong>Global scope:</strong> Consult on cross-border expansion and international market strategy</li>
         <li><strong>Premium brand:</strong> Be part of a firm recognized as a top-tier strategic consulting partner</li>
       </ul>
-      
+
       <h2 style={pageSubHeadStyle}>Our Consulting Culture</h2>
       <p>
         At Bharat Pursuit, we believe that consulting excellence comes from disciplined thinking, clear communication, and senior-led engagement. We prioritize meaningful client relationships over volume, strategic depth over surface-level recommendations, and long-term impact over quick wins.
@@ -2050,7 +2258,7 @@ function CareersPage() {
       <p style={{ marginBottom: '40px' }}>
         We invest in our team's growth through real consulting engagements with enterprise clients, cross-functional collaboration, and mentorship from senior strategists.
       </p>
-      
+
       <h2 style={pageSubHeadStyle}>Open Positions</h2>
       <p style={{ marginBottom: '30px', fontSize: '16px', color: 'var(--primary)' }}>
         Below are our current career opportunities. Each role is integral to delivering premier consulting outcomes.
@@ -2061,7 +2269,7 @@ function CareersPage() {
 
 function JobListingPage({ jobId, setCurrentPage }) {
   const job = jobListings.find(j => j.id === jobId);
-  
+
   if (!job) {
     return (
       <div style={pageStyle}>
@@ -2074,7 +2282,7 @@ function JobListingPage({ jobId, setCurrentPage }) {
   return (
     <div style={pageStyle}>
       <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>← Back to Careers</a>
-      
+
       <div style={{ marginBottom: '40px' }}>
         <h1 style={pageHeadStyle}>{job.title}</h1>
         <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '20px', color: 'var(--text-soft)', fontSize: '14px' }}>
@@ -2125,31 +2333,97 @@ function JobListingPage({ jobId, setCurrentPage }) {
   );
 }
 
-function CareerListings() {
+function CareerListings({ setCurrentPage, setSelectedJobId }) {
+  const [filterDept, setFilterDept] = React.useState('All');
+  const [filterLevel, setFilterLevel] = React.useState('All');
+  const [filterLocation, setFilterLocation] = React.useState('All');
+
+  // get unique values for dropdowns
+  const departments = ['All', ...new Set(jobListings.map(j => j.department))];
+  const levels = ['All', ...new Set(jobListings.map(j => j.level))];
+  const locations = ['All', ...new Set(jobListings.map(j => j.location))];
+
+  const filteredJobs = jobListings.filter(job => {
+    return (filterDept === 'All' || job.department === filterDept) &&
+      (filterLevel === 'All' || job.level === filterLevel) &&
+      (filterLocation === 'All' || job.location === filterLocation);
+  });
+
   return (
-    <section className="section" style={{ borderTop: "1px solid rgba(20, 37, 56, 0.08)" }}>
+    <section className="section" style={{ borderTop: "1px solid rgba(20, 37, 56, 0.08)", paddingBottom: '100px' }}>
       <div className="container">
-        <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px', marginTop: '40px' }}>
-          {jobListings.map((job) => (
-            <article key={job.id} className="job-card" style={{
-              padding: '24px',
-              border: '1px solid rgba(20, 37, 56, 0.08)',
-              borderRadius: '12px',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}>
-              <div style={{ marginBottom: '16px' }}>
-                <h3 style={{ margin: '0 0 8px 0', color: 'var(--primary)', fontSize: '18px' }}>{job.title}</h3>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.level}</span>
-                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.location}</span>
-                  <span style={{ fontSize: '12px', padding: '4px 8px', background: 'rgba(196, 166, 100, 0.15)', borderRadius: '4px' }}>{job.type}</span>
+
+        {/* Dropdown Filters */}
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '40px', background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--line)', boxShadow: 'var(--shadow)' }}>
+          <div style={{ flex: '1 1 200px' }}>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: 'var(--text-soft)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Department</label>
+            <select value={filterDept} onChange={(e) => setFilterDept(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '15px', fontWeight: '500', appearance: 'none' }}>
+              {departments.map(d => <option key={d} value={d}>{d === 'All' ? 'All Roles' : d}</option>)}
+            </select>
+          </div>
+          <div style={{ flex: '1 1 200px' }}>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: 'var(--text-soft)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Level</label>
+            <select value={filterLevel} onChange={(e) => setFilterLevel(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '15px', fontWeight: '500', appearance: 'none' }}>
+              {levels.map(l => <option key={l} value={l}>{l === 'All' ? 'All Levels' : l}</option>)}
+            </select>
+          </div>
+          <div style={{ flex: '1 1 200px' }}>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: 'var(--text-soft)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Location</label>
+            <select value={filterLocation} onChange={(e) => setFilterLocation(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--line)', background: 'var(--bg)', color: 'var(--primary)', fontSize: '15px', fontWeight: '500', appearance: 'none' }}>
+              {locations.map(loc => <option key={loc} value={loc}>{loc === 'All' ? 'All Locations' : loc}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map((job) => (
+              <article key={job.id} className="job-card"
+                onClick={() => {
+                  setCurrentPage('jobDetail');
+                  setSelectedJobId(job.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                style={{
+                  padding: '32px',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--line)',
+                  borderRadius: '16px',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div style={{ flexGrow: 1 }}>
+                  <h3 style={{ margin: '0 0 16px 0', color: 'var(--primary)', fontSize: '20px', fontWeight: '800' }}>{job.title}</h3>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                    <span style={{ fontSize: '12px', padding: '6px 12px', background: 'rgba(196, 166, 100, 0.1)', color: 'var(--secondary)', borderRadius: '20px', fontWeight: '600' }}>{job.level}</span>
+                    <span style={{ fontSize: '12px', padding: '6px 12px', background: 'rgba(20, 37, 56, 0.05)', color: 'var(--text-soft)', borderRadius: '20px', fontWeight: '600' }}>{job.location}</span>
+                    <span style={{ fontSize: '12px', padding: '6px 12px', background: 'rgba(20, 37, 56, 0.05)', color: 'var(--text-soft)', borderRadius: '20px', fontWeight: '600' }}>{job.type}</span>
+                  </div>
+                  <p style={{ color: 'var(--text-soft)', fontSize: '14px', marginBottom: '24px', lineHeight: 1.6 }}>{job.description}</p>
                 </div>
-              </div>
-              <p style={{ color: 'var(--text-soft)', fontSize: '14px', marginBottom: '16px', lineHeight: 1.6 }}>{job.description}</p>
-              <div style={{ fontSize: '14px', color: 'var(--secondary)', fontWeight: '600' }}>View Details →</div>
-            </article>
-          ))}
+                <div style={{ fontSize: '14px', color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  View Details <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--secondary)' }}>arrow_forward</span>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 20px', background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--line)' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '48px', color: 'var(--text-soft)', opacity: 0.5, marginBottom: '16px' }}>search_off</span>
+              <h3 style={{ margin: '0 0 8px 0', color: 'var(--primary)' }}>No open positions match</h3>
+              <p style={{ margin: 0, color: 'var(--text-soft)' }}>Try adjusting your filters to see more roles.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -2403,41 +2677,13 @@ export default function App() {
   else if (currentPage === 'terms') content = <TermsOfServicePage />;
   else if (currentPage === 'cookies') content = <CookiePolicyPage />;
   else if (currentPage === 'about') content = <AboutUsPage />;
+  else if (currentPage === 'tech') content = <TechServicesPage />;
+  else if (currentPage === 'caseStudies') content = <CaseStudiesPage />;
   else if (currentPage === 'careers') {
     content = (
       <>
         <CareersPage />
-        <CareerListings />
-        <div style={{ margin: '60px 0', textAlign: 'center' }}>
-          <h2 style={{ marginBottom: '20px', color: 'var(--primary)' }}>Explore a Specific Role</h2>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {jobListings.map((job) => (
-              <button
-                key={job.id}
-                onClick={() => {
-                  setCurrentPage('jobDetail');
-                  setSelectedJobId(job.id);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                style={{
-                  padding: '12px 24px',
-                  background: 'var(--secondary)',
-                  color: 'var(--white)',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  transition: 'opacity 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.target.style.opacity = '0.8'}
-                onMouseLeave={(e) => e.target.style.opacity = '1'}
-              >
-                {job.title}
-              </button>
-            ))}
-          </div>
-        </div>
+        <CareerListings setCurrentPage={setCurrentPage} setSelectedJobId={setSelectedJobId} />
       </>
     );
   }
