@@ -1248,9 +1248,9 @@ function Contact() {
               Let’s build a market presence that commands trust across borders.
             </p>
 
-            <div style={{ marginTop: '40px', padding: '32px', background: 'var(--bg)', borderRadius: '16px', border: '1px solid var(--line)' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '12px', color: 'var(--primary)' }}>Prefer an immediate dialogue?</h3>
-              <p style={{ color: 'var(--text-soft)', marginBottom: '24px', fontSize: '15px' }}>
+            {/* <div style={{ marginTop: '40px', padding: '32px', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '12px', color: '#fff' }}>Prefer an immediate dialogue?</h3>
+              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '24px', fontSize: '15px' }}>
                 Bypass the form and schedule a 30-minute strategic briefing directly with a Managing Partner.
               </p>
 
@@ -1273,7 +1273,7 @@ function Contact() {
                   </button>
                 </form>
               )}
-            </div>
+            </div> */}
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
@@ -1353,7 +1353,7 @@ function Footer({ setCurrentPage }) {
               Pursue Growth. Build Bharat.
             </div>
             <p className="footer-desc">
-              Premier strategic marketing consulting firm specializing in market positioning, go-to-market acceleration, and global expansion. Top-tier strategy execution for ambitious enterprises worldwide.
+              Elite technology and strategy consultancy specializing in enterprise transformation, AI-driven innovation, cloud architecture, and precision go-to-market execution for ambitious enterprises worldwide.
             </p>
             <div className="footer-contact-info" style={{ marginTop: '20px' }}>
               <a href="mailto:support@bharatpursuit.com" style={{
@@ -1377,9 +1377,9 @@ function Footer({ setCurrentPage }) {
             <h4 className="footer-heading">Explore</h4>
             <ul className="footer-links">
               <li><a href="#about" onClick={(e) => { e.preventDefault(); goPage(e, 'about'); }}>About Us</a></li>
-              <li><a href="#approach" onClick={(e) => goHomeSection(e, 'approach')}>Our Approach</a></li>
-              <li><a href="#services" onClick={(e) => goHomeSection(e, 'services')}>Core Services</a></li>
-              <li><a href="#companies" onClick={(e) => goHomeSection(e, 'companies')}>Companies We've Worked With</a></li>
+              <li><a href="#tech" onClick={(e) => { e.preventDefault(); goPage(e, 'tech'); }}>Technology</a></li>
+              <li><a href="#cases" onClick={(e) => { e.preventDefault(); goPage(e, 'caseStudies'); }}>Case Studies</a></li>
+              <li><a href="#insights" onClick={(e) => { e.preventDefault(); goPage(e, 'insights'); }}>Insights</a></li>
               <li><a href="#careers" onClick={(e) => { e.preventDefault(); goPage(e, 'careers'); }}>Careers</a></li>
             </ul>
           </div>
