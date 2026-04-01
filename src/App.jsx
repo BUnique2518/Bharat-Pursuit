@@ -318,13 +318,13 @@ function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMob
           <button onClick={toggleTheme} className="btn-icon" aria-label="Toggle Theme" style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', padding: 0, color: 'var(--primary)' }}>
             <span className="material-symbols-outlined">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
           </button>
-          
+
           <div className="desktop-only">
             <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openBookingModal')); }}>Book a Strategy Call</a>
           </div>
 
-          <button 
-            className="mobile-menu-toggle" 
+          <button
+            className="mobile-menu-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
             style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'none', padding: 4, color: 'var(--primary)' }}
@@ -364,7 +364,7 @@ function MobileMenu({ isOpen, onClose, setCurrentPage }) {
         <a href="#careers" onClick={(e) => navigate(e, 'careers')}>Careers</a>
         <a href="#insights" onClick={(e) => navigate(e, 'insights')}>Insights</a>
         <div style={{ marginTop: '20px' }}>
-           <a href="#" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={handleBooking}>Book a Strategy Call</a>
+          <a href="#" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={handleBooking}>Book a Strategy Call</a>
         </div>
       </nav>
     </div>
@@ -1407,21 +1407,14 @@ function Footer({ setCurrentPage }) {
               Elite technology and strategy consultancy specializing in enterprise transformation, AI-driven innovation, cloud architecture, and precision go-to-market execution for ambitious enterprises worldwide.
             </p>
             <div className="footer-contact-info" style={{ marginTop: '20px' }}>
-              <a href="mailto:support@bharatpursuit.com" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                color: '#94a3b8',
-                fontSize: '14px',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease'
-              }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#fbbf24'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
-              >
-                <span className="material-symbols-outlined" style={{ color: '#fbbf24', fontSize: '20px' }}>mail</span>
+              <a href="mailto:support@bharatpursuit.com" className="footer-contact-item">
+                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--secondary)' }}>mail</span>
                 support@bharatpursuit.com
               </a>
+              <div className="footer-contact-item">
+                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--secondary)' }}>location_on</span>
+                Kolkata,India
+              </div>
             </div>
           </div>
           <div>
