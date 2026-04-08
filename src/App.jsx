@@ -311,6 +311,7 @@ function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMob
           <a href="#about" onClick={(e) => goPage(e, 'about')}>About</a>
           <a href="#tech" onClick={(e) => goPage(e, 'tech')}>Tech</a>
           <a href="#cases" onClick={(e) => goPage(e, 'caseStudies')}>Case Studies</a>
+          <a href="#blog" onClick={(e) => goPage(e, 'insights')}>Blog</a>
           <a href="#careers" onClick={(e) => goPage(e, 'careers')}>Careers</a>
         </nav>
 
@@ -2994,7 +2995,7 @@ const insightsData = [
     title: 'The AI Imperative: Architecting Autonomous Enterprise Systems',
     readTime: '12 min read',
     image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
-    content: "Artificial Intelligence is no longer an experimental edge case—it is the core infrastructure of the modern enterprise. In this whitepaper, we dissect the necessary transition from human-in-the-loop workflows to fully autonomous, agentic systems. We cover the foundational data architecture required, the shift from monolithic predictive models to composable generative pipelines, and the strategic implications for organizational design."
+    content: "The AI imperative is no longer a future concept—it’s something businesses are actively dealing with today. Companies that want to stay relevant are now focusing on building autonomous enterprise systems that can think, adapt, and respond in real time. By combining artificial intelligence, machine learning, and data analytics, these systems help reduce manual effort while improving accuracy and speed across operations. From streamlining supply chains to delivering more personalised customer experiences, AI is quietly reshaping how modern organisations function. What makes this shift powerful is not just automation, but the ability to make smarter decisions faster. Businesses are moving from reactive workflows to proactive, insight-driven strategies. In simple terms, enterprises that start integrating AI into their core systems today are setting themselves up for stronger growth, better efficiency, and long-term competitive advantage in an increasingly AI-driven world."
   },
   {
     id: 'i2',
@@ -3002,15 +3003,15 @@ const insightsData = [
     title: 'Positioning in the Post-SaaS Era: Finding Moats in Crowded Markets',
     readTime: '8 min read',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
-    content: "The SaaS explosion has led to unprecedented feature commoditization. When every competitor can ship identical functionality within weeks, the only sustainable moat is brand positioning and data gravity. This insight explores how B2B firms must pivot from competing on 'what it does' to 'how it transforms the business model', leveraging sophisticated narrative architecture to command premium pricing."
+    content: "Positioning in the post-SaaS era is no longer about simply launching another software product—it’s about building defensible moats in an increasingly crowded market. As SaaS becomes commoditised, businesses must go beyond features and pricing to differentiate themselves through unique value, strong brand identity, and deep customer understanding. Today’s winning companies focus on ecosystem lock-in, proprietary data, network effects, and seamless user experiences that are hard to replicate. Instead of competing on tools, they position themselves as indispensable platforms or solutions. In this landscape, distribution, community, and trust play a critical role in long-term success. Enterprises that clearly define their niche, solve a specific high-value problem, and continuously evolve with customer needs are the ones that stand out. In simple terms, the future belongs to companies that don’t just build products—but create lasting advantages that competitors cannot easily copy."
   },
   {
     id: 'i3',
     type: 'Research Report',
     title: 'Global Expansion Playbook: Navigating APAC Market Entry Strategy',
-    readTime: '15 min read',
+    readTime: '10 min read',
     image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80',
-    content: "Entering the APAC region requires more than just translating documentation. It demands deep understanding of fragmented regulatory landscapes, localized cultural trust markers, and unique digital ecosystems (such as WeChat in China or LINE in Japan). This report provides a quantitative analysis of market entry velocities, detailing the optimal GTM plays for enterprise software firms targeting Singapore, Australia, and Japan."
+    content: "Global expansion is no longer limited to large enterprises—startups and growing businesses are actively exploring APAC market entry as a strategic growth move. However, entering Asia-Pacific markets requires more than just scaling operations; it demands a deep understanding of regional diversity, consumer behaviour, and regulatory frameworks. Countries across APAC differ significantly in language, culture, digital adoption, and business practices, making localisation a critical success factor. Companies that succeed focus on tailored go-to-market strategies, strong local partnerships, and compliance with country-specific regulations. Leveraging digital channels, mobile-first experiences, and data-driven insights can accelerate traction in high-growth markets like India, Southeast Asia, and Australia. Instead of a one-size-fits-all approach, businesses must adapt quickly and remain agile. In simple terms, successful APAC expansion is about blending global vision with local execution to unlock scalable, long-term growth opportunities."
   },
   {
     id: 'i4',
@@ -3018,7 +3019,8 @@ const insightsData = [
     title: 'Modernizing Legacy Data Stacks for Real-Time Analytics',
     readTime: '10 min read',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
-    content: "Batch processing is dead. Executive teams demand real-time telemetry to steer large organizations. We outline the architectural migration path from legacy on-premise warehouses to modern cloud data lakes utilizing Snowflake, dbt, and Kafka. Essential reading for CTOs and VP of Engineering profiles managing technical debt."
+    content: "Modernizing legacy data stacks is becoming a critical priority for businesses aiming to unlock real-time analytics and faster decision-making. Traditional systems often struggle with scalability, data silos, and delayed processing, limiting an organisation’s ability to respond quickly to changing market conditions. By transitioning to modern data architectures—such as cloud-native platforms, data lakes, and streaming pipelines—companies can enable continuous data flow and real-time insights. This shift allows teams to move beyond static reports and embrace dynamic, data-driven strategies. More importantly, modern data stacks improve data accessibility, governance, and integration across multiple sources. Businesses that invest in real-time analytics can enhance customer experiences, optimise operations, and identify opportunities as they happen. In simple terms, upgrading legacy data systems is not just a technical upgrade—it’s a strategic move that empowers organisations to stay agile, competitive, and future-ready in a data-driven world."
+
   },
   {
     id: 'i5',
@@ -3026,7 +3028,8 @@ const insightsData = [
     title: 'The Hidden Cost of Misaligned Go-To-Market Teams',
     readTime: '6 min read',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80',
-    content: "When Marketing promises 'digital transformation' but Sales sells 'software licenses', enterprise prospects disengage. This summary quantifies the pipeline leakage caused by siloed revenue teams and offers a framework for total commercial alignment, bridging the gap from first-touch marketing to post-sale customer success."
+    content: "The hidden cost of misaligned go-to-market teams often goes unnoticed until it starts impacting revenue, customer experience, and overall growth. When sales, marketing, and product teams operate in silos, messaging becomes inconsistent, leads are poorly qualified, and valuable opportunities slip through the cracks. This lack of alignment creates friction in the customer journey, leading to longer sales cycles and lower conversion rates. High-performing organisations prioritise clear communication, shared goals, and unified data across teams to ensure a seamless go-to-market strategy. By aligning incentives, defining common success metrics, and fostering collaboration, businesses can create a more cohesive and efficient growth engine. In simple terms, when go-to-market teams are aligned, execution becomes sharper, customers receive a consistent experience, and revenue growth becomes more predictable and scalable in today’s competitive landscape."
+
   },
   {
     id: 'i6',
@@ -3034,8 +3037,27 @@ const insightsData = [
     title: 'Cloud Optimization: Cutting Enterprise AWS Spend by 40%',
     readTime: '9 min read',
     image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80',
-    content: "A detailed post-mortem on how we restructured the cloud architecture of a hyper-growth consumer application. We cover Kubernetes cluster optimization, strategic use of Spot instances, and implementing automated resource spin-downs during non-peak hours, resulting in massive operational savings without sacrificing SLA."
+    content: "Cloud optimization is no longer just about cost-cutting—it’s about building a smarter, more efficient infrastructure that drives long-term value. Many enterprises overspend on AWS due to unused resources, overprovisioned instances, and lack of continuous monitoring. By adopting a strategic cloud cost optimization approach, businesses can reduce AWS spend by up to 40% without compromising performance. This involves right-sizing compute resources, leveraging auto-scaling, using reserved and spot instances, and implementing strong cost governance practices. Real-time monitoring and FinOps frameworks help teams track usage, eliminate waste, and make data-driven decisions. More importantly, optimization ensures that every dollar spent on the cloud directly contributes to business outcomes. In simple terms, companies that actively manage and optimize their cloud infrastructure not only save costs but also improve scalability, efficiency, and overall operational performance in a cloud-first world."
+
+  },
+  {
+    id: 'i7',
+    type: 'Case Study Analysis',
+    title: 'Beyond Metros: Why Tier 2 & Tier 3 Cities Are India’s Next Growth Giants',
+    readTime: '9 min read',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+    content: "India’s next wave of growth is no longer confined to metro cities Tier 2 and Tier 3 markets are rapidly emerging as the country’s new economic powerhouses. Driven by rising internet penetration, affordable smartphones, and increasing digital adoption, these regions are unlocking massive opportunities for businesses across sectors. From e-commerce and fintech to edtech and healthcare, companies are now actively targeting smaller cities to tap into a vast, underserved consumer base. What makes this shift powerful is the combination of aspirational demand, improving infrastructure, and a growing young population eager to engage with digital platforms. Brands that localise their offerings, build trust, and understand regional nuances are gaining a strong competitive edge. In simple terms, India’s next giants will not just come from metros—they will rise from Tier 2 and Tier 3 cities, shaping the future of the country’s digital and economic landscape."
+  },
+
+  {
+    id: 'i8',
+    type: 'Research Report',
+    title: 'The AI Shift in 2026: From Tools to Autonomous Systems',
+    readTime: '10 min read',
+    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80',
+    content: "The AI shift in 2026 marks a clear transition from simple tools to fully autonomous systems that can operate with minimal human input. Businesses are no longer relying on AI just for assistance; they are building intelligent systems that can plan, execute, and optimise tasks in real time. From customer support to operations and decision-making, AI is becoming deeply embedded into core workflows. This transformation is driven by advancements in machine learning, real-time data processing, and agent-based architectures. Companies adopting autonomous systems are seeing faster execution, reduced costs, and improved scalability. More importantly, AI is enabling organisations to move from reactive processes to proactive, insight-driven strategies. In simple terms, 2026 is not about using AI occasionally it’s about making AI the foundation of how businesses operate, compete, and grow in an increasingly digital and data-driven world."
   }
+
 ];
 
 function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
