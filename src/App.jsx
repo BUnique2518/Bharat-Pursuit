@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route, Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -274,10 +275,12 @@ const jobListings = [
   }
 ];
 
-function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMobileMenuOpen }) {
+function Header({ theme, toggleTheme, isMobileMenuOpen, setIsMobileMenuOpen }) {
+  const navigate = useNavigate();
+
   const goHome = (e, targetId) => {
     e.preventDefault();
-    setCurrentPage('home');
+    navigate('/');
     setIsMobileMenuOpen(false);
     if (targetId) {
       setTimeout(() => {
@@ -289,9 +292,7 @@ function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMob
     }
   };
 
-  const goPage = (e, page) => {
-    e.preventDefault();
-    setCurrentPage(page);
+  const closeAndScroll = () => {
     setIsMobileMenuOpen(false);
     window.scrollTo({ top: 0 });
   };
@@ -308,11 +309,11 @@ function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMob
         </a>
 
         <nav className="main-nav">
-          <a href="#about" onClick={(e) => goPage(e, 'about')}>About</a>
-          <a href="#tech" onClick={(e) => goPage(e, 'tech')}>Tech</a>
-          <a href="#cases" onClick={(e) => goPage(e, 'caseStudies')}>Case Studies</a>
-          <a href="#blog" onClick={(e) => goPage(e, 'insights')}>Blog</a>
-          <a href="#careers" onClick={(e) => goPage(e, 'careers')}>Careers</a>
+          <Link to="/about" onClick={closeAndScroll}>About</Link>
+          <Link to="/tech" onClick={closeAndScroll}>Tech</Link>
+          <Link to="/case-studies" onClick={closeAndScroll}>Case Studies</Link>
+          <Link to="/blogs" onClick={closeAndScroll}>Blog</Link>
+          <Link to="/careers" onClick={closeAndScroll}>Careers</Link>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -340,10 +341,8 @@ function Header({ setCurrentPage, theme, toggleTheme, isMobileMenuOpen, setIsMob
   );
 }
 
-function MobileMenu({ isOpen, onClose, setCurrentPage }) {
-  const navigate = (e, page) => {
-    e.preventDefault();
-    setCurrentPage(page);
+function MobileMenu({ isOpen, onClose }) {
+  const closeAndScroll = () => {
     onClose();
     window.scrollTo({ top: 0 });
   };
@@ -359,11 +358,11 @@ function MobileMenu({ isOpen, onClose, setCurrentPage }) {
   return (
     <div className="mobile-menu-overlay" onClick={onClose}>
       <nav className="mobile-menu-content" onClick={e => e.stopPropagation()}>
-        <a href="#about" onClick={(e) => navigate(e, 'about')}>About</a>
-        <a href="#tech" onClick={(e) => navigate(e, 'tech')}>Tech</a>
-        <a href="#cases" onClick={(e) => navigate(e, 'caseStudies')}>Case Studies</a>
-        <a href="#careers" onClick={(e) => navigate(e, 'careers')}>Careers</a>
-        <a href="#insights" onClick={(e) => navigate(e, 'insights')}>Insights</a>
+        <Link to="/about" onClick={closeAndScroll}>About</Link>
+        <Link to="/tech" onClick={closeAndScroll}>Tech</Link>
+        <Link to="/case-studies" onClick={closeAndScroll}>Case Studies</Link>
+        <Link to="/careers" onClick={closeAndScroll}>Careers</Link>
+        <Link to="/blogs" onClick={closeAndScroll}>Blog</Link>
         <div style={{ marginTop: '20px' }}>
           <a href="#" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={handleBooking}>Book a Strategy Call</a>
         </div>
@@ -1377,21 +1376,9 @@ function Contact() {
   );
 }
 
-function Footer({ setCurrentPage }) {
-  const goPage = (e, page) => {
-    e.preventDefault();
-    setCurrentPage(page);
+function Footer() {
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goHomeSection = (e, targetId) => {
-    e.preventDefault();
-    setCurrentPage('home');
-    setTimeout(() => {
-      const el = document.getElementById(targetId);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-      else window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 50);
   };
 
   return (
@@ -1421,28 +1408,28 @@ function Footer({ setCurrentPage }) {
           <div>
             <h4 className="footer-heading">Explore</h4>
             <ul className="footer-links">
-              <li><a href="#about" onClick={(e) => { e.preventDefault(); goPage(e, 'about'); }}>About Us</a></li>
-              <li><a href="#tech" onClick={(e) => { e.preventDefault(); goPage(e, 'tech'); }}>Technology</a></li>
-              <li><a href="#cases" onClick={(e) => { e.preventDefault(); goPage(e, 'caseStudies'); }}>Case Studies</a></li>
-              <li><a href="#insights" onClick={(e) => { e.preventDefault(); goPage(e, 'insights'); }}>Insights</a></li>
-              <li><a href="#careers" onClick={(e) => { e.preventDefault(); goPage(e, 'careers'); }}>Careers</a></li>
+              <li><Link to="/about" onClick={scrollToTop}>About Us</Link></li>
+              <li><Link to="/tech" onClick={scrollToTop}>Technology</Link></li>
+              <li><Link to="/case-studies" onClick={scrollToTop}>Case Studies</Link></li>
+              <li><Link to="/blogs" onClick={scrollToTop}>Blog</Link></li>
+              <li><Link to="/careers" onClick={scrollToTop}>Careers</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="footer-heading">Legal</h4>
             <ul className="footer-links">
-              <li><a href="#" onClick={(e) => goPage(e, 'privacy')}>Privacy Policy</a></li>
-              <li><a href="#" onClick={(e) => goPage(e, 'terms')}>Terms of Service</a></li>
-              <li><a href="#" onClick={(e) => goPage(e, 'cookies')}>Cookie Policy</a></li>
+              <li><Link to="/privacy" onClick={scrollToTop}>Privacy Policy</Link></li>
+              <li><Link to="/terms" onClick={scrollToTop}>Terms of Service</Link></li>
+              <li><Link to="/cookies" onClick={scrollToTop}>Cookie Policy</Link></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
           <p className="footer-copyright">© Bharat Pursuit. All rights reserved.</p>
           <div className="footer-social">
-            <a href="#" aria-label="Back to Top" className="footer-social-icon" style={{ display: 'flex' }} onClick={(e) => goPage(e, 'home')}>
+            <Link to="/" aria-label="Back to Top" className="footer-social-icon" style={{ display: 'flex' }} onClick={scrollToTop}>
               <span className="material-symbols-outlined">home</span>
-            </a>
+            </Link>
             <a href="mailto:support@bharatpursuit.com" aria-label="Support Mail" className="footer-social-icon" style={{ display: 'flex' }}>
               <span className="material-symbols-outlined">mail</span>
             </a>
@@ -2410,7 +2397,7 @@ const caseStudiesData = [
   }
 ];
 
-function CaseStudiesPage({ setCurrentPage, setSelectedCaseId }) {
+function CaseStudiesPage() {
   return (
     <>
       {/* Hero Banner Section */}
@@ -2462,14 +2449,9 @@ function CaseStudiesPage({ setCurrentPage, setSelectedCaseId }) {
                   <span style={{ fontSize: '14px', color: 'var(--text-soft)', fontWeight: '500' }}>{c.metricLabel}</span>
                 </div>
 
-                <a href="#" onClick={(e) => {
-                  e.preventDefault();
-                  setSelectedCaseId(c.id);
-                  setCurrentPage('caseDetail');
-                  window.scrollTo(0, 0);
-                }} style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px', width: 'fit-content' }}>
+                <Link to={`/case-studies/${c.id}`} onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px', width: 'fit-content' }}>
                   Read architectural review <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-                </a>
+                </Link>
               </article>
             ))}
           </div>
@@ -2488,14 +2470,15 @@ function CaseStudiesPage({ setCurrentPage, setSelectedCaseId }) {
   );
 }
 
-function CaseStudyDetailPage({ caseId, setCurrentPage }) {
-  const c = caseStudiesData.find(cs => cs.id === caseId);
+function CaseStudyDetailPage() {
+  const { id } = useParams();
+  const c = caseStudiesData.find(cs => cs.id === id);
 
   if (!c) {
     return (
       <div style={pageStyle}>
         <h1 style={pageHeadStyle}>Case Study Not Found</h1>
-        <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Case Studies</a>
+        <Link to="/case-studies" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Case Studies</Link>
       </div>
     );
   }
@@ -2505,9 +2488,9 @@ function CaseStudyDetailPage({ caseId, setCurrentPage }) {
       {/* Detail Hero */}
       <header style={{ padding: 'clamp(100px, 15vh, 160px) 0 clamp(60px, 10vh, 100px)', background: '#0a0a0a', color: '#fff', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('caseStudies'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
+          <Link to="/case-studies" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Work
-          </a>
+          </Link>
           <div style={{ marginBottom: '24px' }}>
             <span style={{ padding: '6px 16px', background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: '20px', fontSize: '12px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{c.tag}</span>
           </div>
@@ -2608,21 +2591,23 @@ function CareersPage() {
   );
 }
 
-function JobListingPage({ jobId, setCurrentPage }) {
+function JobListingPage() {
+  const { id } = useParams();
+  const jobId = parseInt(id);
   const job = jobListings.find(j => j.id === jobId);
 
   if (!job) {
     return (
       <div style={pageStyle}>
         <h1 style={pageHeadStyle}>Job Not Found</h1>
-        <p>This position is no longer available. <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>View all open positions</a></p>
+        <p>This position is no longer available. <Link to="/careers" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>View all open positions</Link></p>
       </div>
     );
   }
 
   return (
     <div style={pageStyle}>
-      <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('careers'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>← Back to Careers</a>
+      <Link to="/careers" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>← Back to Careers</Link>
 
       <div style={{ marginBottom: '40px' }}>
         <h1 style={pageHeadStyle}>{job.title}</h1>
@@ -2674,7 +2659,7 @@ function JobListingPage({ jobId, setCurrentPage }) {
   );
 }
 
-function CareerListings({ setCurrentPage, setSelectedJobId }) {
+function CareerListings() {
   const [filterDept, setFilterDept] = React.useState('All');
   const [filterLevel, setFilterLevel] = React.useState('All');
   const [filterLocation, setFilterLocation] = React.useState('All');
@@ -2719,10 +2704,8 @@ function CareerListings({ setCurrentPage, setSelectedJobId }) {
         <div className="careers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job) => (
-              <article key={job.id} className="job-card"
+              <Link to={`/careers/${job.id}`} key={job.id} className="job-card"
                 onClick={() => {
-                  setCurrentPage('jobDetail');
-                  setSelectedJobId(job.id);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 style={{
@@ -2733,7 +2716,9 @@ function CareerListings({ setCurrentPage, setSelectedJobId }) {
                   transition: 'all 0.3s ease',
                   cursor: 'pointer',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  textDecoration: 'none',
+                  color: 'inherit'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -2756,7 +2741,7 @@ function CareerListings({ setCurrentPage, setSelectedJobId }) {
                 <div style={{ fontSize: '14px', color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   View Details <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--secondary)' }}>arrow_forward</span>
                 </div>
-              </article>
+              </Link>
             ))
           ) : (
             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 20px', background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--line)' }}>
@@ -2931,7 +2916,7 @@ function Chatbot() {
   );
 }
 
-function Home({ setCurrentPage, setSelectedInsightId }) {
+function Home() {
   React.useEffect(() => {
     const cards = document.querySelectorAll(".tilt-card");
 
@@ -2981,7 +2966,7 @@ function Home({ setCurrentPage, setSelectedInsightId }) {
       <Services />
       {/* <SectorsBand /> */}
       <Approach />
-      <InsightsSection setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />
+      <InsightsSection />
       <WhyChoose />
       <Contact />
     </>
@@ -3060,27 +3045,20 @@ const insightsData = [
 
 ];
 
-function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
-  const displayInsights = insightsData.slice(0, 3);
-
+function InsightsSection() {
   return (
     <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--line)', padding: '120px 0' }}>
       <div className="container reveal-up">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px', flexWrap: 'wrap', gap: '24px' }}>
-          <div style={{ maxWidth: '600px' }}>
-            <div className="eyebrow-pill">Intellectual Capital</div>
-            <h2 style={{ fontSize: '42px', color: 'var(--primary)', fontWeight: '800', lineHeight: 1.2, margin: 0 }}>
-              Insights & Perspectives
-            </h2>
-          </div>
-          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); window.scrollTo(0, 0); }} style={{ color: 'var(--secondary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px' }}>
+          <h2 style={{ fontSize: '42px', color: 'var(--primary)', fontWeight: '800', lineHeight: 1.1, margin: 0 }}>Latest thinking</h2>
+          <Link to="/blogs" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--secondary)', paddingBottom: '4px' }}>
             View all research <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-          </a>
+          </Link>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-          {displayInsights.map((insight, i) => (
-            <article key={i} className="insight-card" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
+          {insightsData.slice(0, 3).map((insight, i) => (
+            <Link to={`/blogs/${insight.id}`} key={i} className="insight-card" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }} onClick={() => window.scrollTo(0, 0)}>
               <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
                 <img
                   src={insight.image}
@@ -3097,7 +3075,7 @@ function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
               <h3 style={{ fontSize: '24px', fontWeight: '700', lineHeight: 1.4, color: 'var(--primary)', marginBottom: '16px', transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--primary)'}>
                 {insight.title}
               </h3>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -3105,7 +3083,7 @@ function InsightsSection({ setCurrentPage, setSelectedInsightId }) {
   );
 }
 
-function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
+function InsightsPage() {
   return (
     <div style={{ background: 'var(--bg)', paddingBottom: '120px' }}>
       <section style={{ padding: '160px 0 80px', background: '#0a0a0a', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -3122,7 +3100,7 @@ function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
             {insightsData.map((insight) => (
-              <article key={insight.id} className="insight-card reveal-up" style={{ cursor: 'pointer' }} onClick={() => { setSelectedInsightId(insight.id); setCurrentPage('insightDetail'); window.scrollTo(0, 0); }}>
+              <Link to={`/blogs/${insight.id}`} key={insight.id} className="insight-card reveal-up" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }} onClick={() => window.scrollTo(0, 0)}>
                 <div style={{ overflow: 'hidden', borderRadius: '16px', marginBottom: '24px', position: 'relative', aspectRatio: '16/9' }}>
                   <img
                     src={insight.image}
@@ -3139,7 +3117,7 @@ function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
                 <h3 style={{ fontSize: '24px', fontWeight: '700', lineHeight: 1.4, color: 'var(--primary)', marginBottom: '16px', transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--primary)'}>
                   {insight.title}
                 </h3>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -3148,14 +3126,16 @@ function InsightsPage({ setCurrentPage, setSelectedInsightId }) {
   );
 }
 
-function InsightDetailPage({ insightId, setCurrentPage }) {
+function InsightDetailPage() {
+  const { id } = useParams();
+  const insightId = parseInt(id);
   const insight = insightsData.find(i => i.id === insightId);
 
   if (!insight) {
     return (
       <div style={pageStyle}>
         <h1 style={pageHeadStyle}>Insight Not Found</h1>
-        <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); }} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Research</a>
+        <Link to="/blogs" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>Back to Blog</Link>
       </div>
     );
   }
@@ -3164,9 +3144,9 @@ function InsightDetailPage({ insightId, setCurrentPage }) {
     <article style={{ background: 'var(--bg)', paddingBottom: 'clamp(60px, 10vh, 120px)' }}>
       <header style={{ padding: 'clamp(100px, 15vh, 160px) 0 0', position: 'relative' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('insights'); }} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Research
-          </a>
+          <Link to="/blogs" onClick={() => window.scrollTo(0, 0)} style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontWeight: '600' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span> Back to Blog
+          </Link>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '24px' }}>
             <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', padding: '6px 16px', background: 'rgba(196, 166, 100, 0.1)', borderRadius: '20px' }}>{insight.type}</span>
             <span style={{ color: 'var(--text-soft)', fontSize: '14px', fontWeight: '500' }}>{insight.readTime}</span>
@@ -3300,10 +3280,7 @@ function BookingModal({ isOpen, onClose }) {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = React.useState('home');
-  const [selectedJobId, setSelectedJobId] = React.useState(null);
-  const [selectedCaseId, setSelectedCaseId] = React.useState(null);
-  const [selectedInsightId, setSelectedInsightId] = React.useState(null);
+  const location = useLocation();
   const [theme, setTheme] = React.useState('light');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false);
@@ -3313,6 +3290,10 @@ export default function App() {
     window.addEventListener('openBookingModal', handleOpenModal);
     return () => window.removeEventListener('openBookingModal', handleOpenModal);
   }, []);
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
 
   React.useEffect(() => {
     // Global IntersectionObserver for reveal classes
@@ -3325,19 +3306,22 @@ export default function App() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    // Find all elements looking to be revealed on scroll
-    const hiddenElements = document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-tl, .reveal-tr, .reveal-bl, .reveal-br');
+    const timeoutId = setTimeout(() => {
+      // Find all elements looking to be revealed on scroll
+      const hiddenElements = document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-tl, .reveal-tr, .reveal-bl, .reveal-br');
 
-    // Reset them to ensure animation plays again if navigating back
-    hiddenElements.forEach(el => {
-      el.classList.remove('is-visible');
-      observer.observe(el);
-    });
+      // Reset them to ensure animation plays again if navigating back
+      hiddenElements.forEach(el => {
+        el.classList.remove('is-visible');
+        observer.observe(el);
+      });
+    }, 50);
 
     return () => {
+      clearTimeout(timeoutId);
       observer.disconnect();
     };
-  }, [currentPage]);
+  }, [location.pathname]);
 
   React.useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -3361,38 +3345,37 @@ export default function App() {
     }
   };
 
-  let content;
-  if (currentPage === 'privacy') content = <PrivacyPolicyPage />;
-  else if (currentPage === 'terms') content = <TermsOfServicePage />;
-  else if (currentPage === 'cookies') content = <CookiePolicyPage />;
-  else if (currentPage === 'about') content = <AboutUsPage />;
-  else if (currentPage === 'tech') content = <TechServicesPage />;
-  else if (currentPage === 'caseStudies') content = <CaseStudiesPage setCurrentPage={setCurrentPage} setSelectedCaseId={setSelectedCaseId} />;
-  else if (currentPage === 'caseDetail') content = <CaseStudyDetailPage caseId={selectedCaseId} setCurrentPage={setCurrentPage} />;
-  else if (currentPage === 'insights') content = <InsightsPage setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />;
-  else if (currentPage === 'insightDetail') content = <InsightDetailPage insightId={selectedInsightId} setCurrentPage={setCurrentPage} />;
-  else if (currentPage === 'careers') {
-    content = (
-      <>
-        <CareersPage />
-        <CareerListings setCurrentPage={setCurrentPage} setSelectedJobId={setSelectedJobId} />
-      </>
-    );
-  }
-  else if (currentPage === 'jobDetail') {
-    content = <JobListingPage jobId={selectedJobId} setCurrentPage={setCurrentPage} />;
-  }
-  else content = <Home setCurrentPage={setCurrentPage} setSelectedInsightId={setSelectedInsightId} />;
+  const content = (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<AboutUsPage />} />
+      <Route path="/tech" element={<TechServicesPage />} />
+      <Route path="/case-studies" element={<CaseStudiesPage />} />
+      <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} />
+      <Route path="/blogs" element={<InsightsPage />} />
+      <Route path="/blogs/:id" element={<InsightDetailPage />} />
+      <Route path="/careers" element={
+        <>
+          <CareersPage />
+          <CareerListings />
+        </>
+      } />
+      <Route path="/careers/:id" element={<JobListingPage />} />
+      <Route path="/privacy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms" element={<TermsOfServicePage />} />
+      <Route path="/cookies" element={<CookiePolicyPage />} />
+    </Routes>
+  );
 
   return (
     <>
       <div className="bg-orb orb-one"></div>
       <div className="bg-orb orb-two"></div>
       <div className="bg-orb orb-three"></div>
-      <Header setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
-      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} setCurrentPage={setCurrentPage} />
+      <Header theme={theme} toggleTheme={toggleTheme} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
       <main>{content}</main>
-      <Footer setCurrentPage={setCurrentPage} />
+      <Footer />
       <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
       <Chatbot />
       <Analytics />
