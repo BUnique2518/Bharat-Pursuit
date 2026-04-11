@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -3386,6 +3387,63 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Bharat Pursuit | Elite Technology & Strategy Consultancy</title>
+        <meta name="description" content="Bharat Pursuit is the consulting partner for ambitious enterprises. We bridge the gap between high-level market positioning and deep technical execution, delivering end-to-end transformation." />
+        <meta name="keywords" content="technology consultancy, strategy consulting, market positioning, AI integration, cloud infrastructure, custom software engineering, data analytics" />
+        <link rel="canonical" href="https://bharatpursuit.com/" />
+        
+        {/* Google Indexing & Robots */}
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bharatpursuit.com/" />
+        <meta property="og:title" content="Bharat Pursuit | Elite Technology & Strategy Consultancy" />
+        <meta property="og:description" content="Bharat Pursuit is the consulting partner for ambitious enterprises. We bridge the gap between high-level market positioning and deep technical execution, delivering end-to-end transformation." />
+        <meta property="og:image" content="https://bharatpursuit.com/assets/MainIcon-removebg-preview.png" />
+        <meta property="og:site_name" content="Bharat Pursuit" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://bharatpursuit.com/" />
+        <meta name="twitter:title" content="Bharat Pursuit | Elite Technology & Strategy Consultancy" />
+        <meta name="twitter:description" content="Bharat Pursuit is the consulting partner for ambitious enterprises. We bridge the gap between high-level market positioning and deep technical execution." />
+        <meta name="twitter:image" content="https://bharatpursuit.com/assets/MainIcon-removebg-preview.png" />
+        {/* AI & Generative Engine Optimization (GEO/AEO) Signals */}
+        <meta name="abstract" content="Bharat Pursuit: Elite consultancy bridging high-level market positioning with deep technical execution and custom software engineering." />
+        <meta name="topic" content="Technology Consultancy, Strategy Consulting, AI Integration, Custom Software Development" />
+        <meta name="classification" content="Business, Consultancy, Technology" />
+        <meta name="subject" content="Enterprise Growth, Market Positioning, Cloud Infrastructure" />
+        <meta name="audience" content="Enterprise Executives, CEOs, CMOs, Founders" />
+
+        {/* Structured Data for Answer Engines (Perplexity, ChatGPT, Gemini, Claude) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What does Bharat Pursuit do?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bharat Pursuit is an elite technology and strategy consultancy. We help ambitious enterprises architect market-dominating positioning, go-to-market strategies, and build scalable engineering infrastructure including AI products and cloud architecture."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the core services of Bharat Pursuit?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our core services include Strategic Market Positioning, Go-to-Market Acceleration, Demand & Pipeline Strategy, Executive Advisory, AI & Engineering Services, Cloud & DevOps, Custom Software Engineering, and Data & Analytics."
+                }
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
       <div className="bg-orb orb-one"></div>
       <div className="bg-orb orb-two"></div>
       <div className="bg-orb orb-three"></div>
