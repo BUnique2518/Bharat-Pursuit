@@ -15,6 +15,7 @@ import { CaseStudiesPage, CaseStudyDetailPage } from './pages/CaseStudies';
 import { CareersPage, CareerListings, JobListingPage } from './pages/Careers';
 import { InsightsPage, InsightDetailPage } from './pages/Insights';
 import { PrivacyPolicyPage, TermsOfServicePage, CookiePolicyPage } from './pages/Legal';
+import NotFound from './pages/NotFound';
 
 // Global styles and animations for reveal effects
 const AppStyles = () => (
@@ -160,6 +161,7 @@ export default function App() {
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsOfServicePage />} />
       <Route path="/cookies" element={<CookiePolicyPage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 
