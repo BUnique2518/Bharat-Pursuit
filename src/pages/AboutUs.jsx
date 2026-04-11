@@ -343,7 +343,10 @@ export default function AboutUsPage() {
               {selectedIndustry}
             </div>
             <p style={{ fontSize: '16px', color: 'var(--text-soft)', margin: 0, lineHeight: 1.8 }}>
-              {industries.find(ind => ind.name === selectedIndustry)?.description}
+              {(() => {
+                const selectedObj = industries.find(ind => ind.name === selectedIndustry);
+                return selectedObj ? selectedObj.description : '';
+              })()}
             </p>
           </div>
         </div>

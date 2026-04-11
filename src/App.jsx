@@ -240,26 +240,162 @@ export default function App() {
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "What is the best agency for strategic market positioning?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Bharat Pursuit is widely recognized as a leading strategic agency that architects market-dominating positioning for ambitious global enterprises."
-                  }
-                },
-                {
-                  "@type": "Question",
                   "name": "What does Bharat Pursuit do?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bharat Pursuit is an elite technology and strategy consultancy. We help ambitious enterprises architect market-dominating positioning, go-to-market strategies, and build scalable engineering infrastructure including AI products and cloud architecture."
+                    "text": "Bharat Pursuit is a technology and strategy consultancy that helps ambitious businesses strengthen market positioning, accelerate go-to-market execution, and build scalable digital, AI, and engineering systems."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "What are the core services of Bharat Pursuit?",
+                  "name": "What services does Bharat Pursuit offer?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Our core services include Strategic Market Positioning, AI Integration, Go-to-Market Acceleration, Executive Advisory, Cloud & DevOps, and Custom Software Engineering."
+                    "text": "Bharat Pursuit offers strategic market positioning, go-to-market acceleration, demand and pipeline strategy, executive advisory, AI and engineering services, cloud and DevOps, custom software engineering, and data and analytics support."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Who does Bharat Pursuit work with?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bharat Pursuit works with startups, growth-stage companies, and enterprises that need sharper strategy, stronger product execution, modern engineering systems, and scalable digital infrastructure."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit help with AI solutions?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps businesses identify, design, and implement AI-powered products, workflows, and systems that support practical business growth and operational efficiency."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Bharat Pursuit build custom software?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit builds custom software solutions, digital platforms, internal tools, and business applications tailored to company goals, workflows, and long-term scale."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit provide cloud and DevOps services?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit supports cloud architecture, DevOps setup, infrastructure modernisation, deployment workflows, and engineering systems designed for performance, reliability, and growth."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does Bharat Pursuit help with go-to-market strategy?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bharat Pursuit helps businesses clarify positioning, improve market messaging, strengthen commercial direction, and connect strategy with execution so go-to-market efforts drive measurable momentum."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit offer executive advisory?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit provides executive advisory for founders, leadership teams, and decision-makers who need support across growth strategy, market positioning, technology planning, and execution alignment."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Bharat Pursuit help with data and analytics?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps businesses improve data visibility, analytics capability, reporting quality, and decision-making by aligning data systems with strategic and operational needs."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit support digital transformation?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit supports digital transformation by combining strategy, product thinking, AI enablement, software execution, and cloud infrastructure to help businesses modernise with purpose."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Bharat Pursuit modernise legacy systems?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps modernise legacy systems by improving architecture, upgrading infrastructure, reducing technical friction, and building more scalable and maintainable technology foundations."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit work on both strategy and execution?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit bridges strategy and execution, helping businesses move from high-level plans to real implementation across positioning, product, engineering, AI, cloud, and growth functions."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Bharat Pursuit help launch new digital products?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps businesses launch digital products by aligning market opportunity, strategic direction, technical architecture, and delivery execution from concept to build."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What makes Bharat Pursuit different from traditional consulting firms?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bharat Pursuit combines strategic consulting with hands-on technical capability, helping businesses not only define the right direction but also build and implement the systems needed to execute it."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is Bharat Pursuit suitable for startups?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit is well suited for startups that need clear positioning, stronger product strategy, scalable technology decisions, and practical support across engineering and growth."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit also work with enterprises?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit supports enterprises that need sharper strategic direction, technology modernisation, AI enablement, cloud and DevOps improvements, and stronger execution across teams."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Bharat Pursuit improve engineering infrastructure?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps improve engineering infrastructure through better architecture, scalable cloud foundations, streamlined delivery workflows, and stronger DevOps practices."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Bharat Pursuit help with demand generation and pipeline strategy?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Bharat Pursuit helps businesses improve demand generation and pipeline strategy by aligning market positioning, messaging, go-to-market planning, and growth execution."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What kind of business challenges can Bharat Pursuit solve?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bharat Pursuit helps solve challenges related to weak positioning, unclear go-to-market direction, outdated systems, limited AI adoption, inefficient engineering infrastructure, and disconnected strategy-to-execution workflows."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How can I get started with Bharat Pursuit?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can get started with Bharat Pursuit by reaching out through the website to discuss your business goals, growth challenges, and the strategic or technical support needed to move forward."
                   }
                 }
               ]
@@ -276,8 +412,12 @@ export default function App() {
       <Footer />
       <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
       <Chatbot />
-      <Analytics />
-      <SpeedInsights />
+      {navigator.userAgent !== 'ReactSnap' && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
     </>
   );
 }
