@@ -259,22 +259,32 @@ export default function AboutUsPage() {
             </p>
           </div>
           <div style={{
-            maxWidth: '900px',
+            maxWidth: '1000px',
             margin: '0 auto',
-            borderRadius: '16px',
+            borderRadius: '24px',
             overflow: 'hidden',
-            boxShadow: 'var(--shadow)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
             background: '#000',
             position: 'relative',
-            paddingBottom: '56.25%',
+            paddingBottom: '56.25%', // 16:9 Aspect Ratio
             height: 0
           }}>
             <video
-              width="100%"
-              height="auto"
-              style={{ display: 'block', borderRadius: '16px' }}
-              controls autoPlay muted loop playsInline
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              playsInline={true}
+              onEnded={(e) => e.target.play()}
               poster="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block'
+              }}
             >
               <source src="https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4" type="video/mp4" />
               Your browser does not support the video tag.
