@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900');
+
+.not-found-container {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #09334f;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#yetiSVG {
+    width: 600px;
+    height: 470px;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    overflow: hidden;
+}
+
+#lightSVG {
+    width: 600px;
+    height: 470px;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    overflow: visible;
+}
+
+.not-found-content {
+    padding: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: 10%;
+    position: relative;
+    z-index: 10;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #FFF;
+    text-align: left;
+}
+
+.not-found-content h3 {
+    margin: 0 0 .8rem;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 120%;
+}
+
+.not-found-content p {
+    font-size: 1.5rem;
+    font-weight: normal;
+    line-height: 150%;
+    color: #d1e2ed;
+    margin-bottom: 2rem;
+}
+
+.not-found-content p span {
+    text-decoration: line-through;
+}
+
+.btn-home {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #fbbf24;
+    color: #09334f;
+    text-decoration: none;
+    font-weight: 900;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #f59e0b;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1000px) {
+    .not-found-container {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 50px;
+    }
+    
+    #yetiSVG, #lightSVG {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+    }
+    
+    .not-found-content {
+        margin: 0;
+        text-align: center;
+        padding: 2rem;
+    }
+}

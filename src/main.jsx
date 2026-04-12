@@ -1,12 +1,18 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
+import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+const app = (
   <React.StrictMode>
-    <BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
-)
+    </HelmetProvider>
+  </React.StrictMode>
+);
+
+createRoot(rootElement).render(app);
