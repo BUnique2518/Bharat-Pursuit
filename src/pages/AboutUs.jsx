@@ -259,7 +259,7 @@ export default function AboutUsPage() {
             </p>
           </div>
           <div style={{
-            maxWidth: '1000px',
+            maxWidth: '1200px',
             margin: '0 auto',
             borderRadius: '24px',
             overflow: 'hidden',
@@ -286,7 +286,7 @@ export default function AboutUsPage() {
                 display: 'block'
               }}
             >
-              <source src="https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+              <source src="/Videos/about.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

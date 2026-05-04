@@ -481,7 +481,7 @@ function Services() {
                 }, 300);
               }}
               className="btn btn-gold"
-              style={{ display: 'block', marginTop: '24px', width: '100%', textAlign: 'center' }}
+              style={{ display: 'flex', justifyContent: 'center', marginTop: '24px', width: '100%', textAlign: 'center', justifySelf: 'center' }}
             >
               Schedule a Consultation for This Service
             </a>
